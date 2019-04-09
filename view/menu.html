@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Menu</title>
+</head>
+<body style="background-color: #de8e47;">
+    <div class="container">
+        <div class="row mt-2 justify-content-between"><!--Info de la materia y campos de texto-->
+            <div class="col-6">
+                <!-- ]<H3>Tecnológico de Monterrey</H3> -->
+                <img src="../img/itesm.png" class="mb-3" width="125px" height="125px" alt="ITESM">
+                <h5>Materia: Evaluación y Administración de Proyectos</h5>
+                <h5>Proyecto: Project Portfolio Evaluation Tool</h5>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="proyectoID" class="form-control-label">Nombre/Número de Proyecto</label>
+                    <input type="text" name="" id="proyectoID" class="form-control" placeholder="" aria-describedby="helpId">                 
+                </div>
+                <div class="form-group">
+                    <label for="evaluadorID" class="form-control-label">Evaluador</label>
+                    <input type="text" name="" id="evaluadorID" class="form-control" placeholder="" aria-describedby="helpId">
+                  </div>                
+            </div>
+        </div>
+
+        <div class="row mt-3 justify-content-center">
+            <h6>Breve objetivo/ Descripción de la Herramienta e instrucciones de Uso</h6>
+        </div>
+
+        <div class="col"><!--Tabs con las herramientas-->
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item">
+                    <a href="#tab1" class="nav-link active text-white bg-success">Payback Period</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tab2" class="nav-link text-white bg-danger">NPV</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tab3" class="nav-link text-white bg-warning">Checklist</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tab4" class="nav-link text-white bg-info">Depreciation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tab5" class="nav-link text-white bg-secondary">Project Screening Matrix</a>
+                </li>               
+            </ul>
+            <div class="row justify-content-center">
+                <div class="tab-content ml-3 col-9">
+                        <div class="tab-pane bg-success rounded" id="tab1">
+                            <h3>PANEL 1</h3>
+                            <p>hola Mundo</p>
+                        </div>
+                        <div class="tab-pane bg-danger rounded" id="tab2">
+                            <h3>PANEL 2</h3>
+                            <p>Hola mundo</p>
+                        </div>
+                        <div class="tab-pane bg-warning rounded" id="tab3">
+                                <h3>PANEL 3</h3>
+                                <p>Hola mundo</p>
+                        </div>
+                        <div class="tab-pane bg-info rounded" id="tab4">
+                                <h3>PANEL 4</h3>
+                                <p>Hola mundo</p>
+                        </div>
+                        <div class="tab-pane bg-secondary rounded" id="tab5">
+                                <h3>PANEL 5</h3>
+                                <p>Hola mundo</p>
+                        </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</body>
+    <script type="text/css" src="../frameworks/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../frameworks/bootstrap.css">
+    <script src="../frameworks/jquery-3.3.1.min.js"></script>    
+    <script src="../js-scripts/dropdown.js"></script>
+</html>
