@@ -51,7 +51,7 @@
             </ul>
             <div class="row justify-content-center">
                 <div class="tab-content ml-3 col-11">
-                        <div class="tab-pane bg-success rounded border border-dark pt-4" id="tab1"><!--Start tab1-->
+                        <div class="tab-pane bg-success rounded border border-dark pt-4" id="tab1"><!--Start tab1: Discounted Pay Back-->
                             <form action="" class="justify-content-center">
                                 <div class="row form-group form-inline">
                                     <label for="periodosID" class="col-4">Periodos (drop list)</label>
@@ -91,10 +91,46 @@
                                 </div>                            
                             </form>                            
                         </div><!--End tab1-->
-                        <div class="tab-pane bg-danger rounded border border-dark" id="tab2">
-                            <h3>PANEL 2</h3>
-                            <p>Hola mundo</p>
-                        </div>
+                        <div class="tab-pane bg-danger rounded border border-dark" id="tab2"><!--Start tab2: NPV-->
+                            <form action="" class="justify-content-center">
+                                <div class="row form-group form-inline">
+                                    <label for="periodosID" class="col-4">Periodos (drop list)</label>
+                                    <div class="col-3">
+                                        <input type="text" id="periodosID" value="" class="form-control form-control-sm">
+                                    </div>
+                                    <button class="ml-3 btn btn-outline-dark btn-sm" id="bCalcular">Calcular</button>                                 
+                                </div>
+                                <div class="row form-group form-inline">
+                                    <label for="principalID" class="col-4">Principal</label>
+                                    <div class="col-3">
+                                        <input type="text" id="principalID" value="" class="form-control form-control-sm">
+                                    </div>
+                                    <button class="ml-3 btn btn-outline-dark btn-sm" id="bLimpiar">Limpiar Datos</button>
+                                </div>
+                                <div class="row form-group form-inline">
+                                    <label for="interesID" class="col-4">Tasa de Interés $</label>
+                                    <div class="col-3">
+                                        <input type="text" id="interesID" value="" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th>N</th>
+                                                <th>Outflows</th>
+                                                <th>Inflows</th>
+                                                <th>Cumulative Cash Flow</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="datosTabla">
+                                            
+                                        </tbody>                            
+                                    </table>
+                                </div>                            
+                            </form>
+                        </div><!--End Tab2-->
                         <div class="tab-pane bg-warning rounded border border-dark" id="tab3">
                                 <h3>PANEL 3</h3>
                                 <p>Hola mundo</p>
