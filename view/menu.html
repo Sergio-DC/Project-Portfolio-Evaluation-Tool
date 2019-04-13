@@ -93,37 +93,37 @@
                                         </tbody>                            
                                     </table>
                                 </div>                            
-                            </form>                            
+                            </form>                      
                         </div><!--End tab1-->
                         <div class="tab-pane bg-danger rounded border border-dark pt-4" id="tab2"><!--Start tab2: NPV-->
                             <form action="" class="justify-content-center">
                                 <div class="form-group ml-3">
                                     <div class="row">
-                                        <label for="periodosID" class="col-3"><p id="fontStyle">Periodos (drop list)</p></label>
+                                        <label for="periodosID2" class="col-3"><p id="fontStyle">Periodos (drop list)</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="periodosID" value="" class="form-control form-control-sm">
+                                            <input type="text" id="periodosID2" value="" class="form-control form-control-sm">
                                         </div>
                                         <div class="col-2">
-                                            <button class="btn btn-outline-dark btn-sm" id="bCalcular">Calcular</button>
+                                            <button class="btn btn-outline-dark btn-sm" id="bCalcular2">Calcular</button>
                                         </div>  
                                     </div>
                                     <div class="row">
-                                        <label for="principalID" class="col-3"><p id="fontStyle">Principal</p></label>
+                                        <label for="principalID2" class="col-3"><p id="fontStyle">Principal</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="principalID" value="" class="form-control form-control-sm">
+                                            <input type="text" id="principalID2" value="" class="form-control form-control-sm">
                                         </div>
                                         <div class="col-2">
                                             <button class="btn btn-outline-dark btn-sm" id="bLimpiar">Limpiar Datos</button>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label for="interesID" class="col-3"><p id="fontStyle">Tasa de Interés (%)</p></label>
+                                        <label for="interesID2" class="col-3"><p id="fontStyle">Tasa de Interés (%)</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="interesID" value="" class="form-control form-control-sm">
+                                            <input type="text" id="interesID2" value="" class="form-control form-control-sm">
                                         </div>
-                                        <label for="interesID" class="col-2"><p id="fontStyle">Salvage Value</p></label>
+                                        <label for="svID" class="col-2"><p id="fontStyle">Salvage Value</p></label>
                                         <div class="col-2">
-                                            <input type="text" name="" id="" class="form-control form-control-sm" placeholder="Salvage Value">
+                                            <input type="text" name="" id="svID" class="form-control form-control-sm" placeholder="Salvage Value">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -136,10 +136,9 @@
                                             <input type="text" name="" id="" class="form-control form-control-sm" placeholder="P. Salvage Value">
                                         </div> 
                                     </div>                                                                      
-                                </div>   
-                    
+                                </div>                    
                                                          
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center"><!--Centramos la tabla-->
                                     <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->
                                         <thead class="thead-default">
                                             <tr>
@@ -149,7 +148,7 @@
                                                 <th>Cumulative Cash Flow</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="datosTabla">
+                                        <tbody id="datosTabla2">
                                             
                                         </tbody>                            
                                     </table>
@@ -178,4 +177,5 @@
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <script src="../frameworks/jquery-3.3.1.min.js"></script>    
     <script src="../js-scripts/discPayBack.js"></script>
+    <script src="../js-scripts/npv.js"></script>
 </html>

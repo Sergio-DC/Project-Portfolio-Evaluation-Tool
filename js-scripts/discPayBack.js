@@ -47,7 +47,6 @@ $(document).ready(function ()
  */
 function displayPeriodos(numero_periodos){//Despliega filas de periodos con 3 columnas 
     var template;
-
     if(numero_periodos == "")
         template = "";
     else{
