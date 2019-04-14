@@ -1,7 +1,7 @@
 define(['jquery'], function($) {
     var methods = {};
 
-    methods.displayPeriodos = displayPeriodos;
+    methods.displayPeriodosTab1 = displayPeriodosTab1;
     methods.displayCumCashFlow = displayCumCashFlow;
     methods.getOutflows = getOutflows;
     methods.getInflows = getInflows;
@@ -17,7 +17,7 @@ define(['jquery'], function($) {
  * @brief muestra en la GUI una tabla de 4*N celdas, siendo N el número de periodos
  * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
  */
-function displayPeriodos(numero_periodos){//Despliega filas de periodos con 3 columnas 
+function displayPeriodosTab1(numero_periodos){//Despliega filas de periodos con 3 columnas 
     var template;
     if(numero_periodos == "")
         template = "";

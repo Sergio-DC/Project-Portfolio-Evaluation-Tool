@@ -1,16 +1,22 @@
 require.config({
     paths: {
         'discPayBack' : './discPayBack',
+        'npv' : "./npv",
         'jquery' : '../frameworks/jquery-3.3.1.min',
         'estilos' : '../css/estilos.css'
     }
 });
 
-require(['discPayBack', 'jquery'], function(dpp, $)
+require(['discPayBack','npv','jquery'], function(dpp,npv,$)
 {
     $(document).ready(function () 
-    {
-        $('.nav li a').on('click', function(){//Cambiamos de tab
+    {   
+        /**
+        * Evento de Tabs
+        * Al hacer click en un tab se despliega por debajo de este la información 
+        * correspondiente.
+        */
+        $('.nav li a').on('click', function(){
             $('.nav li a').removeClass("active");
             $(this).addClass("active");
             //Obtenemos el atributo href
@@ -19,12 +25,26 @@ require(['discPayBack', 'jquery'], function(dpp, $)
             $('.tab-content > div').removeClass('active');
             $(tab).addClass('active');
         });
-        $('#periodosID').on("keyup", function(e){//Leemos del campo de texto periodos
-            var num = $('#periodosID').val();//Obtenemos el número de periodos
-            dpp.displayPeriodos(num);//Mostramos los campos en el DOM
+        /**
+         * Eventos de campo de texto de periodos
+         * Cuando escribimos un número entero positivo en el campo de texto de periodos
+         * Se despliega una lista de celdas con diferentes columnas dependiendo del tab
+         * en el que nos encontremos
+         */
+        $('#periodosID1').on("keyup", function(e){//Leemos del campo de texto periodos de TAB1
+            var num = $('#periodosID1').val();//Obtenemos el número de periodos
+            dpp.displayPeriodosTab1(num);//Mostramos los campos en el DOM
+        });
+        $('#periodosID2').on("keyup", function(e){//Leemos del campo de texto periodos
+            var num = $('#periodosID2').val();//Obtenemos el número de periodos
+            npv.displayPeriodosTab2(num);//Mostramos los campos en el DOM
         });
 
-        //Realizamos los calculos después de haber recibido los datos correspondientes
+        /*
+        * Evento de Botón Calcular
+        * Realizamos los calculos después de haber recibido los datos correspondientes
+        * Mostramos los resultados en la columna que corresponde
+        */
         $('#bCalcular').on("click", function (e){
             //Guardamos el número de periodos, la inversión inicial y la tasa de interés proporcionadas por el usuario
             var periodos = $('#periodosID').val();
@@ -33,13 +53,10 @@ require(['discPayBack', 'jquery'], function(dpp, $)
             //1. Inflows y Outflows
             var inflows = dpp.getInflows(periodos);//Obtenemos un array con los inflows
             var outflows = dpp.getOutflows(periodos);//Obtenemos un array con los outflows
-            console.log(inflows, outflows);
             //2. Realizamos el calculo de net cash flow
             var netCashFlow = dpp.calculateNetCashFlow(periodos, inflows, outflows);
-            console.log("netCash: " + netCashFlow);
             //3. Calculamos el NPV
             var npv = dpp.calculateNPV(interes, periodos);
-            console.log("npv: " + npv);
             //4. Calculamos el Discounted Cash Flow
             var discCashFlow = dpp.calculateDiscCashFlow(netCashFlow, npv, periodos);
             //5. Calculamos el cumulative Cash Flow
@@ -48,7 +65,11 @@ require(['discPayBack', 'jquery'], function(dpp, $)
             dpp.displayCumCashFlow(periodos, cumCashFlow);
         
         });
-
+        /**
+         * Evento de Botón Limpiar
+         * Al presionar el botón Limpiar se borran los datos escritos en cualquier
+         * campo de texto y la tabla desplegable
+         */
         $('#bLimpiar').on("click", function (e){//Limpiamos los campos y la información mostrada  
             $('form').trigger('reset');
             displayPeriodos(0);
