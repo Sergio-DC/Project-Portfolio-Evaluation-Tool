@@ -1,7 +1,7 @@
 require.config({
     paths: {
-        'discPayBack' : './discPayBack',
-        'npv' : "./npv",
+        'discPayBack' : './discPayBack',//Discounted Payback Period
+        'npv' : "./npv",//Net Present Value
         'jquery' : '../frameworks/jquery-3.3.1.min',
         'estilos' : '../css/estilos.css'
     }
@@ -41,11 +41,11 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
         });
 
         /*
-        * Evento de Botón Calcular
+        * Evento de Botón Calcular 'Discounted Payback'
         * Realizamos los calculos después de haber recibido los datos correspondientes
         * Mostramos los resultados en la columna que corresponde
         */
-        $('#bCalcular').on("click", function (e){
+        $('#bCalcular1').on("click", function (e){
             //Guardamos el número de periodos, la inversión inicial y la tasa de interés proporcionadas por el usuario
             var periodos = $('#periodosID').val();
             var principal = $('#principalID').val();
@@ -65,14 +65,34 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             dpp.displayCumCashFlow(periodos, cumCashFlow);
         
         });
+
+        /*
+        * Evento de Botón Calcular NPV
+        * Realizamos los calculos después de haber recibido los datos correspondientes
+        * Mostramos los resultados en la columna que corresponde
+        */
+       $('#bCalcular2').on('click', function(){
+            //Guardamos el número de periodos, la inversión inicial y la tasa de interés, tasa de impuesto y el valor de Rescate.
+            var periodos = $('#periodosID').val();
+            var principal = $('#principalID').val();
+            var interes = $('#interesID').val();
+            var tax = $('#taxID').val();
+            var salvageValue = $('#svID').val();
+            var period_salvageValue = $('#p_svID').val();
+       });
+
         /**
          * Evento de Botón Limpiar
          * Al presionar el botón Limpiar se borran los datos escritos en cualquier
          * campo de texto y la tabla desplegable
          */
-        $('#bLimpiar').on("click", function (e){//Limpiamos los campos y la información mostrada  
-            $('form').trigger('reset');
-            displayPeriodos(0);
+        $('#bLimpiar1').on("click", function (e){//Limpiamos los campos y la información mostrada  
+            $('#form1').trigger('reset');
+            dpp.displayPeriodosTab1(0);
+        });
+        $('#bLimpiar2').on("click", function (e){//Limpiamos los campos y la información mostrada  
+            $('#form2').trigger('reset');
+            npv.displayPeriodosTab2(0);
         });   
     });
 
