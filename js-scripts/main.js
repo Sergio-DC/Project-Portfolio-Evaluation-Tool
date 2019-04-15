@@ -1,7 +1,7 @@
 require.config({
     paths: {
         'discPayBack' : './discPayBack',//Discounted Payback Period
-        'npv' : "./npv",//Net Present Value
+        'npv' : './npv',
         'jquery' : '../frameworks/jquery-3.3.1.min',
         'estilos' : '../css/estilos.css'
     }
@@ -45,7 +45,8 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
         * Realizamos los calculos después de haber recibido los datos correspondientes
         * Mostramos los resultados en la columna que corresponde
         */
-        $('#bCalcular1').on("click", function (e){
+        $('#bCalcular1').on("click", function (e)
+        {
             //Guardamos el número de periodos, la inversión inicial y la tasa de interés proporcionadas por el usuario
             var periodos = $('#periodosID1').val();
             var principal = $('#principalID1').val();
@@ -59,17 +60,16 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             //2. Realizamos el calculo de net cash flow
             var netCashFlow = calculateNetCashFlow(periodos, inflows, outflows);
             console.log("Net Cash Flow: " + netCashFlow);
-            //3. Calculamos el NPV
-            var npv = calculateNPV(interes, periodos); 
+            //3. Calculamos el Present Value Factor
+            var pvf = calculatePVF(interes, periodos); 
             //4. Calculamos el Discounted Cash Flow
-            var discCashFlow = dpp.calculateDiscCashFlow(netCashFlow, npv, periodos);
+            var discCashFlow = dpp.calculateDiscCashFlow(netCashFlow, pvf, periodos);
             console.log("DiscCashFlow: " + discCashFlow);
             //5. Calculamos el cumulative Cash Flow
             var cumCashFlow = dpp.calculateCumCashFlow(principal, discCashFlow, periodos);
             console.log("CumCashFlow: " + cumCashFlow);
             //6. Mostramos el array de cumCashFlow en la GUI
-            dpp.displayCumCashFlow(periodos, cumCashFlow);
-        
+            dpp.displayCumCashFlow(periodos, cumCashFlow);        
         });
 
         /*
@@ -77,25 +77,27 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
         * Realizamos los calculos después de haber recibido los datos correspondientes
         * Mostramos los resultados en la columna que corresponde
         */
-       $('#bCalcular2').on('click', function(){
+       $('#bCalcular2').on('click', function()
+       {
             //Guardamos el número de periodos, la inversión inicial y la tasa de interés, tasa de impuesto y el valor de Rescate.
-            var periodos = $('#periodosID').val();
-            var principal = $('#principalID').val();
-            var interes = $('#interesID').val();
+            var periodos = $('#periodosID2').val();
+            var principal = $('#principalID2').val();
+            var interes = $('#interesID2').val();
             var tax = $('#taxID').val();
             var salvageValue = $('#svID').val();
             var period_salvageValue = $('#p_svID').val();
+            console.log(periodos, principal, interes, tax, salvageValue, period_salvageValue);
 
             //1. Obtener Inflows y Outflows
-            var inflows = npv.getInflows2(periodos);
-            var outflows = npv.getOutflows2(periodos);
-            console.log("Inflows2: " + inflows);
-            console.log("Outflows2: " + outflows);
+            var inflows2 = npv.getInflows2(periodos);
+            var outflows2 = npv.getOutflows2(periodos);
+            console.log("Inflows2: " + inflows2);
+            console.log("Outflows2: " + outflows2);
             //2. Calcular el Net Cash Flow
-            var netCashFlow = calculateNetCashFlow(periodos, inflows, outflows);
+            var netCashFlow = calculateNetCashFlow(periodos, inflows2, outflows2);
             console.log("Net Cash Flow2: " + netCashFlow);
             //3. Calcular el Present Value Factor(PVF)
-            var pvf = calculateNPV(interes, periodos);
+            var pvf = calculatePVF(interes, periodos);
             console.log("PVF2: " + pvf);
             //4. Calcular Net Cash After Taxes
             var netCashAfterTaxes = npv.calculateNetCashAfterTax(netCashFlow, tax, periodos);
@@ -103,9 +105,9 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             //5. Calcular el Cumulative Cash Flow
             var cumCashFlow = npv.calculateCumCashFlow(pvf, netCashAfterTaxes, periodos);
             console.log("CumulativeCASHfLOW2: " + cumCashFlow);
-            //6. Mostramos el array de Cumulative Cash Flow en la GUI
+            //6. Mostramos el array de Cumulative Cash Flow  y el array de Net Cash Flow en la GUI
             npv.displayCumCashFlow2(periodos, cumCashFlow);
-
+            npv.displayNetCashFlow(periodos, netCashFlow);
        });
 
         /**
@@ -146,7 +148,7 @@ function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el f
  * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
  * @return un array de números decimales sin la parte entera que contiene el Net Present Value
  */
-function calculateNPV(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
+function calculatePVF(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
     var npv = [];   
 
     for(var n = 1; n <= numero_periodos; n++)
