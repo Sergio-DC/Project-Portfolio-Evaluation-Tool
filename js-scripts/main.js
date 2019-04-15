@@ -47,20 +47,26 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
         */
         $('#bCalcular1').on("click", function (e){
             //Guardamos el número de periodos, la inversión inicial y la tasa de interés proporcionadas por el usuario
-            var periodos = $('#periodosID').val();
-            var principal = $('#principalID').val();
-            var interes = $('#interesID').val();
+            var periodos = $('#periodosID1').val();
+            var principal = $('#principalID1').val();
+            var interes = $('#interesID1').val();
+            //console.log(periodos, principal, interes);
             //1. Inflows y Outflows
             var inflows = dpp.getInflows(periodos);//Obtenemos un array con los inflows
             var outflows = dpp.getOutflows(periodos);//Obtenemos un array con los outflows
+            console.log("Inflows: " + inflows);
+            console.log("Outflows: " + outflows);
             //2. Realizamos el calculo de net cash flow
             var netCashFlow = dpp.calculateNetCashFlow(periodos, inflows, outflows);
+            console.log("Net Cash Flow: " + netCashFlow);
             //3. Calculamos el NPV
-            var npv = dpp.calculateNPV(interes, periodos);
+            var npv = dpp.calculateNPV(interes, periodos); 
             //4. Calculamos el Discounted Cash Flow
             var discCashFlow = dpp.calculateDiscCashFlow(netCashFlow, npv, periodos);
+            console.log("DiscCashFlow: " + discCashFlow);
             //5. Calculamos el cumulative Cash Flow
             var cumCashFlow = dpp.calculateCumCashFlow(principal, discCashFlow, periodos);
+            console.log("CumCashFlow: " + cumCashFlow);
             //6. Mostramos el array de cumCashFlow en la GUI
             dpp.displayCumCashFlow(periodos, cumCashFlow);
         
@@ -79,6 +85,14 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             var tax = $('#taxID').val();
             var salvageValue = $('#svID').val();
             var period_salvageValue = $('#p_svID').val();
+
+            //1. Obtener Inflows y Outflows
+            var inflows = npv.getInflows(periodos);
+            var outflows = npv.getOutflows(periodos);
+            //2. Calcular el Net Cash Flow
+            var netCashFlow = npv.calculateNetCashFlow(periodos, inflows, outflows);
+            //3. Calcular el Present Value Factor(PVF)
+
        });
 
         /**

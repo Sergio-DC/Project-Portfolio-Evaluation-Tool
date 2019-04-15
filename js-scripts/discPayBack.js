@@ -27,9 +27,9 @@ function displayPeriodosTab1(numero_periodos){//Despliega filas de periodos con 
             template += `
             <tr id="${i+1}ID">
                 <td>${i+1}</td>
-                <td><input id="outflowID${i+1}" type="text" class="form-control-sm"></td>
-                <td><input id="inflowID${i+1}" type="text" class="form-control-sm"></td>
-                <td><input id="cumCash${i+1}" type="text" class="form-control-sm"></td>
+                <td><input id="outflow1ID${i+1}" type="text" class="form-control-sm"></td>
+                <td><input id="inflow1ID${i+1}" type="text" class="form-control-sm"></td>
+                <td><input id="cumCash1${i+1}" type="text" class="form-control-sm"></td>
             </tr>
             `;
         }            
@@ -44,7 +44,7 @@ function displayPeriodosTab1(numero_periodos){//Despliega filas de periodos con 
  */
 function displayCumCashFlow(numero_periodos, cumCashFlow){
     for(var i = 1; i <= numero_periodos; i++){
-        $(`#cumCash${i}`).val(cumCashFlow[i]);
+        $(`#cumCash1${i}`).val(cumCashFlow[i]);
     }
 }
 /**
@@ -54,11 +54,10 @@ function displayCumCashFlow(numero_periodos, cumCashFlow){
  */
 function getOutflows(numero_periodos){
     var data = [];
-
     for(var i = 1; i <= numero_periodos; i++)
-        data[i] = $(`#outflowID${i}`).val();
+        data[i] = $(`#outflow1ID${i}`).val();
 
-    return data;
+        return data;
 }
 /**
  * @brief obtiene los datos de la columna de 'inflows' de la GUI y los guarda en un array
@@ -69,7 +68,7 @@ function getInflows(numero_periodos){
     var data = [];
 
     for(var i = 1; i <= numero_periodos; i++)
-        data[i] = $(`#inflowID${i}`).val();
+        data[i] = $(`#inflow1ID${i}`).val();
 
     return data;
 }
@@ -92,9 +91,10 @@ function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el f
  * @brief calcula el Net Present Value
  * @param interes es un número de punto flotante sin la parte entera que representa la tasa de interés
  * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
+ * @return un array de números decimales sin la parte entera que contiene el Net Present Value
  */
 function calculateNPV(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
-    var npv = [];
+    var npv = [];   
 
     for(var n = 1; n <= numero_periodos; n++)
         npv[n] =  1/(1+interes)**n
