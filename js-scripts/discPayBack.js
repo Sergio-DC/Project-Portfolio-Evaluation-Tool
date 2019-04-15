@@ -5,8 +5,6 @@ define(['jquery'], function($) {
     methods.displayCumCashFlow = displayCumCashFlow;
     methods.getOutflows = getOutflows;
     methods.getInflows = getInflows;
-    methods.calculateNetCashFlow = calculateNetCashFlow;
-    methods.calculateNPV = calculateNPV;
     methods.calculateDiscCashFlow = calculateDiscCashFlow;
     methods.calculateCumCashFlow = calculateCumCashFlow;
 
