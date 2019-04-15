@@ -2,8 +2,8 @@ define(['jquery'], function($) {
     methods = {};
 
     methods.displayPeriodosTab2 = displayPeriodosTab2;
-    methods.getOutflows = getOutflows;
-    methods.getInflows = getInflows;
+    methods.getOutflows2 = getOutflows2;
+    methods.getInflows2 = getInflows2;
     methods.calculateNetCashFlow = calculateNetCashFlow;
     methods.calculateNPV = calculateNPV;
     methods.calculateNetCashAfterTax = calculateNetCashAfterTax;
@@ -38,11 +38,21 @@ function displayPeriodosTab2(numero_periodos){//Despliega filas de periodos con 
 }
 
 /**
+ * @brief muestra en la columna 'Cumulative Cash Flow' de la GUI el contenido del array cumCashFlow[]
+ * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
+ * @param cumCashFlow es un vector de números reales(+/-) que guarda la los valores de Cumulative Cash Flow de 1-n periodos
+ */
+function displayCumCashFlow2(numero_periodos, cumCashFlow){
+    for(var i = 1; i <= numero_periodos; i++){
+        $(`#cumCash2${i}`).val(cumCashFlow[i]);
+    }
+}
+/**
  * @brief obtiene los datos de la columna de 'outflows' de la GUI y lo convierte a un array
  * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
  * @return un arreglo de números reales(+/-) que contiene a los outflows de 1-n periodos
  */
-function getOutflows(numero_periodos){
+function getOutflows2(numero_periodos){
     var data = [];
 
     for(var i = 1; i <= numero_periodos; i++)
@@ -55,44 +65,13 @@ function getOutflows(numero_periodos){
  * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
  * @return un arreglo de números reales que contiene los outflows de 1-n periodos
  */
-function getInflows(numero_periodos){
+function getInflows2(numero_periodos){
     var data = [];
 
     for(var i = 1; i <= numero_periodos; i++)
         data[i] = $(`#inflow2ID${i}`).val();
 
     return data;
-}
-
-/**
- * @brief calcula el 'Net Cash Flow'
- * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
- * @param inflows es un array de números reales(+/-) que contiene los inflows de 1-n periodos
- * @param outflows es un array de números reales(+/-) que contiene los outflows de 1-n periodos
- * @return un array de númers reales(+/-) que contiene el 'Net cash Flow'
- */
-function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el flujo neto de caja de los N periodos
-    var netCash = [];
-
-    for(var i = 1; i <= numero_periodos; i++)
-        netCash[i] = inflows[i] - outflows[i]; 
-
-    return netCash;
-}
-
-/**
- * @brief calcula el Net Present Value
- * @param interes es un número de punto flotante sin la parte entera que representa la tasa de interés
- * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
- * @return un array de números decimales sin la parte entera que contiene el Net Present Value
- */
-function calculateNPV(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
-    var npv = [];
-
-    for(var n = 1; n <= numero_periodos; n++)
-        npv[n] =  1/(1+interes)**n
-
-    return npv;
 }
 
 /** 

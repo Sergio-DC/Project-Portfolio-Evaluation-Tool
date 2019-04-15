@@ -50,17 +50,17 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             var periodos = $('#periodosID1').val();
             var principal = $('#principalID1').val();
             var interes = $('#interesID1').val();
-            //console.log(periodos, principal, interes);
+            console.log(periodos, principal, interes);
             //1. Inflows y Outflows
             var inflows = dpp.getInflows(periodos);//Obtenemos un array con los inflows
             var outflows = dpp.getOutflows(periodos);//Obtenemos un array con los outflows
             console.log("Inflows: " + inflows);
             console.log("Outflows: " + outflows);
             //2. Realizamos el calculo de net cash flow
-            var netCashFlow = dpp.calculateNetCashFlow(periodos, inflows, outflows);
+            var netCashFlow = calculateNetCashFlow(periodos, inflows, outflows);
             console.log("Net Cash Flow: " + netCashFlow);
             //3. Calculamos el NPV
-            var npv = dpp.calculateNPV(interes, periodos); 
+            var npv = calculateNPV(interes, periodos); 
             //4. Calculamos el Discounted Cash Flow
             var discCashFlow = dpp.calculateDiscCashFlow(netCashFlow, npv, periodos);
             console.log("DiscCashFlow: " + discCashFlow);
@@ -87,11 +87,24 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             var period_salvageValue = $('#p_svID').val();
 
             //1. Obtener Inflows y Outflows
-            var inflows = npv.getInflows(periodos);
-            var outflows = npv.getOutflows(periodos);
+            var inflows = npv.getInflows2(periodos);
+            var outflows = npv.getOutflows2(periodos);
+            console.log("Inflows2: " + inflows);
+            console.log("Outflows2: " + outflows);
             //2. Calcular el Net Cash Flow
-            var netCashFlow = npv.calculateNetCashFlow(periodos, inflows, outflows);
+            var netCashFlow = calculateNetCashFlow(periodos, inflows, outflows);
+            console.log("Net Cash Flow2: " + netCashFlow);
             //3. Calcular el Present Value Factor(PVF)
+            var pvf = calculateNPV(interes, periodos);
+            console.log("PVF2: " + pvf);
+            //4. Calcular Net Cash After Taxes
+            var netCashAfterTaxes = npv.calculateNetCashAfterTax(netCashFlow, tax, periodos);
+            console.log("NetCashAfterTax: " + netCashAfterTaxes);
+            //5. Calcular el Cumulative Cash Flow
+            var cumCashFlow = npv.calculateCumCashFlow(pvf, netCashAfterTaxes, periodos);
+            console.log("CumulativeCASHfLOW2: " + cumCashFlow);
+            //6. Mostramos el array de Cumulative Cash Flow en la GUI
+            npv.displayCumCashFlow2(periodos, cumCashFlow);
 
        });
 
@@ -112,3 +125,32 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
 
 });
 
+/**
+ * @brief calcula el 'Net Cash Flow'
+ * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
+ * @param inflows es un array de números reales(+/-) que contiene los inflows de 1-n periodos
+ * @param outflows es un array de números reales(+/-) que contiene los outflows de 1-n periodos
+ * @return un array de númers reales(+/-) que contiene el 'Net cash Flow'
+ */
+function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el flujo neto de caja de los N periodos
+    var netCash = [];
+
+    for(var i = 1; i <= numero_periodos; i++)
+        netCash[i] = inflows[i] - outflows[i]; 
+
+    return netCash;
+}
+/**
+ * @brief calcula el Net Present Value
+ * @param interes es un número de punto flotante sin la parte entera que representa la tasa de interés
+ * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
+ * @return un array de números decimales sin la parte entera que contiene el Net Present Value
+ */
+function calculateNPV(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
+    var npv = [];   
+
+    for(var n = 1; n <= numero_periodos; n++)
+        npv[n] =  1/(1+interes)**n
+
+    return npv;
+}

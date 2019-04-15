@@ -73,35 +73,6 @@ function getInflows(numero_periodos){
     return data;
 }
 /**
- * @brief calcula el 'Net Cash Flow'
- * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
- * @param inflows es un array de números reales(+/-) que contiene los inflows de 1-n periodos
- * @param outflows es un array de números reales(+/-) que contiene los outflows de 1-n periodos
- * @return un array de númers reales(+/-) que contiene el 'Net cash Flow'
- */
-function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el flujo neto de caja de los N periodos
-    var netCash = [];
-
-    for(var i = 1; i <= numero_periodos; i++)
-        netCash[i] = inflows[i] - outflows[i]; 
-
-    return netCash;
-}
-/**
- * @brief calcula el Net Present Value
- * @param interes es un número de punto flotante sin la parte entera que representa la tasa de interés
- * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
- * @return un array de números decimales sin la parte entera que contiene el Net Present Value
- */
-function calculateNPV(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
-    var npv = [];   
-
-    for(var n = 1; n <= numero_periodos; n++)
-        npv[n] =  1/(1+interes)**n
-
-    return npv;
-}
-/**
  * @brief calcula el 'Discounted Cash Flow'
  * @param netCashFlow[] array de números reales(+/-) que guarda los valores del net cash flow de 1-n periodos
  * @param npv[] array que guarda los valores del nvp de 1-n periodos
