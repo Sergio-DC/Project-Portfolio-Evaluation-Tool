@@ -77,6 +77,7 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
         * Realizamos los calculos después de haber recibido los datos correspondientes
         * Mostramos los resultados en la columna que corresponde
         */
+       var npvTotal;
        $('#bCalcular2').on('click', function()
        {
             //Guardamos el número de periodos, la inversión inicial y la tasa de interés, tasa de impuesto y el valor de Rescate.
@@ -103,11 +104,21 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             var netCashAfterTaxes = npv.calculateNetCashAfterTax(netCashFlow, tax, periodos);
             console.log("NetCashAfterTax: " + netCashAfterTaxes);
             //5. Calcular el Cumulative Cash Flow
-            var cumCashFlow = npv.calculateCumCashFlow2(pvf, netCashAfterTaxes, periodos);
-            console.log("CumulativeCASHfLOW2: " + cumCashFlow);
+            var cumCashFlow2 = npv.calculateCumCashFlow2(pvf, netCashAfterTaxes, periodos);
+            console.log("CumulativeCASHfLOW2: " + cumCashFlow2);
             //6. Mostramos el array de Cumulative Cash Flow  y el array de Net Cash Flow en la GUI
-            npv.displayCumCashFlow2(periodos, cumCashFlow);
+            npv.displayCumCashFlow2(periodos, cumCashFlow2);
             npv.displayNetCashFlow(periodos, netCashFlow);
+            //7. Calculamos el NPV
+            npvTotal = npv.calculateNPV(cumCashFlow2, periodos);
+            console.log("Primer NPV: " + npvTotal);
+       });
+
+       $('#bMostrarNPV').on('click', function(){
+           alert("Me presionaste");
+            
+            $('#npvID').val(npvTotal.toFixed(3));
+            npvTotal = 0;
        });
 
         /**
