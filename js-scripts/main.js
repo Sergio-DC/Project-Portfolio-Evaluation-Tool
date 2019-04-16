@@ -129,10 +129,10 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
 
 /**
  * @brief calcula el 'Net Cash Flow'
- * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
- * @param inflows es un array de números reales(+/-) que contiene los inflows de 1-n periodos
- * @param outflows es un array de números reales(+/-) que contiene los outflows de 1-n periodos
- * @return un array de númers reales(+/-) que contiene el 'Net cash Flow'
+ * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ * @param {Array<number>} inflows -  es un array de números reales(+/-) que contiene los inflows de 1-n periodos
+ * @param {Array<number>} outflows - es un array de números reales(+/-) que contiene los outflows de 1-n periodos
+ * @returns {Array<number>} un array de númers reales(+/-) que contiene el 'Net cash Flow'
  */
 function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el flujo neto de caja de los N periodos
     var netCash = [];
@@ -144,9 +144,9 @@ function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el f
 }
 /**
  * @brief calcula el Net Present Value
- * @param interes es un número de punto flotante sin la parte entera que representa la tasa de interés
- * @param numero_periodos es un número entero positivo que tiene significado por su propio nombre
- * @return un array de números decimales sin la parte entera que contiene el Net Present Value
+ * @param {number} interes - es un número de punto flotante sin la parte entera que representa la tasa de interés
+ * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ * @returns {Array<number>} un array de números decimales sin la parte entera que contiene el Net Present Value
  */
 function calculatePVF(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
     var npv = [];   
