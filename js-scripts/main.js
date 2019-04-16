@@ -89,7 +89,7 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             console.log(periodos, principal, interes, tax, salvageValue, period_salvageValue);
 
             //1. Obtener Inflows y Outflows
-            var inflows2 = npv.getInflows2(periodos);
+            var inflows2 = npv.getInflows2(periodos, salvageValue, period_salvageValue);
             var outflows2 = npv.getOutflows2(periodos);
             console.log("Inflows2: " + inflows2);
             console.log("Outflows2: " + outflows2);
@@ -103,7 +103,7 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
             var netCashAfterTaxes = npv.calculateNetCashAfterTax(netCashFlow, tax, periodos);
             console.log("NetCashAfterTax: " + netCashAfterTaxes);
             //5. Calcular el Cumulative Cash Flow
-            var cumCashFlow = npv.calculateCumCashFlow(pvf, netCashAfterTaxes, periodos);
+            var cumCashFlow = npv.calculateCumCashFlow2(pvf, netCashAfterTaxes, periodos);
             console.log("CumulativeCASHfLOW2: " + cumCashFlow);
             //6. Mostramos el array de Cumulative Cash Flow  y el array de Net Cash Flow en la GUI
             npv.displayCumCashFlow2(periodos, cumCashFlow);
