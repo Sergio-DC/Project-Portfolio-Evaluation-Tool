@@ -15,7 +15,7 @@ define(['jquery'], function($) {
     return methods;
 });
 
-const PERIODO_INICIAL = 1;//Constante que indica desde que periodo se realizaran los calculos
+const PERIODO_INICIAL = 0;//Constante que indica desde que periodo se realizaran los calculos
 
 /**
  * @brief muestra en la GUI una tabla de 4*N celdas, siendo N el número de periodos
@@ -80,14 +80,21 @@ function displayNetCashFlow (numero_periodos, netCash){
 /**
  * @brief obtiene los datos de la columna de 'outflows' del tab2 y lo convierte a un array
  * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ * @param {number} principal - representa la inversión inicial
  * @return {Array<number>} un arreglo de números reales(+/-) que contiene a los outflows de 1-n periodos
  */
-function getOutflows2 (numero_periodos)
+function getOutflows2 (numero_periodos,principal)
 {
     var data = [];
+    alert("Principal interno: " + principal);
 
-    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
-        data[i] = $(`#outflow2ID${i}`).val();
+    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
+        if(i == 0)
+            data[i] = principal
+        else
+            data[i] = $(`#outflow2ID${i}`).val();
+    }
+        
 
     return data;
 }
@@ -98,38 +105,49 @@ function getOutflows2 (numero_periodos)
  * @param {number} p_salvage_value - es un número entero positivo que representa el periodo en que ingreso el valor de rescate
  * @return {Array<number>} un arreglo de números reales que contiene los outflows de 1-n periodos
  */
-function getInflows2 (numero_periodos, salvage_value, p_salvage_value){
+function getInflows2 (numero_periodos,salvage_value, p_salvage_value){
     var data = [];
     salvage_value = parseFloat(salvage_value);
 
-    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
+    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
+    {
 
-        //Si la celda leída de la tabla esta en blanco, tomar el dato como 0
-        //En caso contrario leer el número y convertirlo a tipo de dato flotante
-        if($(`#inflow2ID${i}`).val() == "")
+        if(i==0)
             data[i] = 0;
         else
-            data[i] = parseFloat($(`#inflow2ID${i}`).val());
-            
-        if(i == p_salvage_value){
-            data[i] = data[i] + salvage_value;
-        }            
+        {
+            //Si la celda leída de la tabla esta en blanco, tomar el dato como 0
+            //En caso contrario leer el número y convertirlo a tipo de dato flotante
+            if($(`#inflow2ID${i}`).val() == "")
+                data[i] = 0;
+            else
+                data[i] = parseFloat($(`#inflow2ID${i}`).val());
+        
+            if(i == p_salvage_value){
+                data[i] = data[i] + salvage_value;
+            }       
+        }             
     }
     return data;
 }
 
 /** 
- * @brief calcula el Net Cash After Tax
- * @param netCash es un array de números reales(+/-) que contiene el flujo neto de caja
- * @param {number} tax -  es un número decimal sin la parte entera que representa la tasa de impuesto
+ * @brief calcula el Net Cash After Tax de [0,N] periodos
+ * @param {Array<number>} netCash - es un array de números reales(+/-) que contiene el flujo neto de caja
+ * @param {number} tax - es un número decimal sin la parte entera que representa la tasa de impuesto
  * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
  * @return {Array<number>} un array de números reales(+/-) que contiene el 'net cash after tax'
  */
 function calculateNetCashAfterTax (netCash, tax, numero_periodos){
     var netCashAfterTax = [];
+    //Calculamos el NetCash para el periódo 0        
+        
 
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
-        netCashAfterTax[i] = netCash[i] * (1 - tax);
+        if(i == 0)
+            netCashAfterTax[0] = netCash[i] * (1 + tax);
+        else
+            netCashAfterTax[i] = netCash[i] * (1 - tax);
     }
     return netCashAfterTax;
 }

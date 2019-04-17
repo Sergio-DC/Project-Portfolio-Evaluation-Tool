@@ -91,7 +91,7 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
 
             //1. Obtener Inflows y Outflows
             var inflows2 = npv.getInflows2(periodos, salvageValue, period_salvageValue);
-            var outflows2 = npv.getOutflows2(periodos);
+            var outflows2 = npv.getOutflows2(periodos, principal);
             console.log("Inflows2: " + inflows2);
             console.log("Outflows2: " + outflows2);
             //2. Calcular el Net Cash Flow
@@ -148,8 +148,9 @@ require(['discPayBack','npv','jquery'], function(dpp,npv,$)
 function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el flujo neto de caja de los N periodos
     var netCash = [];
 
-    for(var i = 1; i <= numero_periodos; i++)
-        netCash[i] = inflows[i] - outflows[i]; 
+    for(var i = 0; i <= numero_periodos; i++){
+            netCash[i] = inflows[i] - outflows[i];
+    } 
 
     return netCash;
 }
@@ -162,7 +163,7 @@ function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el f
 function calculatePVF(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
     var npv = [];   
 
-    for(var n = 1; n <= numero_periodos; n++)
+    for(var n = 0; n <= numero_periodos; n++)
         npv[n] =  1/(1+interes)**n
 
     return npv;
