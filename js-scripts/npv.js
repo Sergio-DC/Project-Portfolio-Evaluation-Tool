@@ -1,27 +1,10 @@
-define(['jquery'], function($) {
-    methods = {};
-
-    methods.displayPeriodosTab2 = displayPeriodosTab2;
-    methods.displayCumCashFlow2 = displayCumCashFlow2;
-    methods.displayNetCashFlow = displayNetCashFlow;
-    methods.getOutflows2 = getOutflows2;
-    methods.getInflows2 =  getInflows2;
-    //methods.calculateNetCashFlow = calculateNetCashFlow;
-    //methods.calculateNPV = calculateNPV;
-    methods.calculateNetCashAfterTax = calculateNetCashAfterTax;
-    methods.calculateCumCashFlow2 = calculateCumCashFlow2;
-    methods.calculateNPV = calculateNPV;
-
-    return methods;
-});
-
 const PERIODO_INICIAL = 0;//Constante que indica desde que periodo se realizaran los calculos
 
 /**
  * @brief muestra en la GUI una tabla de 4*N celdas, siendo N el número de periodos
  * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
  */
-function displayPeriodosTab2 (numero_periodos){//Despliega filas de periodos con 3 columnas 
+export function displayPeriodosTab2 (numero_periodos){//Despliega filas de periodos con 3 columnas 
     var template, template2;
     if(numero_periodos == "")
         template = "";
@@ -130,7 +113,36 @@ function getInflows2 (numero_periodos,salvage_value, p_salvage_value){
     }
     return data;
 }
+/**
+ * @brief calcula el 'Net Cash Flow'
+ * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ * @param {Array<number>} inflows -  es un array de números reales(+/-) que contiene los inflows de 1-n periodos
+ * @param {Array<number>} outflows - es un array de números reales(+/-) que contiene los outflows de 1-n periodos
+ * @returns {Array<number>} un array de númers reales(+/-) que contiene el 'Net cash Flow'
+ */
+function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el flujo neto de caja de los N periodos
+    var netCash = [];
 
+    for(var i = 0; i <= numero_periodos; i++){
+            netCash[i] = inflows[i] - outflows[i];
+    } 
+
+    return netCash;
+}
+/**
+ * @brief calcula el Net Present Value
+ * @param {number} interes - es un número de punto flotante sin la parte entera que representa la tasa de interés
+ * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ * @returns {Array<number>} un array de números decimales sin la parte entera que contiene el Net Present Value
+ */
+function calculatePVF(interes,numero_periodos){//Calcula el Net Present Value, recibe 2 argumentos: interés y periodos
+    var pvf = [];   
+
+    for(var n = 0; n <= numero_periodos; n++)
+        pvf[n] =  1/(1+interes)**n
+
+    return pvf;
+}
 /** 
  * @brief calcula el Net Cash After Tax de [0,N] periodos
  * @param {Array<number>} netCash - es un array de números reales(+/-) que contiene el flujo neto de caja
@@ -177,5 +189,42 @@ function calculateNPV(cumCashFlow, numero_periodos){
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
         npv += cumCashFlow[i]
     }
+    console.log("NPV interno: " + npv);
     return npv;
+}
+
+export function runAlgorithm_NPV() {  
+    //Guardamos el número de periodos, la inversión inicial y la tasa de interés, tasa de impuesto y el valor de Rescate.
+    var periodos = $('#periodosID2').val();
+    var principal = $('#principalID2').val();
+    var interes = $('#interesID2').val();
+    var tax = $('#taxID').val();
+    var salvageValue = $('#svID').val();
+    var period_salvageValue = $('#p_svID').val();
+    console.log(periodos, principal, interes, tax, salvageValue, period_salvageValue);
+
+    //1. Obtener Inflows y Outflows
+    var inflows2 = getInflows2(periodos, salvageValue, period_salvageValue);
+    var outflows2 = getOutflows2(periodos, principal);
+    console.log("Inflows2: " + inflows2);
+    console.log("Outflows2: " + outflows2);
+    //2. Calcular el Net Cash Flow
+    var netCashFlow = calculateNetCashFlow(periodos, inflows2, outflows2);
+    console.log("Net Cash Flow2: " + netCashFlow);
+    //3. Calcular el Present Value Factor(PVF)
+    var pvf = calculatePVF(interes, periodos);
+    console.log("PVF2: " + pvf);
+    //4. Calcular Net Cash After Taxes
+    var netCashAfterTaxes = calculateNetCashAfterTax(netCashFlow, tax, periodos);
+    console.log("NetCashAfterTax: " + netCashAfterTaxes);
+    //5. Calcular el Cumulative Cash Flow
+    var cumCashFlow2 = calculateCumCashFlow2(pvf, netCashAfterTaxes, periodos);
+    console.log("CumulativeCASHfLOW2: " + cumCashFlow2);
+    //6. Mostramos el array de Cumulative Cash Flow  y el array de Net Cash Flow en la GUI
+    displayCumCashFlow2(periodos, cumCashFlow2);
+    displayNetCashFlow(periodos, netCashFlow);
+    //7. Calculamos el NPV
+    var npvTotal = calculateNPV(cumCashFlow2, periodos);
+    console.log("Primer NPV: " + npvTotal);
+    return npvTotal;
 }
