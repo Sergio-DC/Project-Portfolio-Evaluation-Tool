@@ -171,9 +171,78 @@
                                 <h3>PANEL 3</h3>
                                 <p>Hola mundo</p>
                         </div><!--End Tab3-->
-                        <div class="tab-pane bg-primary rounded border border-dark" id="tab4"><!--Start tab4: Depreciation-->
-                                <h3>PANEL 4</h3>
-                                <p>Hola mundo</p>
+                        <div class="tab-pane bg-primary rounded border border-dark pt-4" id="tab4"><!--Start tab4: Depreciation-->
+                            <form action="" class="justify-content-center" id="form2">
+                                <div class="form-group ml-3">
+                                    <div class="row">
+                                        <label for="periodosID2" class="col-3"><p id="fontStyle">Periodos (drop list)</p></label>
+                                        <div class="col-2">
+                                            <input type="text" id="periodosID2" value="" class="form-control form-control-sm">
+                                        </div>
+                                        <label for="svID" class="col-2"><p id="fontStyle">Starting Year</p></label>
+                                        <div class="col-2">
+                                            <input type="text" name="" id="svID" class="form-control form-control-sm" placeholder="">
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-outline-dark btn-sm" id="bCalcular2">Calcular Straight Line</button>
+                                        </div>  
+                                    </div>
+                                    <div class="row">
+                                        <label for="principalID2" class="col-3"><p id="fontStyle">Principal</p></label>
+                                        <div class="col-2">
+                                            <input type="text" id="principalID2" value="" class="form-control form-control-sm">
+                                        </div>
+                                        <label for="principalID2" class="col-2"><p id="fontStyle">Period of S.V.</p></label>
+                                        <div class="col-2">
+                                            <input type="text" id="" value="" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-outline-dark btn-sm" id="bLimpiar2">Calcular Macrs</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="interesID2" class="col-3"><p id="fontStyle">Tax(%)</p></label>
+                                        <div class="col-2">
+                                            <input type="text" id="interesID2" value="" class="form-control form-control-sm">
+                                        </div>
+                                        <label for="svID" class="col-2"><p id="fontStyle">Depreciation Category</p></label>
+                                        <div class="col-2">
+                                            <input type="text" name="" id="svID" class="form-control form-control-sm" placeholder="">
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-outline-dark btn-sm" id="bLimpiar2">Limpiar Datos</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="taxID" class="col-3"><p id="fontStyle">Salvage Value</p></label>
+                                        <div class="col-2">
+                                            <input type="text" id="taxID" value="" class="form-control form-control-sm">
+                                        </div>
+                                    </div>                                                                      
+                                </div>                    
+                                                         
+                                <div class="row justify-content-center"><!--Centramos la tabla-->
+                                    <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th>Years</th>
+                                                <th>Dep Rate</th>
+                                                <th>Annual Dep</th>
+                                                <th>Acc Dep</th>
+                                                <th>Value in Ledgers</th>
+                                                <th>Tax per year</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="datosTabla2">
+                                            
+                                        </tbody>                            
+                                    </table>
+                                    <div class="w-100"></div>
+                                    <button class="btn btn-dark floa-right" id="bMostrarNPV">Imprimir Resultado</button>                   
+                                                                                                              
+                                    
+                                </div>                            
+                            </form>  
                         </div><!--End Tab 4-->
                         <div class="tab-pane bg-secondary rounded border border-dark" id="tab5"><!--Star tab5: Project Screening Matrix-->
                                 <h3>PANEL 5</h3>
