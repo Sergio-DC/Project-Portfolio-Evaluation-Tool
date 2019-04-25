@@ -172,59 +172,67 @@
                                 <p>Hola mundo</p>
                         </div><!--End Tab3-->
                         <div class="tab-pane bg-primary rounded border border-dark pt-4" id="tab4"><!--Start tab4: Depreciation-->
-                            <form action="" class="justify-content-center" id="form2">
+                            <form action="" class="justify-content-center" id="form3">
                                 <div class="form-group ml-3">
                                     <div class="row">
-                                        <label for="periodosID2" class="col-3"><p id="fontStyle">Periodos (drop list)</p></label>
+                                        <label for="periodosID3" class="col-3"><p id="fontStyle">Periodos (drop list)</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="periodosID2" value="" class="form-control form-control-sm">
+                                            <input type="text" id="periodosID3" value="" class="form-control form-control-sm">
                                         </div>
-                                        <label for="svID" class="col-2"><p id="fontStyle">Starting Year</p></label>
+                                        <label for="start_year" class="col-2"><p id="fontStyle">Starting Year</p></label>
                                         <div class="col-2">
-                                            <input type="text" name="" id="svID" class="form-control form-control-sm" placeholder="">
+                                            <input type="text" name="" id="start_year" class="form-control form-control-sm" placeholder="">
                                         </div>
                                         <div class="col-2">
-                                            <button class="btn btn-outline-dark btn-sm" id="bCalcular2">Calcular Straight Line</button>
+                                            <button class="btn btn-outline-dark btn-sm" id="bStraightLine">Calcular Straight Line</button>
                                         </div>  
                                     </div>
                                     <div class="row">
-                                        <label for="principalID2" class="col-3"><p id="fontStyle">Principal</p></label>
+                                        <label for="principalID3" class="col-3"><p id="">Principal</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="principalID2" value="" class="form-control form-control-sm">
+                                            <input type="text" id="principalID3" value="" class="form-control form-control-sm">
                                         </div>
-                                        <label for="principalID2" class="col-2"><p id="fontStyle">Period of S.V.</p></label>
+                                        <label for="p_svID3" class="col-2"><p id="fontStyle">Period of S.V.</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="" value="" class="form-control form-control-sm">
-                                        </div>
-                                        <div class="col-2">
-                                            <button class="btn btn-outline-dark btn-sm" id="bLimpiar2">Calcular Macrs</button>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <label for="interesID2" class="col-3"><p id="fontStyle">Tax(%)</p></label>
-                                        <div class="col-2">
-                                            <input type="text" id="interesID2" value="" class="form-control form-control-sm">
-                                        </div>
-                                        <label for="svID" class="col-2"><p id="fontStyle">Depreciation Category</p></label>
-                                        <div class="col-2">
-                                            <input type="text" name="" id="svID" class="form-control form-control-sm" placeholder="">
+                                            <input type="text" id="p_svID3" value="" class="form-control form-control-sm">
                                         </div>
                                         <div class="col-2">
-                                            <button class="btn btn-outline-dark btn-sm" id="bLimpiar2">Limpiar Datos</button>
+                                            <button class="btn btn-outline-dark btn-sm" id="bMACRS">Calcular Macrs</button>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label for="taxID" class="col-3"><p id="fontStyle">Salvage Value</p></label>
+                                        <label for="taxID3" class="col-3"><p id="fontStyle">Tax(%)</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="taxID" value="" class="form-control form-control-sm">
+                                            <input type="text" id="taxID3" value="" class="form-control form-control-sm">
+                                        </div>
+                                        <label for="dep_category" class="col-2"><p id="fontStyle">Depreciation Category</p></label>
+                                        <div class="col-2">
+                                            <select name="" id="dep_category" class="form-control selectpicker">
+                                                <option value="3_year">3-year</option>
+                                                <option value="5_year">5-year</option>
+                                                <option value="7_year">7-year</option>
+                                                <option value="10_year">10-year</option>
+                                                <option value="15_year">15-year</option>
+                                                <option value="20_year">20-year</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-outline-dark btn-sm" id="bLimpiar3">Limpiar Datos</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="svID3" class="col-3"><p id="fontStyle">Salvage Value</p></label>
+                                        <div class="col-2">
+                                            <input type="text" id="svID3" value=" class="form-control form-control-sm">
                                         </div>
                                     </div>                                                                      
                                 </div>                    
                                                          
                                 <div class="row justify-content-center"><!--Centramos la tabla-->
-                                    <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->
+                                    <table class="table table-responsive-sm table-sm col-6 table-bordered"><!--Definition of the table-->
                                         <thead class="thead-default">
                                             <tr>
+                                                <th>N</th>
                                                 <th>Years</th>
                                                 <th>Dep Rate</th>
                                                 <th>Annual Dep</th>
@@ -233,7 +241,7 @@
                                                 <th>Tax per year</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="datosTabla2">
+                                        <tbody id="datosTabla3">
                                             
                                         </tbody>                            
                                     </table>
