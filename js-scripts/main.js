@@ -1,5 +1,6 @@
 import {displayPeriodosTab1, runAlgorithm_discPayBack} from './discPayBack.js';
 import {displayPeriodosTab2, runAlgorithm_NPV} from './npv.js';
+import {displayPeriodosTab3, runAlgorithm_MACRS} from './macrs.js';
 
 
 $(document).ready(function () 
@@ -32,6 +33,10 @@ $(document).ready(function ()
         var num = $('#periodosID2').val();//Obtenemos el número de periodos
         displayPeriodosTab2(num);//Mostramos los campos en el DOM
     });
+    $('#periodosID3').on('keyup', function(){  
+        var num = $('#periodosID3').val();//Obtenemos el número de periodos
+        displayPeriodosTab3(num);//Mostramos los campos en el DOM
+    });
 
     /*
     * Evento de Botón Calcular 'Discounted Payback'
@@ -58,6 +63,17 @@ $(document).ready(function ()
     });
 
     /**
+     * Evento de Botón Calcular MACRS
+     * Realizamos los calculos después de haber recibido los datos correspondientes
+     * Mostramos los resultados en la columna que corresponde
+     */
+    $('#bMACRS').on('click', function(){
+        npvTotal =runAlgorithm_MACRS();
+    });
+
+
+
+    /**
      * Evento de Botón Limpiar
      * Al presionar el botón Limpiar se borran los datos escritos en cualquier
      * campo de texto y la tabla desplegable
@@ -69,6 +85,10 @@ $(document).ready(function ()
     $('#bLimpiar2').on("click", function (e){//Limpiamos los campos y la información mostrada  
         $('#form2').trigger('reset');
         displayPeriodosTab2(0);
+    }); 
+    $('#bLimpiar3').on("click", function (e){//Limpiamos los campos y la información mostrada  
+        $('#form3').trigger('reset');
+        displayPeriodosTab3(0);
     });   
 });
 
