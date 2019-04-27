@@ -8,14 +8,14 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
     if(numero_periodos == "")
         template = "";
     else{
-        for(var i = 0; i < numero_periodos; i++)
+        for(var i = 0; i <= numero_periodos; i++)
         {
             template += `
-            <tr id="${i+1}ID">
-                <td>${i+1}</td>
-                <td><input id="outflow1ID${i+1}" type="text" class="form-control-sm"></td>
-                <td><input id="inflow1ID${i+1}" type="text" class="form-control-sm"></td>
-                <td><input id="cumCash1${i+1}" type="text" class="form-control-sm"></td>
+            <tr id="${i}ID">
+                <td>${i}</td>
+                <td><input id="inflow1ID${i}" type="text" class="form-control-sm"></td>
+                <td><input id="outflow1ID${i}" type="text" class="form-control-sm"></td>
+                <td><input id="cumCash1${i}" type="text" class="form-control-sm"></td>
             </tr>
             `;
         }            
@@ -29,7 +29,7 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
  * @param {Array<number>} cumCashFlow - es un vector de números reales(+/-) que guarda la los valores de Cumulative Cash Flow de [1,N] periodos
  */
 function displayCumCashFlow(numero_periodos, cumCashFlow){
-    for(var i = 1; i <= numero_periodos; i++){
+    for(var i = 0; i <= numero_periodos; i++){
         $(`#cumCash1${i}`).val(cumCashFlow[i]);
     }
 }

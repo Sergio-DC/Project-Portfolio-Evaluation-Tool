@@ -16,7 +16,7 @@ export function displayPeriodosTab3(numero_periodos){//Despliega filas de period
     if(numero_periodos == "")
         template = "";
     else{
-        for(var i = 0; i < numero_periodos; i++)
+        for(var i = 0; i <= numero_periodos; i++)
         {
             template += `
             <tr id="${i}ID">
@@ -80,27 +80,13 @@ function calculateValueInLedgers(depreciation, principal, periodos){
     return valueInLedgers;
 }
 
-function displayYears(starting_year, periodos){
-    
-    for(var i = 0; i < periodos; i++){
+function displayInfo(starting_year, depreciation, accDep, valor_libros, periodos){
+    for(var i = 0; i <= periodos; i++){
         $(`#years${i}`).val(starting_year++);
-    }
-    
-}
-
-function displayAnnualDep(depreciation, periodos){
-    for(var i = 0; i < periodos; i++)
         $(`#AnnualDep${i}`).val(depreciation[i]);
-}
-
-function displayAccDep(accDep, periodos){
-    for(var i = 0; i < periodos; i++)
         $(`#AccDep${i}`).val(accDep[i]);
-}
-
-function displayValueInLedgers(valor_libros, periodos){
-    for(var i = 0; i < periodos; i++)
         $(`#valueInLedgers${i}`).val(valor_libros[i]);
+    }
 }
 
 export function runAlgorithm_MACRS(){
@@ -132,8 +118,5 @@ export function runAlgorithm_MACRS(){
     var valor_libros = calculateValueInLedgers(depreciation, principal,periodos);
     console.log("Valor en libros: " + valor_libros);
     //5. Mostrar la información en la tabla
-    displayYears(starting_year, periodos);
-    displayAnnualDep(depreciation, periodos);
-    displayAccDep(accDep, periodos);
-    displayValueInLedgers(valor_libros, periodos);
+    displayInfo(starting_year, depreciation, accDep, valor_libros, periodos);
 }

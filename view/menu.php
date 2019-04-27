@@ -83,8 +83,8 @@
                                         <thead class="thead-default">
                                             <tr>
                                                 <th>N</th>
-                                                <th>Outflows</th>
                                                 <th>Inflows</th>
+                                                <th>Outflows</th>
                                                 <th>Cumulative Cash Flow</th>
                                             </tr>
                                         </thead>
@@ -143,8 +143,8 @@
                                         <thead class="thead-default">
                                             <tr>
                                                 <th>N</th>
-                                                <th>Outflows</th>
                                                 <th>Inflows</th>
+                                                <th>Outflows</th>
                                                 <th>Net Cash Flow</th>
                                                 <th>Cumulative Cash Flow</th>
                                             </tr>
@@ -223,7 +223,7 @@
                                     <div class="row">
                                         <label for="svID3" class="col-3"><p id="fontStyle">Salvage Value</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="svID3" value=" class="form-control form-control-sm">
+                                            <input type="text" id="svID3" value="" class="form-control form-control-sm">
                                         </div>
                                     </div>                                                                      
                                 </div>                    
