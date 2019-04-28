@@ -60,6 +60,7 @@
                                     <label for="periodosID1" class="col-3">Periodos (drop list)</label>
                                     <div class="col-2">
                                         <input type="text" id="periodosID1" value="" class="form-control form-control-sm">
+                                        <div id="feedbackPeriodos1"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
                                     </div>
                                     <div class="col-2">
                                         <button class="btn btn-outline-dark btn-sm" id="bCalcular1">Calcular</button>
@@ -68,7 +69,7 @@
                                 <div class="form-group row ml-3">
                                     <label for="principalID1" class="col-3">Principal</label>
                                     <div class="col-2">
-                                        <input type="text" id="principalID1" value="" class="form-control form-control-sm">
+                                        <input type="text" id="principalID1" class="form-control form-control-sm">
                                     </div>
                                     <div class="col-2">
                                         <button class="btn btn-outline-dark btn-sm" id="bLimpiar1">Limpiar Datos</button>
@@ -78,6 +79,7 @@
                                     <label for="interesID1" class="col-3">Tasa de Interés $</label>
                                     <div class="col-2">
                                         <input type="text" id="interesID1" value="" class="form-control form-control-sm">
+                                        <div id="feedbackInteres1"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
                                     </div>
             
                                 </div>
@@ -88,6 +90,7 @@
                                                 <th>N</th>
                                                 <th>Inflows</th>
                                                 <th>Outflows</th>
+                                                <th>Net Cash Flow</th>
                                                 <th>Cumulative Cash Flow</th>
                                             </tr>
                                         </thead>
@@ -105,6 +108,7 @@
                                         <label for="periodosID2" class="col-3"><p id="fontStyle">Periodos (drop list)</p></label>
                                         <div class="col-2">
                                             <input type="text" id="periodosID2" value="" class="form-control form-control-sm">
+                                            <div id="feedbackPeriodos2"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
                                         </div>
                                         <div class="col-2">
                                             <button class="btn btn-outline-dark btn-sm" id="bCalcular2">Calcular</button>
@@ -123,6 +127,7 @@
                                         <label for="interesID2" class="col-3"><p id="fontStyle">Tasa de Interés (%)</p></label>
                                         <div class="col-2">
                                             <input type="text" id="interesID2" value="" class="form-control form-control-sm">
+                                            <div id="feedbackInteres2"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
                                         </div>
                                         <label for="svID" class="col-2"><p id="fontStyle">Salvage Value</p></label>
                                         <div class="col-2">
@@ -130,9 +135,9 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label for="taxID" class="col-3"><p id="fontStyle">Tax Rate (%)</p></label>
+                                        <label for="taxID1" class="col-3"><p id="fontStyle">Tax Rate (%)</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="taxID" value="" class="form-control form-control-sm">
+                                            <input type="text" id="taxID1" value="" class="form-control form-control-sm">
                                         </div>
                                         <label for="p_svID" class="col-2"><p id="fontStyle">P. Salvage Value</p></label>            
                                         <div class="col-2">
@@ -361,9 +366,9 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label for="taxID3" class="col-3"><p id="fontStyle">Tax(%)</p></label>
+                                        <label for="taxID2" class="col-3"><p id="fontStyle">Tax(%)</p></label>
                                         <div class="col-2">
-                                            <input type="text" id="taxID3" value="" class="form-control form-control-sm">
+                                            <input type="text" id="taxID2" value="" class="form-control form-control-sm">
                                         </div>
                                         <label for="dep_category" class="col-2"><p id="fontStyle">Depreciation Category</p></label>
                                         <div class="col-2">
@@ -421,11 +426,12 @@
         </div>
     </div>
 </body>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../frameworks/jquery-3.3.1.min.js"></script>
     <script src="../js-scripts/main.js" type="module"></script>
     <link rel="stylesheet" type="text/css" href="../frameworks/bootstrap.css">
    
-    <!-- <script src="../frameworks/bootstrap.min.js"></script>
+    <script src="../frameworks/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css"> -->
     
    

@@ -203,7 +203,7 @@ export function runAlgorithm_NPV() {
     var periodos = $('#periodosID2').val();
     var principal = $('#principalID2').val();
     var interes = $('#interesID2').val();
-    var tax = $('#taxID3').val();
+    var tax = $('#taxID1').val();
     var salvageValue = $('#svID').val();
     var period_salvageValue = $('#p_svID').val();
     console.log(periodos, principal, interes, tax, salvageValue, period_salvageValue);

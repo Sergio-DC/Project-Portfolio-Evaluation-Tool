@@ -1,4 +1,4 @@
-
+var PERIODO_INICIAL = 0;
 /**
  * @brief muestra en la tabla del tab 1 una tabla de 4*N celdas, siendo N el número de periodos/filas
  * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
@@ -10,14 +10,26 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
     else{
         for(var i = 0; i <= numero_periodos; i++)
         {
-            template += `
-            <tr id="${i}ID">
-                <td>${i}</td>
-                <td><input id="inflow1ID${i}" type="text" class="form-control-sm"></td>
-                <td><input id="outflow1ID${i}" type="text" class="form-control-sm"></td>
-                <td><input id="cumCash1${i}" type="text" class="form-control-sm"></td>
-            </tr>
-            `;
+            if(i == 0){
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>
+                    <td><input id="inflow1ID${i}" type="text" class="form-control-sm" disabled></td>
+                    <td><input id="outflow1ID${i}" type="text" class="form-control-sm" disabled></td>
+                    <td><input id="netCashFlow1${i}" type="text" class="form-control-sm" disabled></td>
+                    <td><input id="cumCash1${i}" type="text" class="form-control-sm" disabled></td>
+                </tr>
+                `;
+            }else           
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>
+                    <td><input id="inflow1ID${i}" type="text" class="form-control-sm"></td>
+                    <td><input id="outflow1ID${i}" type="text" class="form-control-sm"></td>
+                    <td><input id="netCashFlow1${i}" type="text" class="form-control-sm" disabled></td>
+                    <td><input id="cumCash1${i}" type="text" class="form-control-sm" disabled></td>
+                </tr>
+                `;
         }            
     }
     $('#datosTabla').html(template);    
@@ -28,9 +40,15 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
  * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
  * @param {Array<number>} cumCashFlow - es un vector de números reales(+/-) que guarda la los valores de Cumulative Cash Flow de [1,N] periodos
  */
-function displayCumCashFlow(numero_periodos, cumCashFlow){
-    for(var i = 0; i <= numero_periodos; i++){
+// function displayCumCashFlow(numero_periodos, cumCashFlow){
+//     for(var i = 0; i <= numero_periodos; i++){
+//         $(`#cumCash1${i}`).val(cumCashFlow[i]);
+//     }
+// }
+function displayInfo(cumCashFlow, netCash, numero_periodos){
+    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
         $(`#cumCash1${i}`).val(cumCashFlow[i]);
+        $(`#netCashFlow1${i}`).val(netCash[i]);
     }
 }
 /**
@@ -65,10 +83,13 @@ function getInflows(numero_periodos){
  * @param {Array<number>} outflows - es un array de números reales(+/-) que contiene los outflows de 1-n periodos
  * @returns {Array<number>} un array de númers reales(+/-) que contiene el 'Net cash Flow'
  */
-function calculateNetCashFlow(numero_periodos, inflows, outflows){//Calcula el flujo neto de caja de los N periodos
+function calculateNetCashFlow(numero_periodos, inflows, outflows, principal){//Calcula el flujo neto de caja de los N periodos
     var netCash = [];
 
     for(var i = 0; i <= numero_periodos; i++){
+        if(i==0)
+            netCash[i] = principal;
+        else
             netCash[i] = inflows[i] - outflows[i];
     } 
 
@@ -121,19 +142,23 @@ function calculateCumCashFlow(principal, discCashFlow, periodos){
     return cumCashFlow;
 }
 
+function validar(periodos){  
+    
+}
+
 export function runAlgorithm_discPayBack(){
     //Guardamos el número de periodos, la inversión inicial y la tasa de interés proporcionadas por el usuario
-    var periodos = $('#periodosID1').val();
+    var periodos = $('#periodosID1').val(); validar(periodos);
     var principal = $('#principalID1').val();
     var interes = $('#interesID1').val();
-    console.log(periodos, principal, interes);
+    console.log(periodos, principal, interes/100);
     //1. Inflows y Outflows
     var inflows = getInflows(periodos);//Obtenemos un array con los inflows
     var outflows = getOutflows(periodos);//Obtenemos un array con los outflows
     console.log("Inflows: " + inflows);
     console.log("Outflows: " + outflows);
     //2. Realizamos el calculo de net cash flow
-    var netCashFlow = calculateNetCashFlow(periodos, inflows, outflows);
+    var netCashFlow = calculateNetCashFlow(periodos, inflows, outflows,principal);
     console.log("Net Cash Flow: " + netCashFlow);
     //3. Calculamos el Present Value Factor
     var pvf = calculatePVF(interes, periodos); 
@@ -144,5 +169,5 @@ export function runAlgorithm_discPayBack(){
     var cumCashFlow = calculateCumCashFlow(principal, discCashFlow, periodos);
     console.log("CumCashFlow: " + cumCashFlow);
     //6. Mostramos el array de cumCashFlow en la GUI
-    displayCumCashFlow(periodos, cumCashFlow);   
+    displayInfo(cumCashFlow, netCashFlow, periodos);   
 }

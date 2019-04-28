@@ -93,7 +93,7 @@ export function runAlgorithm_MACRS(){
     //Guardamos el número de periodos, la inversión inicial y la tasa de interés proporcionadas por el usuario
     var periodos = $('#periodosID3').val();
     var principal = $('#principalID3').val();
-    var tax = $('#taxID3').val();
+    var tax = $('#taxID2').val();
     var salvage_value = $('#svID3').val();
     var starting_year = $('#start_year').val();
     var period_salvage_value = $('#p_svID3').val();
