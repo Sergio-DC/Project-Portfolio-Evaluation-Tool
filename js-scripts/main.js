@@ -1,4 +1,4 @@
-import {runAlgorithm_discPayBack} from './discPayBack.js';
+import {displayPeriodosTab1,runAlgorithm_discPayBack} from './discPayBack.js';
 import {displayPeriodosTab2, runAlgorithm_NPV} from './npv.js';
 import {displayPeriodosTab3, runAlgorithm_MACRS} from './macrs.js';
 import {validarPeriodosID, validarPrincipalID, validarInteresID, validarCalcular1, validarCalcular2} from './validaciones.js';
@@ -127,15 +127,29 @@ $(document).ready(function ()
      */
     $('#bLimpiar1').on("click", function (e){//Limpiamos los campos y la información mostrada  
         $('#form1').trigger('reset');
-        displayPeriodosTab1(0);
+        validarPeriodosID('#periodosID1', 1);
+        validarPrincipalID('#principalID1', 1);
+        validarInteresID('#interesID1',1);
+        //displayPeriodosTab1(0);
     });
     $('#bLimpiar2').on("click", function (e){//Limpiamos los campos y la información mostrada  
         $('#form2').trigger('reset');
-        displayPeriodosTab2(0);
+        validarPeriodosID('#periodosID2', 2);
+        validarPrincipalID('#principalID2', 2);
+        validarInteresID('#interesID2',2);
+        //displayPeriodosTab2(0);
     }); 
     $('#bLimpiar3').on("click", function (e){//Limpiamos los campos y la información mostrada  
         $('#form3').trigger('reset');
-        displayPeriodosTab3(0);
+        //displayPeriodosTab3(0);
     });   
 });
 
+window.onbeforeunload = function() {
+    $('#form1').trigger('reset');
+    displayPeriodosTab1(0);
+    $('#form2').trigger('reset');
+    displayPeriodosTab2(0);
+    $('#form3').trigger('reset');
+    displayPeriodosTab3(0);    
+}
