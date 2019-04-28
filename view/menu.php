@@ -64,7 +64,11 @@
                                     </div>
                                     <div class="col-2">
                                         <button class="btn btn-outline-dark btn-sm" id="bCalcular1">Calcular</button>
-                                    </div>                                 
+                                    </div>        
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                        <label class="custom-control-label" for="customSwitch1">Activa para usar Salvage Value</label>
+                                    </div>  
                                 </div>
                                 <div class="form-group row ml-3">
                                     <label for="principalID1" class="col-3">Principal</label>
@@ -74,14 +78,25 @@
                                     <div class="col-2">
                                         <button class="btn btn-outline-dark btn-sm" id="bLimpiar1">Limpiar Datos</button>
                                     </div>
+                                    <label for="svID1" class="col-1"><p id="fontStyle">Salvage Value</p></label>
+                                    <div class="col-2">
+                                        <input type="text" name="" id="svID1" class="form-control form-control-sm" placeholder="Salvage Value" disabled>
+                                    </div>
                                 </div>
                                 <div class="form-group row ml-3">
                                     <label for="interesID1" class="col-3">Tasa de Interés $</label>
                                     <div class="col-2">
-                                        <input type="text" id="interesID1" value="" class="form-control form-control-sm">
+                                        <input type="text" id="interesID1" value="" class="form-control form-control-sm" disabled>
                                         <div id="feedbackInteres1"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
                                     </div>
-            
+                                    <div class="col-2 custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                        <label class="custom-control-label" for="customSwitch2">Payback/Disc Payback</label>
+                                    </div>
+                                    <label for="p_svID1" class="col-1"><p id="fontStyle">Period SV</p></label>            
+                                        <div class="col-2">
+                                            <input type="text" name="" id="p_svID1" class="form-control form-control-sm" placeholder="Period" disabled>
+                                        </div> 
                                 </div>
                                 <div class="row justify-content-center">
                                     <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->

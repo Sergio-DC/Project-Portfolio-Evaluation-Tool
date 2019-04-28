@@ -103,3 +103,23 @@ export function validarCalcular2(){
     }else if(periodosListo && principalListo);
         return true;
 }
+
+// export function validarInflows(identificador){
+//     var principal = $(identificador).val();
+//     if(principal == ""){//El campo esta vacio
+//         $(identificador).removeClass('is-valid'); 
+//         $(identificador).removeClass('is-invalid');
+//         principalListo = true;           
+//     }else if(isNaN(principal)){
+//         $(identificador).removeClass('is-valid');$(identificador).addClass('is-invalid');
+//         principalListo = false;
+//     }else if(principal < 0){//El campo tiene un valor negativo
+//         $(identificador).removeClass('is-valid');
+//         $(identificador).addClass('is-invalid');
+//         principalListo = false;
+//     }else{
+//         $(identificador).removeClass('is-invalid');
+//         $(identificador).addClass('is-valid');//El campo esta lleno
+//         principalListo = true;
+//     }       
+// }

@@ -14,20 +14,20 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
                 template += `
                 <tr id="${i}ID">
                     <td>${i}</td>
-                    <td><input id="inflow1ID${i}" type="text" class="form-control-sm" disabled></td>
-                    <td><input id="outflow1ID${i}" type="text" class="form-control-sm" disabled></td>
-                    <td><input id="netCashFlow1${i}" type="text" class="form-control-sm" disabled></td>
-                    <td><input id="cumCash1${i}" type="text" class="form-control-sm" disabled></td>
+                    <td><input id="inflow1ID${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="outflow1ID${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="netCashFlow1${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="cumCash1${i}" type="number" class="form-control-sm" disabled></td>
                 </tr>
                 `;
             }else           
                 template += `
                 <tr id="${i}ID">
                     <td>${i}</td>
-                    <td><input id="inflow1ID${i}" type="text" class="form-control-sm"></td>
-                    <td><input id="outflow1ID${i}" type="text" class="form-control-sm"></td>
-                    <td><input id="netCashFlow1${i}" type="text" class="form-control-sm" disabled></td>
-                    <td><input id="cumCash1${i}" type="text" class="form-control-sm" disabled></td>
+                    <td><input id="inflow1ID${i}" type="number" class="form-control-sm"></td>
+                    <td><input id="outflow1ID${i}" type="number" class="form-control-sm"></td>
+                    <td><input id="netCashFlow1${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="cumCash1${i}" type="number" class="form-control-sm" disabled></td>
                 </tr>
                 `;
         }            
@@ -74,15 +74,18 @@ function getOutflows(principal, numero_periodos){
 /**
  * @brief obtiene los datos de la columna de 'inflows' de la tabla del tab 1
  * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ * @param {number} sv - salvage value
+ * @para {number} p_sv - period of salvage value
  * @returns {Array<number>} un arreglo de números reales que contiene los outflows de [1,N] periodos
  */
-function getInflows(numero_periodos){
+function getInflows(numero_periodos, sv, p_sv){
     var data = [];
 
-    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
+    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
         data[i] = $(`#inflow1ID${i}`).val();
-     
-
+        if(i == p_sv)
+            data[i] += parseFloat(sv);
+    }
     return data;
 }
 /**
@@ -166,9 +169,11 @@ export function runAlgorithm_discPayBack(){
     var periodos = $('#periodosID1').val();
     var principal = $('#principalID1').val();
     var interes = $('#interesID1').val();
+    var sv = $('#svID1').val();//Salvage Value
+    var p_sv = $('#p_svID1').val();//Period of Salvage Value
     console.log(periodos, principal, interes/100);
     //1. Inflows y Outflows
-    var inflows = getInflows(periodos);//Obtenemos un array con los inflows
+    var inflows = getInflows(periodos, sv, p_sv);//Obtenemos un array con los inflows
     var outflows = getOutflows(principal, periodos);//Obtenemos un array con los outflows
     console.log("Inflows: " + inflows);
     console.log("Outflows: " + outflows);
