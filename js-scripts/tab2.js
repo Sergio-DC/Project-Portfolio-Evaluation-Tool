@@ -36,6 +36,19 @@ $('#bMostrarNPV').on('click', function(){
         npvTotal = 0;
     }        
 });
+var estoyActivo = false;
+$('#customSwitch3').on('click', function () {
+    console.log("Me presionaste");
+    if(!estoyActivo){
+        estoyActivo = true;
+        $('#svID2').attr("disabled", false);
+        $('#p_svID2').attr("disabled", false);
+    }else{
+        estoyActivo = false;
+        $('#svID2').attr("disabled", true);
+        $('#p_svID2').attr("disabled", true);
+    }            
+});
 
     //Evento asociado al campo de texto 'Limpiar' del TAB2
     $('#bLimpiar2').on("click", function (e){//Limpiamos los campos y la información mostrada  

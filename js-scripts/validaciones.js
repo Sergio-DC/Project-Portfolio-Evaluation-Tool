@@ -79,7 +79,7 @@ export function validarCalcular1(){
     var principal = $('#principalID1').val();
     var interes = $('#interesID1').val();
 
-    if(periodos=="" || principal==""){
+    if(periodos=="" || principal=="" || !periodosListo || !principalListo){
         if(periodos == "")
             $('#periodosID1').addClass('is-invalid');
         if(principal == "")
@@ -92,6 +92,21 @@ export function validarCalcular1(){
 export function validarCalcular2(){
     var periodos = $('#periodosID2').val();
     var principal = $('#principalID2').val();
+    var interes = $('#interesID2').val();
+
+    if(periodos=="" || principal=="" || !periodosListo || !principalListo){
+        if(periodos == "")
+            $('#periodosID2').addClass('is-invalid');
+        if(principal == "")
+            $('#principalID2').addClass('is-invalid');
+            return false;
+    }else if(periodosListo && principalListo);
+        return true;
+}
+
+export function validarMACRS(){
+    var periodos = $('#periodosID3').val();
+    var principal = $('#principalID3').val();
     var interes = $('#interesID2').val();
 
     if(periodos=="" || principal==""){
