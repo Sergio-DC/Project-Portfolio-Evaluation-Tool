@@ -87,6 +87,29 @@ export function validarInteresID(identificador, tab){
     }
 }
 
+export function validarTax(identificador, tab){
+    var interes = $(identificador).val();
+
+    if(interes == ""){//El campo esta vacio
+        $(identificador).removeClass('is-valid'); 
+        $(identificador).removeClass('is-invalid');
+        $(`#feedbackTax${tab} > p > i`).text("");           
+    }else if(isNaN(interes)){
+        $(identificador).removeClass('is-valid');$(identificador).addClass('is-invalid');
+        $(`#feedbackTax${tab} > p > i`).text("");
+        $(`#feedbackTax${tab} > p > i`).text("Ingresa un valor numérico");
+    }else if(interes < 0 || interes > 100){//El campo tiene un valor negativo o supera a 100
+        $(identificador).removeClass('is-valid');
+        $(identificador).addClass('is-invalid');
+        $(`#feedbackTax${tab} > p > i`).text("");
+        $(`#feedbackTax${tab} > p > i`).text("Ingresa un porcentaje entre 0 y 100");
+    }else{                              //El valor esta dentro del rango
+        $(`#feedbackTax${tab} > p > i`).text("");
+        $(identificador).addClass('is-valid');
+        $(identificador).removeClass('is-invalid');
+    }
+}
+
 export function validarCalcular1(){
     var periodos = $('#periodosID1').val();
     var principal = $('#principalID1').val();
@@ -200,22 +223,3 @@ export function validarP_SalvageValue(identificador, tab){
     }
 }
 
-// export function validarInflows(identificador){
-//     var principal = $(identificador).val();
-//     if(principal == ""){//El campo esta vacio
-//         $(identificador).removeClass('is-valid'); 
-//         $(identificador).removeClass('is-invalid');
-//         principalListo = true;           
-//     }else if(isNaN(principal)){
-//         $(identificador).removeClass('is-valid');$(identificador).addClass('is-invalid');
-//         principalListo = false;
-//     }else if(principal < 0){//El campo tiene un valor negativo
-//         $(identificador).removeClass('is-valid');
-//         $(identificador).addClass('is-invalid');
-//         principalListo = false;
-//     }else{
-//         $(identificador).removeClass('is-invalid');
-//         $(identificador).addClass('is-valid');//El campo esta lleno
-//         principalListo = true;
-//     }       
-// }
