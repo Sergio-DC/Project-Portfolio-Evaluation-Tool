@@ -60,78 +60,9 @@
                             </div>                            
                         </div><!--End tab1-->
                         <div class="tab-pane bg-danger rounded border border-dark pt-4" id="tab2"><!--Start tab2: NPV-->
-                            <form action="" class="justify-content-center" id="form2">
-                                <div class="form-group ml-3">
-                                    <div class="row">
-                                        <label for="periodosID2" class="col-3"><p id="fontStyle">Periodos (drop list)</p></label>
-                                        <div class="col-2">
-                                            <input type="text" id="periodosID2" value="" class="form-control form-control-sm">
-                                            <div id="feedbackPeriodos2"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
-                                        </div>
-                                        <div class="col-2">
-                                            <button class="btn btn-outline-dark btn-sm" id="bCalcular2">Calcular</button>
-                                        </div>  
-                                    </div>
-                                    <div class="row">
-                                        <label for="principalID2" class="col-3"><p id="fontStyle">Principal</p></label>
-                                        <div class="col-2">
-                                            <input type="text" id="principalID2" value="" class="form-control form-control-sm">
-                                        </div>
-                                        <div class="col-2">
-                                            <button class="btn btn-outline-dark btn-sm" id="bLimpiar2">Limpiar Datos</button>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <label for="interesID2" class="col-3"><p id="fontStyle">Tasa de Interés (%)</p></label>
-                                        <div class="col-2">
-                                            <input type="text" id="interesID2" value="" class="form-control form-control-sm">
-                                            <div id="feedbackInteres2"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
-                                        </div>
-                                        <label for="svID" class="col-2"><p id="fontStyle">Salvage Value</p></label>
-                                        <div class="col-2">
-                                            <input type="text" name="" id="svID" class="form-control form-control-sm" placeholder="Salvage Value">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <label for="taxID1" class="col-3"><p id="fontStyle">Tax Rate (%)</p></label>
-                                        <div class="col-2">
-                                            <input type="text" id="taxID1" value="" class="form-control form-control-sm">
-                                        </div>
-                                        <label for="p_svID" class="col-2"><p id="fontStyle">P. Salvage Value</p></label>            
-                                        <div class="col-2">
-                                            <input type="text" name="" id="p_svID" class="form-control form-control-sm" placeholder="P. Salvage Value">
-                                        </div> 
-                                    </div>                                                                      
-                                </div>                    
-                                                         
-                                <div class="row justify-content-center"><!--Centramos la tabla-->
-                                    <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->
-                                        <thead class="thead-default">
-                                            <tr>
-                                                <th class="col-1">N</th>
-                                                <th class="col-1">Inflows</th>
-                                                <th class="col-1">Outflows</th>
-                                                <th class="col-1">Net Cash Flow</th>
-                                                <th class="col-1">Cumulative Cash Flow</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="datosTabla2">
-                                            
-                                        </tbody>                            
-                                    </table>
-                                    <div class="row justify-content-end">
-                                        <div class="col">
-                                            <button class="btn btn-dark" id="bMostrarNPV">Imprimir Resultado</button>
-                                        </div>
-                                        <div class="col">
-                                            <label>Net Present Value</label>
-                                        </div>
-                                        <div class="col">
-                                            <input type="text" id="npvID" size="15">
-                                        </div>                                            
-                                    </div>
-                                </div>                            
-                            </form>
+                            <div style="height:500px; overflow-y:scroll; overflow-x: hidden;" id="content-tab2">
+
+                            </div>   
                         </div><!--End Tab2-->
                         <div class="row tab-pane bg-warning rounded border border-dark" id="tab3"><!--Start tab3 CheckList-->                                
                             <div class="col-8 mt-3">
@@ -393,7 +324,7 @@
     <script>
         $(document).ready(function () {
             $('#content-tab1').load('../view/tab1.html');
-
+            $('#content-tab2').load('../view/tab2.html');
                 $('.nav li a').on('click', function(){
                 $('.nav li a').removeClass("active");
                 $(this).addClass("active");

@@ -202,11 +202,13 @@ export function runAlgorithm_NPV() {
     //Guardamos el número de periodos, la inversión inicial y la tasa de interés, tasa de impuesto y el valor de Rescate.
     var periodos = $('#periodosID2').val();
     var principal = $('#principalID2').val();
-    var interes = $('#interesID2').val();
+    var interes = parseFloat($('#interesID2').val());
     var tax = $('#taxID1').val();
     var salvageValue = $('#svID').val();
     var period_salvageValue = $('#p_svID').val();
-    console.log(periodos, principal, interes, tax, salvageValue, period_salvageValue);
+    console.log("Interes: " + interes/100);
+    console.log("Tax Rate: " + tax/100);
+    console.log(periodos, principal, salvageValue, period_salvageValue);
 
     //1. Obtener Inflows y Outflows
     var inflows2 = getInflows2(periodos, salvageValue, period_salvageValue);
@@ -217,10 +219,10 @@ export function runAlgorithm_NPV() {
     var netCashFlow = calculateNetCashFlow(periodos, inflows2, outflows2);
     console.log("Net Cash Flow2: " + netCashFlow);
     //3. Calcular el Present Value Factor(PVF)
-    var pvf = calculatePVF(interes, periodos);
+    var pvf = calculatePVF(interes/100, periodos);
     console.log("PVF2: " + pvf);
     //4. Calcular Net Cash After Taxes
-    var netCashAfterTaxes = calculateNetCashAfterTax(netCashFlow, tax, periodos);
+    var netCashAfterTaxes = calculateNetCashAfterTax(netCashFlow, tax/100, periodos);
     console.log("NetCashAfterTax: " + netCashAfterTaxes);
     //5. Calcular el Cumulative Cash Flow
     var cumCashFlow2 = calculateCumCashFlow2(pvf, netCashAfterTaxes, periodos);
