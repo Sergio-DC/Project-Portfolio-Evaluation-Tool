@@ -16,7 +16,7 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
                     <td>${i}</td>
                     <td><input id="inflow1ID${i}" type="number" class="form-control-sm" disabled></td>
                     <td><input id="outflow1ID${i}" type="number" class="form-control-sm" disabled></td>
-                    <td><input id="netCashFlow1${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="netCashFlow${i}" type="number" class="form-control-sm" disabled></td>
                     <td><input id="cumCash1${i}" type="number" class="form-control-sm" disabled></td>
                 </tr>
                 `;
@@ -26,7 +26,7 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
                     <td>${i}</td>
                     <td><input id="inflow1ID${i}" type="number" class="form-control-sm"></td>
                     <td><input id="outflow1ID${i}" type="number" class="form-control-sm"></td>
-                    <td><input id="netCashFlow1${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="netCashFlow${i}" type="number" class="form-control-sm" disabled></td>
                     <td><input id="cumCash1${i}" type="number" class="form-control-sm" disabled></td>
                 </tr>
                 `;
@@ -45,15 +45,22 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
 //         $(`#cumCash1${i}`).val(cumCashFlow[i]);
 //     }
 // }
-function displayInfo(outflows, cumCashFlow, netCash, payBackPeriod, numero_periodos){
-    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
+function displayInfo(outflows, cumCashFlow, netCash, payBackPeriod, numero_periodos, p_sv, sv){
+ 
+    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
+    {
         if(i == 0)
             $(`#outflow1ID${i}`).val(outflows[i]);
-        $(`#cumCash1${i}`).removeClass('bg-success');//Quitamos el resaltado verde del Payback Period cuando volvemos a calcular 
+        $(`#cumCash1${i}`).removeClass('bg-light');//Quitamos el resaltado verde del Payback Period cuando volvemos a calcular 
+        
         if(payBackPeriod == i)
-            $(`#cumCash1${i}`).addClass('bg-success'); 
-        $(`#cumCash1${i}`).val(cumCashFlow[i]);
-        $(`#netCashFlow1${i}`).val(netCash[i]);
+            $(`#cumCash1${i}`).addClass('bg-light');
+        
+        $(`#cumCash1${i}`).val(cumCashFlow[i].toFixed(2));
+    
+        $(`#netCashFlow${i}`).val(netCash[i]);
+        console.log("Net CASH iNTER: " + netCash[i]);
+        
     }
 }
 /**
@@ -86,11 +93,7 @@ function getInflows(numero_periodos, sv, p_sv){
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
         data[i] = parseFloat($(`#inflow1ID${i}`).val());
         if(i == p_sv){
-            console.log("Antes de Sumar a inflow: " + data[i])
-            console.log("Salvage value antes: " + sv);
 ;            data[i] = data[i] + sv;
-            console.log("Después de Sumar a inflow: " + data[i])
-            console.log("Salvage value después: " + sv);
         }
             
     }
@@ -205,5 +208,5 @@ export function runAlgorithm_discPayBack(){
     //6. Identificamos el PayBack Period
     var payBackPeriod = getPayBackPeriod(cumCashFlow, periodos);
     //7. Mostramos el array de cumCashFlow en la GUI
-    displayInfo(outflows,cumCashFlow, netCashFlow, payBackPeriod, periodos);   
+    displayInfo(outflows,cumCashFlow, netCashFlow, payBackPeriod, periodos, p_sv, sv);   
 }

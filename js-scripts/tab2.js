@@ -9,7 +9,8 @@ $('#periodosID2').on("keyup", function(e){//Leemos del campo de texto periodos
 //Evento asociado al campo de texto 'Principal' del Tab 2
 $('#principalID2').on("keyup", function(e){//Leemos del campo de texto periodos
     var identificador = '#principalID2';
-    validarPrincipalID(identificador);
+    var tab2 = 2;
+    validarPrincipalID(identificador, 2);
     //$('#principalID2').val(formatNumber($('#principalID2').val()));
 });
 //Evento asociado al campo de texto 'Interes' del Tab 2
