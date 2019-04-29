@@ -55,7 +55,9 @@
                 </div>
                 <div class="tab-content ml-3 col-12"><!--Inicio del Contenido de las Tabs-->            
                         <div class="tab-pane bg-success rounded border border-dark" id="tab1"><!--Start tab1: Discounted Pay Back-->
-                            <object data="./tab1.html" width="100%" height="500" frameborder="0" scrolling="no"></object>
+                            <div style="height:500px; overflow-y:scroll; overflow-x: hidden;" id="content-tab1">
+
+                            </div>                            
                         </div><!--End tab1-->
                         <div class="tab-pane bg-danger rounded border border-dark pt-4" id="tab2"><!--Start tab2: NPV-->
                             <form action="" class="justify-content-center" id="form2">
@@ -382,13 +384,26 @@
         </div>
     </div>
 </body>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../frameworks/jquery-3.3.1.min.js"></script>
-    <script src="../js-scripts/main.js" type="module"></script>
+    <!-- <script src="../js-scripts/main.js" type=""></script> -->
     <link rel="stylesheet" type="text/css" href="../frameworks/bootstrap.css">
    
     <script src="../frameworks/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/estilos.css"> -->
-    
+    <script>
+        $(document).ready(function () {
+            $('#content-tab1').load('../view/tab1.html');
+
+                $('.nav li a').on('click', function(){
+                $('.nav li a').removeClass("active");
+                $(this).addClass("active");
+                //Obtenemos el atributo href
+                var tab = $(this).attr('href');
+                //Ocultamos los otros tabs
+                $('.tab-content > div').removeClass('active');
+                $(tab).addClass('active');
+            });
+        });
+    </script>
    
 </html>

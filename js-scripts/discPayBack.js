@@ -80,11 +80,19 @@ function getOutflows(principal, numero_periodos){
  */
 function getInflows(numero_periodos, sv, p_sv){
     var data = [];
+    sv = parseFloat(sv);
+    p_sv = parseInt(p_sv);
 
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
-        data[i] = $(`#inflow1ID${i}`).val();
-        if(i == p_sv)
-            data[i] += parseFloat(sv);
+        data[i] = parseFloat($(`#inflow1ID${i}`).val());
+        if(i == p_sv){
+            console.log("Antes de Sumar a inflow: " + data[i])
+            console.log("Salvage value antes: " + sv);
+;            data[i] = data[i] + sv;
+            console.log("Después de Sumar a inflow: " + data[i])
+            console.log("Salvage value después: " + sv);
+        }
+            
     }
     return data;
 }
@@ -171,7 +179,12 @@ export function runAlgorithm_discPayBack(){
     var interes = $('#interesID1').val();
     var sv = $('#svID1').val();//Salvage Value
     var p_sv = $('#p_svID1').val();//Period of Salvage Value
-    console.log(periodos, principal, interes/100);
+    
+    console.log("Periodos: " + periodos); 
+    console.log("Principal: " + principal)
+    console.log("Interes: " + interes);
+    console.log("Salvage Value: " + sv);
+    console.log("period of SV: " +p_sv);
     //1. Inflows y Outflows
     var inflows = getInflows(periodos, sv, p_sv);//Obtenemos un array con los inflows
     var outflows = getOutflows(principal, periodos);//Obtenemos un array con los outflows
