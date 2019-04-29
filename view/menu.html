@@ -53,68 +53,9 @@
                 <div class="col">
                     
                 </div>
-                <div class="tab-content ml-3 col-12"><!--Inicio del Contenido de las Tabs-->
-                        <div class="tab-pane bg-success rounded border border-dark pt-4" id="tab1"><!--Start tab1: Discounted Pay Back-->
-                            <form action="" class="justify-content-center" id="form1">
-                                <div class="form-group row ml-3">
-                                    <label for="periodosID1" class="col-3">Periodos (drop list)</label>
-                                    <div class="col-2">
-                                        <input type="text" id="periodosID1" value="" class="form-control form-control-sm">
-                                        <div id="feedbackPeriodos1"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
-                                    </div>
-                                    <div class="col-2">
-                                        <button class="btn btn-outline-dark btn-sm" id="bCalcular1">Calcular</button>
-                                    </div>        
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                        <label class="custom-control-label" for="customSwitch1">Activa para usar Salvage Value</label>
-                                    </div>  
-                                </div>
-                                <div class="form-group row ml-3">
-                                    <label for="principalID1" class="col-3">Principal</label>
-                                    <div class="col-2">
-                                        <input type="text" id="principalID1" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="col-2">
-                                        <button class="btn btn-outline-dark btn-sm" id="bLimpiar1">Limpiar Datos</button>
-                                    </div>
-                                    <label for="svID1" class="col-1"><p id="fontStyle">Salvage Value</p></label>
-                                    <div class="col-2">
-                                        <input type="text" name="" id="svID1" class="form-control form-control-sm" placeholder="Salvage Value" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group row ml-3">
-                                    <label for="interesID1" class="col-3">Tasa de Interés $</label>
-                                    <div class="col-2">
-                                        <input type="text" id="interesID1" value="" class="form-control form-control-sm" disabled>
-                                        <div id="feedbackInteres1"><p class="" style="font-size:13px; font:'Adobe Garamond Pro'"><i></i></p></div>
-                                    </div>
-                                    <div class="col-2 custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                        <label class="custom-control-label" for="customSwitch2">Payback/Disc Payback</label>
-                                    </div>
-                                    <label for="p_svID1" class="col-1"><p id="fontStyle">Period SV</p></label>            
-                                        <div class="col-2">
-                                            <input type="text" name="" id="p_svID1" class="form-control form-control-sm" placeholder="Period" disabled>
-                                        </div> 
-                                </div>
-                                <div class="row justify-content-center">
-                                    <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->
-                                        <thead class="thead-default">
-                                            <tr>
-                                                <th>N</th>
-                                                <th>Inflows</th>
-                                                <th>Outflows</th>
-                                                <th>Net Cash Flow</th>
-                                                <th>Cumulative Cash Flow</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="datosTabla">
-                                            
-                                        </tbody>                            
-                                    </table>
-                                </div>                            
-                            </form>                      
+                <div class="tab-content ml-3 col-12"><!--Inicio del Contenido de las Tabs-->            
+                        <div class="tab-pane bg-success rounded border border-dark" id="tab1"><!--Start tab1: Discounted Pay Back-->
+                            <object data="./tab1.html" width="100%" height="500" frameborder="0" scrolling="no"></object>
                         </div><!--End tab1-->
                         <div class="tab-pane bg-danger rounded border border-dark pt-4" id="tab2"><!--Start tab2: NPV-->
                             <form action="" class="justify-content-center" id="form2">
@@ -165,11 +106,11 @@
                                     <table class="table table-responsive-sm table-sm col-7 table-bordered"><!--Definition of the table-->
                                         <thead class="thead-default">
                                             <tr>
-                                                <th>N</th>
-                                                <th>Inflows</th>
-                                                <th>Outflows</th>
-                                                <th>Net Cash Flow</th>
-                                                <th>Cumulative Cash Flow</th>
+                                                <th class="col-1">N</th>
+                                                <th class="col-1">Inflows</th>
+                                                <th class="col-1">Outflows</th>
+                                                <th class="col-1">Net Cash Flow</th>
+                                                <th class="col-1">Cumulative Cash Flow</th>
                                             </tr>
                                         </thead>
                                         <tbody id="datosTabla2">
