@@ -1,44 +1,54 @@
-import {validarPeriodosID, validarPrincipalID, validarInteresID, validarCalcular2, validarTax, validarSalvageValue, validarP_SalvageValue} from './validaciones.js';
+import {validarPeriodosID, validarPrincipalID, validarCalcular2, validarSalvageValue, validarP_SalvageValue, validarPorcentaje} from './validaciones.js';
 import {runAlgorithm_NPV} from './npv.js';
 
 var TAB = 2;
+const FEEDBACK_INTERES = '#feedbackInteres2';
+const PERIODOS_ID = '#periodosID2';
+const PRINCIPAL_ID = '#principalID2';
+const INTERES_ID = '#interesID2';
+const TAX_ID = '#taxID1';
+const SALVAGE_VALUE_ID = '#svID2';
+const PERIOD_OF_SALVAGE_VALUE_ID = '#p_svID2';
+const BOTON_CALCULAR = '#bCalcular2';
+const BOTON_LIMPIAR = '#bLimpiar2';
+const BOTON_NPV = '#bMostrarNPV';
 
 //Evento asociado al campo de texto de 'Periodos del TAB2'
-$('#periodosID2').on("keyup", function(e){//Leemos del campo de texto periodos
-    var identificador = '#periodosID2';
+$(PERIODOS_ID).on("keyup", function(e){//Leemos del campo de texto periodos
+    var identificador = PERIODOS_ID;
     validarPeriodosID(identificador, TAB);
 });
 //Evento asociado al campo de texto 'Principal' del TAB 2
-$('#principalID2').on("keyup", function(e){//Leemos del campo de texto periodos
-    var identificador = '#principalID2';
+$(PRINCIPAL_ID).on("keyup", function(e){//Leemos del campo de texto periodos
+    var identificador = PRINCIPAL_ID;
     validarPrincipalID(identificador, TAB);
-    //$('#principalID2').val(formatNumber($('#principalID2').val()));
+    //$(PRINCIPAL_ID).val(formatNumber($(PRINCIPAL_ID).val()));
 });
 //Evento asociado al campo de texto 'Interes' del TAB 2
-$('#interesID2').on('keyup', function (e){  
-    var identificador = '#interesID2';
-    validarInteresID(identificador, TAB);
+$(INTERES_ID).on('keyup', function (e){  
+    var identificador = INTERES_ID;
+    validarPorcentaje(identificador, TAB, FEEDBACK_INTERES);
 });
 //Evento asociado al campo de texto 'TAX' del TAB 2
-$('#taxID1').on('keyup', function (e){  
-    var identificador = '#taxID1';
+$(TAX_ID).on('keyup', function (e){  
+    var identificador = TAX_ID;
     validarTax(identificador, TAB);
 });
 //Evento asociado al campo de texto 'Salvage VALUE'
-$('#svID2').keyup(function (){
-    var identificador = '#svID2';  
+$(SALVAGE_VALUE_ID).keyup(function (){
+    var identificador = SALVAGE_VALUE_ID;  
     validarSalvageValue(identificador,TAB);
     // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
 });
-$('#p_svID2').keyup(function (){
-    var identificador = '#p_svID2';  
+$(PERIOD_OF_SALVAGE_VALUE_ID).keyup(function (){
+    var identificador = PERIOD_OF_SALVAGE_VALUE_ID;  
     validarP_SalvageValue(identificador,TAB);
     // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
 });
 
 //Evento asociado al botón 'Calcular' de TAB2
 var npvTotal;
-$('#bCalcular2').on('click', function(){
+$(BOTON_CALCULAR).on('click', function(){
     if(validarCalcular2()){
         npvTotal = runAlgorithm_NPV();
     }else
@@ -46,7 +56,7 @@ $('#bCalcular2').on('click', function(){
 });
 
 //Evento asociado al botón 'Imprimir Resultado' del TAB2
-$('#bMostrarNPV').on('click', function(){ 
+$(BOTON_NPV).on('click', function(){ 
     if(npvTotal==undefined)
         swal({text: "Primero debes presionar el botón 'Calcular'",});
     else{
@@ -59,20 +69,20 @@ $('#customSwitch3').on('click', function () {
     console.log("Me presionaste");
     if(!estoyActivo){
         estoyActivo = true;
-        $('#svID2').attr("disabled", false);
-        $('#p_svID2').attr("disabled", false);
+        $(SALVAGE_VALUE_ID).attr("disabled", false);
+        $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
     }else{
         estoyActivo = false;
-        $('#svID2').attr("disabled", true);
-        $('#p_svID2').attr("disabled", true);
+        $(SALVAGE_VALUE_ID).attr("disabled", true);
+        $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
     }            
 });
 
     //Evento asociado al campo de texto 'Limpiar' del TAB2
-    $('#bLimpiar2').on("click", function (e){//Limpiamos los campos y la información mostrada  
+    $(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la información mostrada  
         $('#form2').trigger('reset');
-        validarPeriodosID('#periodosID2', TAB);
-        validarPrincipalID('#principalID2', TAB);
-        validarInteresID('#interesID2',TAB);
+        validarPeriodosID(PERIODOS_ID, TAB);
+        validarPrincipalID(PRINCIPAL_ID, TAB);
+        validarPorcentaje(INTERES_ID,TAB, FEEDBACK_INTERES);
         //displayPeriodosTAB2(0);
     });
