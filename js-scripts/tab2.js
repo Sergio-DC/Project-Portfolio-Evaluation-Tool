@@ -63,8 +63,7 @@ $(BOTON_NPV).on('click', function(){
     if(npvTotal==undefined)
         swal({text: "Primero debes presionar el botón 'Calcular'",});
     else{
-        $('#npvID').val(npvTotal.toFixed(3));
-        npvTotal = 0;
+        $('#npvID').val(new Intl.NumberFormat().format(npvTotal.toFixed(3)));
     }        
 });
 var estoyActivo = false;

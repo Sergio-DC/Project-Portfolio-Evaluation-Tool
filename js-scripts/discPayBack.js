@@ -46,7 +46,7 @@ export function displayPeriodosTab1(numero_periodos){//Despliega filas de period
 //     }
 // }
 function displayInfo(outflows, cumCashFlow, netCash, payBackPeriod, numero_periodos, p_sv, sv){
- 
+    console.log("CumCash Interno: " + cumCashFlow);
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
     {
         if(i == 0)
@@ -150,15 +150,12 @@ function calculateDiscCashFlow(netCashFlow, npv, numero_periodos){
  * @param {number} periodos - es un número entero positivo que tiene significado por su propio nombre
  * @returns {Array<number>} un array que contiene los registros del 'Cumulative Cash Flow'
  */
-function calculateCumCashFlow(principal, discCashFlow, periodos){
-    //Convertimos el argumento Principal en Floar
-    principal = parseFloat(principal);
-
+function calculateCumCashFlow(netCashFlow, discCashFlow, periodos){
     var cumCashFlow = [];
     
     for(var i = PERIODO_INICIAL; i <= periodos; i++){
         if(i == 0)
-            cumCashFlow[i] = -1*principal;
+            cumCashFlow[i] = netCashFlow[0];
         else
             cumCashFlow[i] = cumCashFlow[i-1] + discCashFlow[i];
     }
@@ -203,7 +200,7 @@ export function runAlgorithm_discPayBack(){
     var discCashFlow = calculateDiscCashFlow(netCashFlow, pvf, periodos);
     console.log("DiscCashFlow: " + discCashFlow);
     //5. Calculamos el cumulative Cash Flow
-    var cumCashFlow = calculateCumCashFlow(principal, discCashFlow, periodos);
+    var cumCashFlow = calculateCumCashFlow(netCashFlow, discCashFlow, periodos);
     console.log("CumCashFlow: " + cumCashFlow);
     //6. Identificamos el PayBack Period
     var payBackPeriod = getPayBackPeriod(cumCashFlow, periodos);

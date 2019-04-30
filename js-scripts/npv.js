@@ -45,7 +45,7 @@ export function displayPeriodosTab2 (numero_periodos){//Despliega filas de perio
 function displayInfo(cumCashFlow = [], netCash, numero_periodos){
 
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
-        $(`#cumCash2${i}`).val(cumCashFlow[i].toFixed(2));
+        $(`#cumCash2${i}`).val(new Intl.NumberFormat().format(cumCashFlow[i].toFixed(2)));
         $(`#netCashFlow2${i}`).val(netCash[i].toFixed(2));
     }
 }
@@ -216,3 +216,8 @@ export function runAlgorithm_NPV() {
     console.log("Primer NPV: " + npvTotal);
     return npvTotal;
 }
+
+// function formatNumber (n) {
+// 	n = String(n).replace(/\D/g, "");
+//   return n === '' ? n : Number(n).toLocaleString();
+// }

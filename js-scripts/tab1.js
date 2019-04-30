@@ -89,7 +89,3 @@ const BOTON_LIMPIAR = '#bLimpiar1';
             swal({text: "Porfavor completa los campos",});            
     });
 
-// function formatNumber (n) {
-// 	n = String(n).replace(/\D/g, "");
-//   return n === '' ? n : Number(n).toLocaleString();
-// }
