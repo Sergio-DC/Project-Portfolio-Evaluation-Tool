@@ -1,5 +1,5 @@
 import {validarMACRS, validarPeriodosID, validarPrincipalID} from './validaciones.js';
-import {runAlgorithm_MACRS} from './macrs.js';//Recuerda siempre agregar la extension js al final sino error   
+import {runAlgorithm_MACRS, runAlgorithm_STRAIGHT_LINE} from './macrs.js';//Recuerda siempre agregar la extension js al final sino error   
 
 const FEEDBACK_INTERES = '#feedbackInteres2';
 const FEEDBACK_TAX = '#feedbackTax2';
@@ -82,7 +82,7 @@ $('#bImprimir').on('click', function(){
         }else
             swal({text: "Porfavor completa los campos",});
     }else{//Straight Line Method
-        console.log("Ejecute Straigt Line");
+        runAlgorithm_STRAIGHT_LINE();
     }   
 });
 

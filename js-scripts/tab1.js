@@ -17,7 +17,15 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         validarPeriodosID(identificador, TAB);
         $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
         $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
-        $(`#feedbackP_SV${1} > p > i`).text("");
+        $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
+    });
+    //Evento asociado al campo de texto 'Periodos' de tipo onInput
+    $(PERIODOS_ID).on("input", function(e){
+        var identificador = PERIODOS_ID;
+        validarPeriodosID(identificador, TAB);
+        $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+        $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+        $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
     });    
     //Evento asociado al campo de texto 'Principal'
     $(PRINCIPAL_ID).keyup(function (){
@@ -25,12 +33,23 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         var identificador = PRINCIPAL_ID;  
         validarPrincipalID(identificador,TAB);
         // $(PRINCIPAL_ID).val(formatNumber($(PRINCIPAL_ID).val()));//Se agrega formato al número introducido        
-    });    
+    });
+    //Evento asociado al campo de texto 'Principal' de tipo onInput
+    $(PRINCIPAL_ID).on("input", function(e){
+        var tab = 1;
+        var identificador = PRINCIPAL_ID;  
+        validarPrincipalID(identificador,TAB);
+    });        
     //Evento asociado al campo de texto 'Interes'
     $(INTERES_ID).on('keyup', function (e){ 
         var identificador = INTERES_ID;
         validarPorcentaje(identificador, FEEDBACK_INTERES);
     });
+    //Evento asociado al campo de texto 'Interes' de tipo onInput
+    $(INTERES_ID).on("input", function(e){
+        var identificador = INTERES_ID;
+        validarPorcentaje(identificador, FEEDBACK_INTERES);
+    });        
     //Evento asociado al botón 'switch' del tab1 de Salvage Value
     var estoyActivo = false;
     $('#customSwitch1').on('click', function () {
@@ -53,10 +72,21 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         validarSalvageValue(identificador, FEEDBACK_SALVAGE_VALUE)
         // $(PRINCIPAL_ID).val(formatNumber($(PRINCIPAL_ID).val()));//Se agrega formato al número introducido        
     });
+    //Evento asociado al campo de texto 'Salvage Value' de tipo onInput
+    $(SALVAGE_VALUE_ID).on("input", function(e){
+        var identificador = SALVAGE_VALUE_ID;  
+        validarSalvageValue(identificador, FEEDBACK_SALVAGE_VALUE);
+    });
+    //Evento asociado al campo de texto 'Period of Salvage Value'
     $(PERIOD_OF_SALVAGE_VALUE_ID).keyup(function (){
         var identificador = PERIOD_OF_SALVAGE_VALUE_ID;  
         validarP_SalvageValue(PERIODOS_ID,identificador, FEEDBACK_PERIOD_SALVAGE_VALUE);
         // $(PRINCIPAL_ID).val(formatNumber($(PRINCIPAL_ID).val()));//Se agrega formato al número introducido        
+    });
+    //Evento asociado al campo de texto 'Period of Salvage Value' de tipo onInput
+    $(PERIOD_OF_SALVAGE_VALUE_ID).on("input", function(e){
+        var identificador = PERIOD_OF_SALVAGE_VALUE_ID;  
+        validarP_SalvageValue(PERIODOS_ID,identificador, FEEDBACK_PERIOD_SALVAGE_VALUE);
     });
     //Evento asociado al botón 'switch' del tab1 de Tasa de Interes
     var estoyActivo2 = false;

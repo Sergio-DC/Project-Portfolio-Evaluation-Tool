@@ -141,18 +141,15 @@ export function validarSalvageValue(identificador, feedback){
 }
 
 export function validarP_SalvageValue(periodosID,identificador, feedback){
-    var num = Number($(identificador).val());//Obtenemos el número de periodos de Salvage Value
+    var num = $(identificador).val();//Obtenemos el número de periodos de Salvage Value
     var periodos = Number($(periodosID).val());//Obtenemos el número de periodos 
-    if(num === "" && num != 0){//El campo esta vació
-        console.log("Entre D")
+    if(num == ""){//El campo esta vació
         $(identificador).removeClass('is-valid');$(identificador).removeClass('is-invalid');
         $(`${feedback} > p > i`).text("");  
     }else if(isNaN(num)){//No es un número
-        console.log("Entre O")
         $(identificador).removeClass('is-valid');$(identificador).addClass('is-invalid');
         $(`${feedback} > p > i`).text("");
         $(`${feedback} > p > i`).text("Ingresa un valor numérico");
-        //periodosListo = false;
     }
     else if(num > periodos || num < 0){//Se excedio el periodo de salvamento de periodos
         console.log("Entre XD")
@@ -160,7 +157,6 @@ export function validarP_SalvageValue(periodosID,identificador, feedback){
          $(identificador).addClass('is-invalid');
         $(`${feedback} > p > i`).text(`Ingresa un número entre 0 y ${periodos}`);
     }else{//El número de periodos esta dentro del rango
-        console.log("Entre :)")
         $(identificador).removeClass('is-invalid');$(identificador).addClass('is-valid');
         $(`${feedback} > p > i`).text("");
     }

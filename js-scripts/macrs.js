@@ -94,7 +94,6 @@ export function runAlgorithm_MACRS(){
     var periodos = $('#periodosID3').val();
     var principal = $('#principalID3').val();
     var tax = $('#taxID2').val();
-    var salvage_value = $('#svID3').val();
     var starting_year = $('#start_year').val();
     var period_salvage_value = $('#p_svID3').val();
     var dep_category = $('#dep_category').val();
@@ -102,9 +101,7 @@ export function runAlgorithm_MACRS(){
     console.log("Periodos: " + periodos);
     console.log("Principal: " + principal);
     console.log("Tax: " + tax);
-    console.log("salvage value: " + salvage_value);
     console.log("startin year: " + starting_year);
-    console.log("Periodo Salvage Val: " + period_salvage_value);
     console.log("Dep category " + dep_category);
 
     //1. Identificar la categoria de MACRS
@@ -120,3 +117,23 @@ export function runAlgorithm_MACRS(){
     //5. Mostrar la información en la tabla
     displayInfo(starting_year, depreciation, accDep, valor_libros, periodos);
 }
+
+
+
+function depAnualizada(principal, salvage_value, n){
+    var depreciacion = (principal-salvage_value)/n;
+    var depreciacionAnualizada = new Array(n+1);
+    depreciacionAnualizada.fill(depreciacion,1,n+1);
+    console.log("Dep anualizada: " + depreciacionAnualizada);
+}
+export function runAlgorithm_STRAIGHT_LINE(){
+    //Obtenemos los datos de entrada
+    var principal = $('#principalID3').val();
+    var salvage_value = $('#svID3').val();
+    var n = $('#periodosID3').val();//Periodos
+    //1. Calculamos la depreciación anualizada
+    depAnualizada(principal, salvage_value, n);
+    //2. Calculamos la depreciación acumulada
+    //var depAcc = 
+}
+
