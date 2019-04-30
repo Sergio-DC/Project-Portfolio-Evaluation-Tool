@@ -39,8 +39,16 @@
                     <div class="col-5">
                         <div class="form-group">
                             <div class=" col-sm-6 col-md-10 col-lg-10 col-xl-8 custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                                <label class="custom-control-label" for="customSwitch4">Activa para usar Salvage Value</label>                        
+                                <!-- <input type="checkbox" class="custom-control-input" id="customSwitch4">
+                                <label class="custom-control-label" for="customSwitch4">Activa para usar Salvage Value</label>                         -->
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active" id="macrsSwitch">
+                                      <input type="radio" autocomplete="off"> MACRS
+                                    </label>
+                                    <label class="btn btn-secondary" id="straightLineSwitch">
+                                      <input type="radio"  autocomplete="off"> STRAIGHT LINE
+                                    </label>
+                                </div>
                             </div>               
                         </div>
                         <div class="form-group row">
@@ -72,8 +80,8 @@
                     <div class="row mb-2">
                         <div class="col form-inline">
                             <div class="form-group">
-                                <button class="btn btn-outline-dark btn-sm mx-2" id="bStraightLine">Calcular Straight Line</button></div>
-                                <button class="btn btn-outline-dark btn-sm mx-2" id="bMACRS">Calcular Macrs</button>
+                                <!-- <button class="btn btn-outline-dark btn-sm mx-2" id="bStraightLine">Calcular Straight Line</button></div>
+                                <button class="btn btn-outline-dark btn-sm mx-2" id="bMACRS">Calcular Macrs</button> -->
                                 <button class="btn btn-outline-dark btn-sm mx-2" id="bLimpiar3">Limpiar Datos</button>
                             </div>
                         </div>                        
@@ -98,7 +106,7 @@
                         </tbody>                            
                     </table>
                     <div class="w-100"></div>
-                    <button class="btn btn-dark floa-right" id="bMostrarNPV">Imprimir Resultado</button>                             
+                    <button class="btn btn-dark floa-right" id="bImprimir">Imprimir Resultado</button>                             
                     
                 </div>
             </div>

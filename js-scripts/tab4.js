@@ -27,29 +27,63 @@ $(PRINCIPAL_ID).on("keyup", function(e){//Leemos del campo de texto periodos
     //$('#principalID2').val(formatNumber($('#principalID2').val()));
 });
 
-var estoyActivo = false;
-$('#customSwitch4').on('click', function () {
-    if(!estoyActivo){//Me activaron
-        estoyActivo = true;
-        $(SALVAGE_VALUE_ID).attr("disabled", false);
-        $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
-    }else{//Me desactivaron
-        estoyActivo = false;
-        $(SALVAGE_VALUE_ID).attr("disabled", true);
-        $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
-        $(SALVAGE_VALUE_ID).val("");
-        $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
-        $(SALVAGE_VALUE_ID).removeClass("is-valid");
-        $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
-    }            
-});
+var macrsActivado = true;
+
+$('#macrsSwitch').click(function() {
+    macrsActivado = true;   
+    //$('input[name=option2]:checked') 
+ });
+
+ $('#straightLineSwitch').click(function() {
+    macrsActivado = false;
+    //$('input[name=option2]:checked') 
+ });
+
+//  $('#straightLineSwitch').on('change', function() {
+//     alert("Macrs Desactivado: " + $(`input[name=option1]: + $('#macrsSwitch').prop('checked', false)`).val());
+//     //alert($('input[name=option2]:checked').val()); 
+//  });
+// if( $('#macrsSwitch').prop('checked') ) {
+//     alert('Seleccionado MACRS');
+//     $('#straightLineSwitch').removeAttr('checked');
+// }
+// if( $('#straightLineSwitch').prop('checked') ) {
+//     $('#macrsSwitch').removeAttr('checked');
+//     alert('Seleccionado Straight Line');
+// }
+
+    // if(!estoyActivo){//Me activaron
+    //     estoyActivo = true;
+    //     $(SALVAGE_VALUE_ID).attr("disabled", false);
+    //     $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
+    // }else{//Me desactivaron
+    //     estoyActivo = false;
+    //     $(SALVAGE_VALUE_ID).attr("disabled", true);
+    //     $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
+    //     $(SALVAGE_VALUE_ID).val("");
+    //     $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+    //     $(SALVAGE_VALUE_ID).removeClass("is-valid");
+    //     $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+    // }            
+
 
 //Evento asociado al botón 'Calcular MACRS' de TAB4
-$('#bMACRS').on('click', function(){
-    if(validarMACRS()){
-        runAlgorithm_MACRS();
-    }else
-        swal({text: "Porfavor completa los campos",});
+// $('#bMACRS').on('click', function(){
+//     if(validarMACRS()){
+//         runAlgorithm_MACRS();
+//     }else
+//         swal({text: "Porfavor completa los campos",});
+// });
+
+$('#bImprimir').on('click', function(){
+    if(macrsActivado){ console.log("Ejecute MACRS");
+        if(validarMACRS()){
+            runAlgorithm_MACRS();
+        }else
+            swal({text: "Porfavor completa los campos",});
+    }else{//Straight Line Method
+        console.log("Ejecute Straigt Line");
+    }   
 });
 
 
