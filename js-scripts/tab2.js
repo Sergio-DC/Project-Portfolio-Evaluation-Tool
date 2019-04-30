@@ -1,8 +1,11 @@
-import {validarPeriodosID, validarPrincipalID, validarCalcular2, validarSalvageValue, validarP_SalvageValue, validarPorcentaje} from './validaciones.js';
+import {validarPeriodosID, validarPrincipalID, validarSalvageValue, validarP_SalvageValue, validarPorcentaje, validarBotonCalcular} from './validaciones.js';
 import {runAlgorithm_NPV} from './npv.js';
 
 var TAB = 2;
 const FEEDBACK_INTERES = '#feedbackInteres2';
+const FEEDBACK_TAX = '#feedbackTax2';
+const FEEDBACK_SALVAGE_VALUE = '#feedbackSV2';
+const FEEDBACK_PERIOD_SALVAGE_VALUE = '#feedbackP_SV2';
 const PERIODOS_ID = '#periodosID2';
 const PRINCIPAL_ID = '#principalID2';
 const INTERES_ID = '#interesID2';
@@ -27,29 +30,29 @@ $(PRINCIPAL_ID).on("keyup", function(e){//Leemos del campo de texto periodos
 //Evento asociado al campo de texto 'Interes' del TAB 2
 $(INTERES_ID).on('keyup', function (e){  
     var identificador = INTERES_ID;
-    validarPorcentaje(identificador, TAB, FEEDBACK_INTERES);
+    validarPorcentaje(identificador, FEEDBACK_INTERES);
 });
 //Evento asociado al campo de texto 'TAX' del TAB 2
 $(TAX_ID).on('keyup', function (e){  
     var identificador = TAX_ID;
-    validarTax(identificador, TAB);
+    validarPorcentaje(identificador, TAB, FEEDBACK_TAX);
 });
 //Evento asociado al campo de texto 'Salvage VALUE'
 $(SALVAGE_VALUE_ID).keyup(function (){
     var identificador = SALVAGE_VALUE_ID;  
-    validarSalvageValue(identificador,TAB);
+    validarSalvageValue(identificador,FEEDBACK_SALVAGE_VALUE);
     // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
 });
 $(PERIOD_OF_SALVAGE_VALUE_ID).keyup(function (){
     var identificador = PERIOD_OF_SALVAGE_VALUE_ID;  
-    validarP_SalvageValue(identificador,TAB);
+    validarP_SalvageValue(PERIODOS_ID,identificador, FEEDBACK_PERIOD_SALVAGE_VALUE);
     // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
 });
 
 //Evento asociado al botón 'Calcular' de TAB2
 var npvTotal;
 $(BOTON_CALCULAR).on('click', function(){
-    if(validarCalcular2()){
+    if(validarBotonCalcular(PERIODOS_ID, PRINCIPAL_ID)){
         npvTotal = runAlgorithm_NPV();
     }else
         swal({text: "Porfavor completa los campos",});
@@ -66,15 +69,18 @@ $(BOTON_NPV).on('click', function(){
 });
 var estoyActivo = false;
 $('#customSwitch3').on('click', function () {
-    console.log("Me presionaste");
-    if(!estoyActivo){
+    if(!estoyActivo){//Me activaron
         estoyActivo = true;
         $(SALVAGE_VALUE_ID).attr("disabled", false);
         $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
-    }else{
+    }else{//Me desactivaron
         estoyActivo = false;
         $(SALVAGE_VALUE_ID).attr("disabled", true);
         $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
+        $(SALVAGE_VALUE_ID).val("");
+        $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+        $(SALVAGE_VALUE_ID).removeClass("is-valid");
+        $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
     }            
 });
 
@@ -83,6 +89,5 @@ $('#customSwitch3').on('click', function () {
         $('#form2').trigger('reset');
         validarPeriodosID(PERIODOS_ID, TAB);
         validarPrincipalID(PRINCIPAL_ID, TAB);
-        validarPorcentaje(INTERES_ID,TAB, FEEDBACK_INTERES);
-        //displayPeriodosTAB2(0);
+        validarPorcentaje(INTERES_ID, FEEDBACK_INTERES);
     });

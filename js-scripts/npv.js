@@ -36,34 +36,17 @@ export function displayPeriodosTab2 (numero_periodos){//Despliega filas de perio
     }
     $('#datosTabla2').html(template);    
 }
-
 /**
- * @brief muestra en la columna 'Cumulative Cash Flow' del tab 2 los datos correspondientes
- * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
- * @param {Array<number>} cumCashFlow es un vector de números reales(+/-) que guarda la los valores de Cumulative Cash Flow de 1-n periodos
+ * 
+ * @param {number} cumCashFlow 
+ * @param {number} netCash 
+ * @param {number} numero_periodos 
  */
-function displayCumCashFlow2 (numero_periodos, cumCashFlow)
-{
-    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
-        $(`#cumCash2${i}`).val(cumCashFlow[i]);
-    }
-}
+function displayInfo(cumCashFlow = [], netCash, numero_periodos){
 
-/**
- * @brief muestra en la columna 'Net Cash Flow' del tab 2 los datos correspondientes
- * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
- * @param {Array<number>} netCash es una array que contiene los datos del 'Flujo Neto de Caja' 
- */
-function displayNetCashFlow (numero_periodos, netCash){
-        
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
-        $(`#netCashFlow2${i}`).val(netCash[i]);
-    }
-}
-function displayInfo(cumCashFlow, netCash, numero_periodos){
-    for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
-        $(`#cumCash2${i}`).val(cumCashFlow[i]);
-        $(`#netCashFlow2${i}`).val(netCash[i]);
+        $(`#cumCash2${i}`).val(cumCashFlow[i].toFixed(2));
+        $(`#netCashFlow2${i}`).val(netCash[i].toFixed(2));
     }
 }
 /**
@@ -94,27 +77,19 @@ function getOutflows2 (numero_periodos,principal)
  * @return {Array<number>} un arreglo de números reales que contiene los outflows de 1-n periodos
  */
 function getInflows2 (numero_periodos,salvage_value, p_salvage_value){
-    var data = [];
-    salvage_value = parseFloat(salvage_value);
+    var data = new Array(numero_periodos+1);
+    data.fill(0,0,numero_periodos+1);
 
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
     {
-
-        if(i==0)
-            data[i] = 0;
-        else
-        {
-            //Si la celda leída de la tabla esta en blanco, tomar el dato como 0
-            //En caso contrario leer el número y convertirlo a tipo de dato flotante
-            if($(`#inflow2ID${i}`).val() == "")
-                data[i] = 0;
-            else
-                data[i] = parseFloat($(`#inflow2ID${i}`).val());
+        //Si la celda leída de la tabla esta en blanco, tomar el dato como 0
+        //En caso contrario leer el número y convertirlo a tipo de dato flotante
+        data[i] = $(`#inflow2ID${i}`).val();
         
-            if(i == p_salvage_value){
-                data[i] = data[i] + salvage_value;
-            }       
-        }             
+        if(i == Number(p_salvage_value)){
+            data[i] = Number(data[i]) + Number(salvage_value);
+        }       
+           
     }
     return data;
 }
@@ -194,6 +169,7 @@ function calculateNPV(cumCashFlow, numero_periodos){
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
         npv += cumCashFlow[i]
     }
+    console.log("CumCASH INTERNO: " + cumCashFlow);
     console.log("NPV interno: " + npv);
     return npv;
 }
@@ -204,11 +180,17 @@ export function runAlgorithm_NPV() {
     var principal = $('#principalID2').val();
     var interes = parseFloat($('#interesID2').val());
     var tax = $('#taxID1').val();
-    var salvageValue = $('#svID').val();
-    var period_salvageValue = $('#p_svID').val();
+    var salvageValue = $('#svID2').val();
+    var period_salvageValue = $('#p_svID2').val();
     console.log("Interes: " + interes/100);
     console.log("Tax Rate: " + tax/100);
-    console.log(periodos, principal, salvageValue, period_salvageValue);
+    console.log("Periodos: " + periodos);
+    console.log("Principal: " + principal);
+    console.log("Interes: " + interes/100);
+    console.log("TAX: " + tax);
+    console.log("Salvage Value: " + salvageValue);
+    console.log("Period of Salvage Value: " + period_salvageValue);
+    
 
     //1. Obtener Inflows y Outflows
     var inflows2 = getInflows2(periodos, salvageValue, period_salvageValue);
@@ -220,13 +202,13 @@ export function runAlgorithm_NPV() {
     console.log("Net Cash Flow2: " + netCashFlow);
     //3. Calcular el Present Value Factor(PVF)
     var pvf = calculatePVF(interes/100, periodos);
-    console.log("PVF2: " + pvf);
+    console.log("PVF: " + pvf);
     //4. Calcular Net Cash After Taxes
     var netCashAfterTaxes = calculateNetCashAfterTax(netCashFlow, tax/100, periodos);
     console.log("NetCashAfterTax: " + netCashAfterTaxes);
     //5. Calcular el Cumulative Cash Flow
     var cumCashFlow2 = calculateCumCashFlow2(pvf, netCashAfterTaxes, periodos);
-    console.log("CumulativeCASHfLOW2: " + cumCashFlow2);
+    console.log("CumulativeCashFlo: " + cumCashFlow2);
     //6. Mostramos el array de Cumulative Cash Flow  y el array de Net Cash Flow en la GUI
     displayInfo(cumCashFlow2, netCashFlow, periodos);
     //7. Calculamos el NPV

@@ -86,14 +86,14 @@ function getOutflows(principal, numero_periodos){
  * @returns {Array<number>} un arreglo de números reales que contiene los outflows de [1,N] periodos
  */
 function getInflows(numero_periodos, sv, p_sv){
-    var data = [];
-    sv = parseFloat(sv);
-    p_sv = parseInt(p_sv);
+    var data = new Array(numero_periodos + 1);
+    data.fill(0, 0,numero_periodos + 1 );
+    console.log("Inflow Interno: " + data);
 
     for(var i = PERIODO_INICIAL; i <= numero_periodos; i++){
-        data[i] = parseFloat($(`#inflow1ID${i}`).val());
-        if(i == p_sv){
-;            data[i] = data[i] + sv;
+        data[i] = $(`#inflow1ID${i}`).val();  
+        if(i == Number(p_sv)){
+;            data[i] = Number(data[i]) + Number(sv);
         }
             
     }
