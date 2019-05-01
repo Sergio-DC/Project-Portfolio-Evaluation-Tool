@@ -127,4 +127,6 @@ $('#customSwitch3').on('click', function () {
         validarPeriodosID(PERIODOS_ID, TAB);
         validarPrincipalID(PRINCIPAL_ID, TAB);
         validarPorcentaje(INTERES_ID, FEEDBACK_INTERES);
+        validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
+        validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
     });

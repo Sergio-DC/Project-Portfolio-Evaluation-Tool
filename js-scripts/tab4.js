@@ -1,68 +1,95 @@
-import {validarMACRS, validarPeriodosID, validarPrincipalID} from './validaciones.js';
+import {validarMACRS, validarPeriodosID, validarPrincipalID, validarPorcentaje} from './validaciones.js';
 import {runAlgorithm_MACRS, runAlgorithm_STRAIGHT_LINE} from './macrs.js';//Recuerda siempre agregar la extension js al final sino error   
 
-const FEEDBACK_INTERES = '#feedbackInteres2';
-const FEEDBACK_TAX = '#feedbackTax2';
-const FEEDBACK_SALVAGE_VALUE = '#feedbackSV2';
-const FEEDBACK_PERIOD_SALVAGE_VALUE = '#feedbackP_SV2';
+const TAB = 3;//Tienes que corregir esto
+const FEEDBACK_TAX = '#feedbackTax3';
+const FEEDBACK_SALVAGE_VALUE = '#feedbackSV3';
+const FEEDBACK_PERIOD_SALVAGE_VALUE = '#feedbackP_SV3';
+const FEEDBACK_STARTING_YEAR = '#feedbackStartingYear';
 const PERIODOS_ID = '#periodosID3';
 const PRINCIPAL_ID = '#principalID3';
-const TAX_ID = '#taxID1';
+const TAX_ID = '#taxID2';
 const SALVAGE_VALUE_ID = '#svID3';
 const PERIOD_OF_SALVAGE_VALUE_ID = '#p_svID3';
-const BOTON_CALCULAR = '#bCalcular2';
 const BOTON_LIMPIAR = '#bLimpiar3';
 
 
 
-//Evento asociado al campo de texto 'Periodos' del Tab 3
+//Evento asociado al campo de texto 'Periodos'
 $(PERIODOS_ID).on('keyup', function(){ //Falta Corregir 
     var identificador = PERIODOS_ID;
-    validarPeriodosID(identificador, 3);
+    validarPeriodosID(identificador, TAB);
+    $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+    $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
 });
-
-//Evento asociado al campo de texto 'Principal' del Tab 2
+//Evento asociado al campo de texto 'Periodos' del tipo onInput
+$(PERIODOS_ID).on('input', function(){ //Falta Corregir 
+    var identificador = PERIODOS_ID;
+    validarPeriodosID(identificador, TAB);
+    $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+    $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
+});
+//Evento asociado al campo de texto 'Principal'
 $(PRINCIPAL_ID).on("keyup", function(e){//Leemos del campo de texto periodos
     var identificador = PRINCIPAL_ID;
-    validarPrincipalID(identificador);
+    validarPrincipalID(identificador, TAB);
     //$('#principalID2').val(formatNumber($('#principalID2').val()));
+});
+//Evento asociado al campo de texto 'Principal' del Tab 2
+$(PRINCIPAL_ID).on("input", function(e){//Leemos del campo de texto periodos
+    var identificador = PRINCIPAL_ID;
+    validarPrincipalID(identificador,TAB);
+    //$('#principalID2').val(formatNumber($('#principalID2').val()));
+});
+//Evento asociado al campo de texto 'TAX' del TAB 2
+$(TAX_ID).on('keyup', function (e){  
+    var identificador = TAX_ID;
+    validarPorcentaje(identificador, FEEDBACK_TAX);
+});
+//Evento asociado al campo de texto 'TAX' del tipo onInput
+$(TAX_ID).on('input', function (e){  
+    var identificador = TAX_ID;
+    validarPorcentaje(identificador, FEEDBACK_TAX);
+});
+
+//Evento asociado al campo de texto 'Salvage VALUE'
+$(SALVAGE_VALUE_ID).keyup(function (){
+    var identificador = SALVAGE_VALUE_ID;  
+    validarSalvageValue(identificador,FEEDBACK_SALVAGE_VALUE);
+    // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
+});
+//Evento asociado al campo de texto 'Salvage VALUE' de tipo onInput
+$(SALVAGE_VALUE_ID).on('input',function (e){
+    var identificador = SALVAGE_VALUE_ID;  
+    validarSalvageValue(identificador,FEEDBACK_SALVAGE_VALUE);
+    // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
+});
+$(PERIOD_OF_SALVAGE_VALUE_ID).keyup(function (){
+    var identificador = PERIOD_OF_SALVAGE_VALUE_ID;  
+    validarP_SalvageValue(PERIODOS_ID,identificador, FEEDBACK_PERIOD_SALVAGE_VALUE);
+    // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
+});
+$(PERIOD_OF_SALVAGE_VALUE_ID).on('input',function (){
+    var identificador = PERIOD_OF_SALVAGE_VALUE_ID;  
+    validarP_SalvageValue(PERIODOS_ID,identificador, FEEDBACK_PERIOD_SALVAGE_VALUE);
+    // $('#principalID1').val(formatNumber($('#principalID1').val()));//Se agrega formato al número introducido        
 });
 
 var macrsActivado = true;
 
 $('#macrsSwitch').click(function() {
-    macrsActivado = true;//Cuando se presiona el botón de MACRS desaparece la sección de SV   
+    macrsActivado = true;//Cuando se presiona el botón de MACRS desaparece la sección de SV
+    $('#dep_category').prop('disabled', false);//Activamos la lista de MACRS(Desactivamos el escudo)  
     on_offSalvageValueSection(true);//Se desactiva la sección de Salvage Value 
  });
 
  $('#straightLineSwitch').click(function() {
     macrsActivado = false;//Cuando se presiona el botón de SL aparece la sección de SV  
+    $('#dep_category').prop('disabled', true);//Desactivamos la lista de MACRS(Activamos el escudo)
     on_offSalvageValueSection(false);//Se activa la sección de Salvage Value
  });
-
-//  $('#straightLineSwitch').on('change', function() {
-//     alert("Macrs Desactivado: " + $(`input[name=option1]: + $('#macrsSwitch').prop('checked', false)`).val());
-//     //alert($('input[name=option2]:checked').val()); 
-//  });
-// if( $('#macrsSwitch').prop('checked') ) {
-//     alert('Seleccionado MACRS');
-//     $('#straightLineSwitch').removeAttr('checked');
-// }
-// if( $('#straightLineSwitch').prop('checked') ) {
-//     $('#macrsSwitch').removeAttr('checked');
-//     alert('Seleccionado Straight Line');
-// }
-
-    
-
-
-//Evento asociado al botón 'Calcular MACRS' de TAB4
-// $('#bMACRS').on('click', function(){
-//     if(validarMACRS()){
-//         runAlgorithm_MACRS();
-//     }else
-//         swal({text: "Porfavor completa los campos",});
-// });
 
 $('#bImprimir').on('click', function(){
     if(macrsActivado){ console.log("Ejecute MACRS");
@@ -76,9 +103,6 @@ $('#bImprimir').on('click', function(){
         console.log("SL");
     }   
 });
-
-
-
 //Evento asociado al campo de texto 'Limpiar' del TAB3 
 $(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la información mostrada  
     $('#form3').trigger('reset');
