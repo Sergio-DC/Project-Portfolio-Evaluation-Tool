@@ -1,8 +1,11 @@
 import {validarPeriodosID, validarPrincipalID, validarPorcentaje, validarSalvageValue, validarP_SalvageValue, validarBotonCalcular} from './validaciones.js';
 import {runAlgorithm_discPayBack} from './discPayBack.js';
+
 const TAB = 1;
 const FEEDBACK_INTERES = '#feedbackInteres1';
 const FEEDBACK_SALVAGE_VALUE = '#feedbackSV1';
+const FEEDBACK_PERIODOS = '#feedbackPeriodos1';
+const FEEDBACK_PRINCIPAL = '#feedbackPrincipal1';
 const FEEDBACK_PERIOD_SALVAGE_VALUE = '#feedbackP_SV1';
 const PERIODOS_ID = '#periodosID1';
 const PRINCIPAL_ID = '#principalID1';
@@ -14,7 +17,7 @@ const BOTON_LIMPIAR = '#bLimpiar1';
     //Evento asociado al campo de texto 'Periodos'
     $(PERIODOS_ID).on("keyup", function(e){//Leemos del campo de texto 'periodos' de TAB1
         var identificador = PERIODOS_ID;
-        validarPeriodosID(identificador, TAB);
+        validarPeriodosID(identificador,FEEDBACK_PERIODOS, TAB);
         $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
         $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
         $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
@@ -22,7 +25,7 @@ const BOTON_LIMPIAR = '#bLimpiar1';
     //Evento asociado al campo de texto 'Periodos' de tipo onInput
     $(PERIODOS_ID).on("input", function(e){
         var identificador = PERIODOS_ID;
-        validarPeriodosID(identificador, TAB);
+        validarPeriodosID(identificador, FEEDBACK_PERIODOS, TAB);
         $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
         $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
         $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
@@ -31,14 +34,14 @@ const BOTON_LIMPIAR = '#bLimpiar1';
     $(PRINCIPAL_ID).keyup(function (){
         var tab = 1;
         var identificador = PRINCIPAL_ID;  
-        validarPrincipalID(identificador,TAB);
+        validarPrincipalID(identificador, FEEDBACK_PRINCIPAL);
         // $(PRINCIPAL_ID).val(formatNumber($(PRINCIPAL_ID).val()));//Se agrega formato al número introducido        
     });
     //Evento asociado al campo de texto 'Principal' de tipo onInput
     $(PRINCIPAL_ID).on("input", function(e){
         var tab = 1;
         var identificador = PRINCIPAL_ID;  
-        validarPrincipalID(identificador,TAB);
+        validarPrincipalID(identificador,FEEDBACK_PRINCIPAL);
     });        
     //Evento asociado al campo de texto 'Interes'
     $(INTERES_ID).on('keyup', function (e){ 
@@ -64,6 +67,10 @@ const BOTON_LIMPIAR = '#bLimpiar1';
             $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
             $(SALVAGE_VALUE_ID).val("");
             $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+            $(SALVAGE_VALUE_ID).removeClass("is-valid");
+            $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-valid");
+            $(SALVAGE_VALUE_ID).removeClass("is-invalid");
+            $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
         }            
     });
     //Evento asociado al campo de texto 'Salvage VALUE'
@@ -103,8 +110,8 @@ const BOTON_LIMPIAR = '#bLimpiar1';
     //Evento asociado al botón 'Limpiar' del TAB1
     $(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la información mostrada  
         $('#form1').trigger('reset');
-        validarPeriodosID(PERIODOS_ID, TAB);
-        validarPrincipalID(PRINCIPAL_ID, TAB);
+        validarPeriodosID(PERIODOS_ID, FEEDBACK_PERIODOS);
+        validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
         validarPorcentaje(INTERES_ID,FEEDBACK_INTERES);
         validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
         validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);

@@ -1,7 +1,9 @@
 import {validarMACRS, validarPeriodosID, validarPrincipalID, validarPorcentaje} from './validaciones.js';
 import {runAlgorithm_MACRS, runAlgorithm_STRAIGHT_LINE} from './macrs.js';//Recuerda siempre agregar la extension js al final sino error   
 
-const TAB = 3;//Tienes que corregir esto
+const TAB = 3;
+const FEEDBACK_PERIODOS = '#feedbackPeriodos3';
+const FEEDBACK_PRINCIPAL = '#feedbackPrincipal3';
 const FEEDBACK_TAX = '#feedbackTax3';
 const FEEDBACK_SALVAGE_VALUE = '#feedbackSV3';
 const FEEDBACK_PERIOD_SALVAGE_VALUE = '#feedbackP_SV3';
@@ -18,7 +20,7 @@ const BOTON_LIMPIAR = '#bLimpiar3';
 //Evento asociado al campo de texto 'Periodos'
 $(PERIODOS_ID).on('keyup', function(){ //Falta Corregir 
     var identificador = PERIODOS_ID;
-    validarPeriodosID(identificador, TAB);
+    validarPeriodosID(identificador, FEEDBACK_PERIODOS, TAB);
     $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
     $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
     $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
@@ -26,7 +28,7 @@ $(PERIODOS_ID).on('keyup', function(){ //Falta Corregir
 //Evento asociado al campo de texto 'Periodos' del tipo onInput
 $(PERIODOS_ID).on('input', function(){ //Falta Corregir 
     var identificador = PERIODOS_ID;
-    validarPeriodosID(identificador, TAB);
+    validarPeriodosID(identificador, FEEDBACK_PERIODOS, TAB);
     $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
     $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
     $(`${FEEDBACK_PERIOD_SALVAGE_VALUE} > p > i`).text("");
@@ -34,13 +36,13 @@ $(PERIODOS_ID).on('input', function(){ //Falta Corregir
 //Evento asociado al campo de texto 'Principal'
 $(PRINCIPAL_ID).on("keyup", function(e){//Leemos del campo de texto periodos
     var identificador = PRINCIPAL_ID;
-    validarPrincipalID(identificador, TAB);
+    validarPrincipalID(identificador, FEEDBACK_PRINCIPAL);
     //$('#principalID2').val(formatNumber($('#principalID2').val()));
 });
 //Evento asociado al campo de texto 'Principal' del Tab 2
 $(PRINCIPAL_ID).on("input", function(e){//Leemos del campo de texto periodos
     var identificador = PRINCIPAL_ID;
-    validarPrincipalID(identificador,TAB);
+    validarPrincipalID(identificador,FEEDBACK_PRINCIPAL);
     //$('#principalID2').val(formatNumber($('#principalID2').val()));
 });
 //Evento asociado al campo de texto 'TAX' del TAB 2
