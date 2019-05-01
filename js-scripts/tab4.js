@@ -1,4 +1,4 @@
-import {validarMACRS, validarPeriodosID, validarPrincipalID, validarPorcentaje} from './validaciones.js';
+import {validarMACRS, validarPeriodosID, validarPrincipalID, validarPorcentaje, validarSalvageValue, validarP_SalvageValue} from './validaciones.js';
 import {runAlgorithm_MACRS, runAlgorithm_STRAIGHT_LINE} from './macrs.js';//Recuerda siempre agregar la extension js al final sino error   
 
 const TAB = 3;
@@ -94,31 +94,31 @@ $('#macrsSwitch').click(function() {
  });
 
 $('#bImprimir').on('click', function(){
-    if(macrsActivado){ console.log("Ejecute MACRS");
+    if(macrsActivado){ 
         if(validarMACRS()){
             runAlgorithm_MACRS();
-            console.log("MACRS");
         }else
             swal({text: "Porfavor completa los campos",});
     }else{//Straight Line Method
         runAlgorithm_STRAIGHT_LINE();
-        console.log("SL");
     }   
 });
 //Evento asociado al campo de texto 'Limpiar' del TAB3 
 $(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la información mostrada  
     $('#form3').trigger('reset');
-    //displayPeriodosTab3(0);
+    validarPeriodosID(PERIODOS_ID, FEEDBACK_PERIODOS);
+    validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
+    validarPorcentaje(TAX_ID, FEEDBACK_TAX);
+    validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
+    validarP_SalvageValue(PERIODOS_ID, PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
 });
 //Funcion que prende y apaga la sección de salvage value
 function on_offSalvageValueSection(estoyActivo){
     if(!estoyActivo){//Me activaron
-        console.log("Me activaron");
         estoyActivo = true;
         $(SALVAGE_VALUE_ID).attr("disabled", false);
         $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
     }else{//Me desactivaron
-        console.log("Me desactivarion");
         estoyActivo = false;
         $(SALVAGE_VALUE_ID).attr("disabled", true);
         $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);

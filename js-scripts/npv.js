@@ -11,28 +11,27 @@ export function displayPeriodosTab2 (numero_periodos){//Despliega filas de perio
     else{
         for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
         {
-            template += `
-            <tr id="${i}ID">
-                <td>${i}</td>                
-                <td><input id="inflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
-                <td><input id="outflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
-                <td><input id="netCashFlow2${i}" typw="text" class="form-control-sm" size="15"></td>
-                <td><input id="cumCash2${i}" type="text" class="form-control-sm" size="15"></td>
-            </tr>
-            `;
-        }
-        template2 = `
-            <div class="col"></div>
-            <div class="col">
-                <button id="bMostrarNPV">Imprimir Resultado</button>
-            </div>
-            <div class="col">
-                <label>Net Present Value</label>
-            </div>
-            <div class="col">
-                <input type="text" id="npvID">
-            </div>
-        `;            
+            if(i == 0){
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>                
+                    <td><input id="inflow2ID${i}" type="text" class="form-control-sm" size="15" disabled></td>
+                    <td><input id="outflow2ID${i}" type="text" class="form-control-sm" size="15" disabled></td>
+                    <td><input id="netCashFlow2${i}" typw="text" class="form-control-sm" size="15" disabled></td>
+                    <td><input id="cumCash2${i}" type="text" class="form-control-sm" size="15" disabled></td>
+                </tr>
+                `;
+            }else
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>                
+                    <td><input id="inflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
+                    <td><input id="outflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
+                    <td><input id="netCashFlow2${i}" typw="text" class="form-control-sm" size="15"></td>
+                    <td><input id="cumCash2${i}" type="text" class="form-control-sm" size="15"></td>
+                </tr>
+                `;
+        }          
     }
     $('#datosTabla2').html(template);    
 }

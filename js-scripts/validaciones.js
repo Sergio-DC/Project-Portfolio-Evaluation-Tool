@@ -14,14 +14,15 @@ export function validarPeriodosID(identificador, feedbackMsj, tab){
         if(tab == 3) displayPeriodosTab3(0);
         periodosListo = false;         
     }else if(isNaN(num)){//No es un número
-        $(identificador).removeClass('is-valid');$(identificador).addClass('is-invalid');
+        $(identificador).removeClass('is-valid');
+        $(identificador).addClass('is-invalid');
         $(`${feedbackMsj} > p > i`).text("");
         $(`${feedbackMsj} > p > i`).text("Ingresa un valor numérico");
         periodosListo = false;
     }
     else if(num > 10 || num < 0){//Se excedio el número máximo de periodos
-        $(identificador).removeClass('is-valid'); $(identificador).addClass('is-invalid');
-        $(feedbackMsj).addClass('invalid-feedback');
+        $(identificador).removeClass('is-valid'); 
+        $(identificador).addClass('is-invalid');
         $(`${feedbackMsj} > p > i`).text("Ingresa un número entre 0 y 10");
         if(tab == 1) displayPeriodosTab1(0);
         if(tab == 2) displayPeriodosTab2(0);
@@ -144,19 +145,23 @@ export function validarP_SalvageValue(periodosID,identificador, feedbackMsj){
     var num = $(identificador).val();//Obtenemos el número de periodos de Salvage Value
     var periodos = Number($(periodosID).val());//Obtenemos el número de periodos 
     if(num == ""){//El campo esta vació
-        $(identificador).removeClass('is-valid');$(identificador).removeClass('is-invalid');
-        $(`${feedbackMsj} > p > i`).text("");  
+        console.log("Entre 1");
+        $(identificador).removeClass('is-valid');
+        $(identificador).removeClass('is-invalid');
+        $(`${feedbackMsj} > p > i`).text("");
     }else if(isNaN(num)){//No es un número
+        console.log("Entre 2");
         $(identificador).removeClass('is-valid');$(identificador).addClass('is-invalid');
         $(`${feedbackMsj} > p > i`).text("");
         $(`${feedbackMsj} > p > i`).text("Ingresa un valor numérico");
     }
     else if(num > periodos || num < 0){//Se excedio el periodo de salvamento de periodos
-        console.log("Entre XD")
+        console.log("Entre 3")
         $(identificador).removeClass('is-valid');
          $(identificador).addClass('is-invalid');
         $(`${feedbackMsj} > p > i`).text(`Ingresa un número entre 0 y ${periodos}`);
     }else{//El número de periodos esta dentro del rango
+        console.log("Entre 4");
         $(identificador).removeClass('is-invalid');$(identificador).addClass('is-valid');
         $(`${feedbackMsj} > p > i`).text("");
     }

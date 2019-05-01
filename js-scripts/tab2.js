@@ -106,6 +106,7 @@ $(BOTON_NPV).on('click', function(){
         $('#npvID').val(new Intl.NumberFormat().format(npvTotal.toFixed(3)));
     }        
 });
+//Interruptor de sección 'Salvage Value'
 var estoyActivo = false;
 $('#customSwitch3').on('click', function () {
     if(!estoyActivo){//Me activaron
@@ -122,6 +123,8 @@ $('#customSwitch3').on('click', function () {
         $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-valid");
         $(SALVAGE_VALUE_ID).removeClass("is-invalid");
         $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+        validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
+        validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
     }            
 });
 
@@ -132,5 +135,5 @@ $('#customSwitch3').on('click', function () {
         validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
         validarPorcentaje(INTERES_ID, FEEDBACK_INTERES);
         validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
-        validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
+        validarP_SalvageValue(PERIODOS_ID,PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
     });

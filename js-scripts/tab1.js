@@ -53,7 +53,7 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         var identificador = INTERES_ID;
         validarPorcentaje(identificador, FEEDBACK_INTERES);
     });        
-    //Evento asociado al botón 'switch' del tab1 de Salvage Value
+    //Interruptor de Sección 'Salvage Value'
     var estoyActivo = false;
     $('#customSwitch1').on('click', function () {
         if(!estoyActivo){//Me activaron
@@ -61,7 +61,6 @@ const BOTON_LIMPIAR = '#bLimpiar1';
             $(SALVAGE_VALUE_ID).attr("disabled", false);
             $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
         }else{//Me desactivaron
-            console.log("Desactivado")
             estoyActivo = false;
             $(SALVAGE_VALUE_ID).attr("disabled", true);
             $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
@@ -71,6 +70,8 @@ const BOTON_LIMPIAR = '#bLimpiar1';
             $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-valid");
             $(SALVAGE_VALUE_ID).removeClass("is-invalid");
             $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+            validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
+            validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
         }            
     });
     //Evento asociado al campo de texto 'Salvage VALUE'
@@ -95,7 +96,7 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         var identificador = PERIOD_OF_SALVAGE_VALUE_ID;  
         validarP_SalvageValue(PERIODOS_ID,identificador, FEEDBACK_PERIOD_SALVAGE_VALUE);
     });
-    //Evento asociado al botón 'switch' del tab1 de Tasa de Interes
+    //Interruptor de Sección 'Tasa de Interés'
     var estoyActivo2 = false;
     $('#customSwitch2').on('click', function () {
         if(!estoyActivo2){//Me activaron
@@ -104,6 +105,10 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         }else{//Me desactivaron
             estoyActivo2 = false;
             $(INTERES_ID).attr("disabled", true);
+            $(INTERES_ID).val("");
+            $(INTERES_ID).removeClass("is-valid");
+            $(INTERES_ID).removeClass("is-invalid");
+            validarPorcentaje(INTERES_ID,FEEDBACK_INTERES);            
         }            
     });
  
@@ -114,7 +119,7 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
         validarPorcentaje(INTERES_ID,FEEDBACK_INTERES);
         validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
-        validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
+        validarP_SalvageValue(PERIODOS_ID,PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
     });    
 
      //Evento asociado al botón 'Calcular' del TAB1
