@@ -82,7 +82,16 @@ function calculateValueInLedgers(depreciation, principal, periodos){
     return valueInLedgers;
 }
 
-function displayInfo(starting_year, depreciation, accDep, valor_libros, periodos){
+function displayInfoMACRS(starting_year, depreciation, accDep, valor_libros, periodos){
+    for(var i = 0; i <= periodos; i++){
+        $(`#years${i}`).val(starting_year++);
+        $(`#AnnualDep${i}`).val(depreciation[i]);
+        $(`#AccDep${i}`).val(accDep[i]);
+        $(`#valueInLedgers${i}`).val(valor_libros[i]);
+    }
+}
+
+function displayInfoSL(starting_year, depreciation, accDep, valor_libros, periodos){
     for(var i = 0; i <= periodos; i++){
         $(`#years${i}`).val(starting_year++);
         $(`#AnnualDep${i}`).val(depreciation[i]);
@@ -97,7 +106,6 @@ export function runAlgorithm_MACRS(){
     var principal = $('#principalID3').val();
     var tax = $('#taxID2').val();
     var starting_year = $('#start_year').val();
-    var period_salvage_value = $('#p_svID3').val();
     var dep_category = $('#dep_category').val();
     
     console.log("Periodos: " + periodos);
@@ -117,7 +125,7 @@ export function runAlgorithm_MACRS(){
     var valor_libros = calculateValueInLedgers(depreciation, principal,periodos);
     console.log("Valor en libros: " + valor_libros);
     //5. Mostrar la información en la tabla
-    displayInfo(starting_year, depreciation, accDep, valor_libros, periodos);
+    displayInfoMACRS(starting_year, depreciation, accDep, valor_libros, periodos);
 }
 
 
@@ -149,6 +157,7 @@ export function runAlgorithm_STRAIGHT_LINE(){
     var principal = $('#principalID3').val();
     var salvage_value = $('#svID3').val();
     var periodos = $('#periodosID3').val();//Periodos
+    var starting_year = $('#start_year').val();
     console.log("Principal: " + principal);
     console.log("Salvage Value: " + salvage_value);
     console.log("Periodos: " + periodos);
@@ -158,6 +167,6 @@ export function runAlgorithm_STRAIGHT_LINE(){
     var depAcc = calcDepAcumulada(depAnual,periodos);
     //3. Calculamos el 'valor en libros'
     var libros = calculateValueInLedgers(depAnual, principal, periodos);
-    console.log("Libros: " + libros);
+    displayInfoSL(starting_year, depAnual, depAcc, libros,periodos);
 }
 
