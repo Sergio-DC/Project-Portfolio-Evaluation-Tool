@@ -14,6 +14,7 @@ const BOTON_CALCULAR = '#bCalcular2';
 const BOTON_LIMPIAR = '#bLimpiar3';
 
 
+
 //Evento asociado al campo de texto 'Periodos' del Tab 3
 $(PERIODOS_ID).on('keyup', function(){ //Falta Corregir 
     var identificador = PERIODOS_ID;
@@ -30,13 +31,13 @@ $(PRINCIPAL_ID).on("keyup", function(e){//Leemos del campo de texto periodos
 var macrsActivado = true;
 
 $('#macrsSwitch').click(function() {
-    macrsActivado = true;   
-    //$('input[name=option2]:checked') 
+    macrsActivado = true;//Cuando se presiona el botón de MACRS desaparece la sección de SV   
+    on_offSalvageValueSection(true);//Se desactiva la sección de Salvage Value 
  });
 
  $('#straightLineSwitch').click(function() {
-    macrsActivado = false;
-    //$('input[name=option2]:checked') 
+    macrsActivado = false;//Cuando se presiona el botón de SL aparece la sección de SV  
+    on_offSalvageValueSection(false);//Se activa la sección de Salvage Value
  });
 
 //  $('#straightLineSwitch').on('change', function() {
@@ -52,19 +53,7 @@ $('#macrsSwitch').click(function() {
 //     alert('Seleccionado Straight Line');
 // }
 
-    // if(!estoyActivo){//Me activaron
-    //     estoyActivo = true;
-    //     $(SALVAGE_VALUE_ID).attr("disabled", false);
-    //     $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
-    // }else{//Me desactivaron
-    //     estoyActivo = false;
-    //     $(SALVAGE_VALUE_ID).attr("disabled", true);
-    //     $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
-    //     $(SALVAGE_VALUE_ID).val("");
-    //     $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
-    //     $(SALVAGE_VALUE_ID).removeClass("is-valid");
-    //     $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
-    // }            
+    
 
 
 //Evento asociado al botón 'Calcular MACRS' de TAB4
@@ -79,10 +68,12 @@ $('#bImprimir').on('click', function(){
     if(macrsActivado){ console.log("Ejecute MACRS");
         if(validarMACRS()){
             runAlgorithm_MACRS();
+            console.log("MACRS");
         }else
             swal({text: "Porfavor completa los campos",});
     }else{//Straight Line Method
         runAlgorithm_STRAIGHT_LINE();
+        console.log("SL");
     }   
 });
 
@@ -92,4 +83,22 @@ $('#bImprimir').on('click', function(){
 $(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la información mostrada  
     $('#form3').trigger('reset');
     //displayPeriodosTab3(0);
-});   
+});
+//Funcion que prende y apaga la sección de salvage value
+function on_offSalvageValueSection(estoyActivo){
+    if(!estoyActivo){//Me activaron
+        console.log("Me activaron");
+        estoyActivo = true;
+        $(SALVAGE_VALUE_ID).attr("disabled", false);
+        $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
+    }else{//Me desactivaron
+        console.log("Me desactivarion");
+        estoyActivo = false;
+        $(SALVAGE_VALUE_ID).attr("disabled", true);
+        $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
+        $(SALVAGE_VALUE_ID).val("");
+        $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+        $(SALVAGE_VALUE_ID).removeClass("is-valid");
+        $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+    }            
+}

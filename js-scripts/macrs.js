@@ -71,11 +71,13 @@ function calculateAccuDep(depreciation, periodos){
  * @param {number} periodos - es un número entero positivo que tiene significado por su propio nombre
  */
 function calculateValueInLedgers(depreciation, principal, periodos){  
-    var valueInLedgers = [];
-    valueInLedgers[0] = principal;
+    var valueInLedgers = new Array(Number(periodos) + 1);   
 
-    for(var i = 1; i < periodos; i++){
-        valueInLedgers[i] = valueInLedgers[i-1] - depreciation[i];
+    for(var i = 0; i <= periodos; i++){
+        if(i==0)
+            valueInLedgers[i] = principal;
+        else
+            valueInLedgers[i] = valueInLedgers[i-1] - depreciation[i];
     }
     return valueInLedgers;
 }
@@ -120,20 +122,42 @@ export function runAlgorithm_MACRS(){
 
 
 
-function depAnualizada(principal, salvage_value, n){
+function calcDepAnualizada(principal, salvage_value, n){
     var depreciacion = (principal-salvage_value)/n;
-    var depreciacionAnualizada = new Array(n+1);
-    depreciacionAnualizada.fill(depreciacion,1,n+1);
+    console.log("Depreciación: " + depreciacion);
+    var depreciacionAnualizada = new Array(Number(n)+1);
+    depreciacionAnualizada[0] = 0;
+    depreciacionAnualizada.fill(15000,1,Number(n)+1);
     console.log("Dep anualizada: " + depreciacionAnualizada);
+    return depreciacionAnualizada;
+}
+
+function calcDepAcumulada(depAnual, periodos){
+    var depAcc = new Array(Number(periodos) + 1);
+    for(var i = 0; i <= periodos; i++){
+        if(i == 0)
+            depAcc[i] = 0;
+        else if(i==1)
+            depAcc[i] = depAnual[i];
+        else
+            depAcc[i] = depAcc[i-1] + depAnual[i];
+    }
+    return depAcc;
 }
 export function runAlgorithm_STRAIGHT_LINE(){
     //Obtenemos los datos de entrada
     var principal = $('#principalID3').val();
     var salvage_value = $('#svID3').val();
-    var n = $('#periodosID3').val();//Periodos
+    var periodos = $('#periodosID3').val();//Periodos
+    console.log("Principal: " + principal);
+    console.log("Salvage Value: " + salvage_value);
+    console.log("Periodos: " + periodos);
     //1. Calculamos la depreciación anualizada
-    depAnualizada(principal, salvage_value, n);
+    var depAnual = calcDepAnualizada(principal, salvage_value, periodos);
     //2. Calculamos la depreciación acumulada
-    //var depAcc = 
+    var depAcc = calcDepAcumulada(depAnual,periodos);
+    //3. Calculamos el 'valor en libros'
+    var libros = calculateValueInLedgers(depAnual, principal, periodos);
+    console.log("Libros: " + libros);
 }
 
