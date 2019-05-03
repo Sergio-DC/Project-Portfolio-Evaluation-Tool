@@ -76,8 +76,10 @@ function calculateValueInLedgers(depreciation, principal, periodos){
     for(var i = 0; i <= periodos; i++){
         if(i==0)
             valueInLedgers[i] = principal;
-        else
-            valueInLedgers[i] = valueInLedgers[i-1] - depreciation[i];
+        else{
+            valueInLedgers[i] = (valueInLedgers[i-1] - depreciation[i]).toFixed(2);
+        }
+            
     }
     return valueInLedgers;
 }
@@ -118,6 +120,7 @@ export function runAlgorithm_MACRS(){
     var macr_category = MACRS_TABLE[dep_category]
     //2. Calcular la columna de Depreciación(MACRS*Principal)
     var depreciation = calculateDep(macr_category, principal, periodos);
+    console.log("Depreciación Anual: " + depreciation);
     //3. Calcular la depreciación acumulada
     var accDep = calculateAccuDep(depreciation, periodos);//arreglo que guarda la 'depreciación acumulada'
     console.log("Depreciación Acumulada: " +accDep);
@@ -135,7 +138,7 @@ function calcDepAnualizada(principal, salvage_value, n){
     console.log("Depreciación: " + depreciacion);
     var depreciacionAnualizada = new Array(Number(n)+1);
     depreciacionAnualizada[0] = 0;
-    depreciacionAnualizada.fill(15000,1,Number(n)+1);
+    depreciacionAnualizada.fill(depreciacion,1,Number(n)+1);
     console.log("Dep anualizada: " + depreciacionAnualizada);
     return depreciacionAnualizada;
 }
