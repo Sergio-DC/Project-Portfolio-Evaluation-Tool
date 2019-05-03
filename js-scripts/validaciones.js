@@ -1,9 +1,18 @@
+/**
+ * Este documento contiene funciones que se encargan de realizar validaciones a los diferentes elementos
+ * de los tabs.
+ */
 import {displayPeriodosTab1} from './tab1_controller.js';
 import {displayPeriodosTab2} from './tab2_controller.js';
 import {displayPeriodosTab4} from './tab4_controller.js';
 
 var periodosListo = false, principalListo=false;
-
+/**
+ * @brief valida el campo de 'periodos' del tab que se especifique utilizando varios criterios
+ * @param {string} identificador - id asociado el campo de texto de 'periodos' del tab que se especifique
+ * @param {string} feedbackMsj - id asociado al msj de retroalimentación de 'Periodos' del tab que se especifique
+ * @param {number} tab - número de tab
+ */
 export function validarPeriodosID(identificador, feedbackMsj, tab){
     var num = $(identificador).val();//Obtenemos el número de periodos
     if(num == ""){//El campo esta vació
@@ -37,7 +46,11 @@ export function validarPeriodosID(identificador, feedbackMsj, tab){
         periodosListo = true;
     }
 }
-
+/**
+ * @brief valida el campo de 'principal' del tab que se especifique utilizando varios criterios
+ * @param {string} identificador - id asociado el campo de texto de 'principal' del tab que se especifique
+ * @param {string} feedbackMsj - id asociado al msj de retroalimentación de 'Principal' del tab que se especifique
+ */
 export function validarPrincipalID(identificador, feedbackMsj){
     var principal = $(identificador).val();
     if(principal == ""){//El campo esta vacio
@@ -63,7 +76,11 @@ export function validarPrincipalID(identificador, feedbackMsj){
         principalListo = true;
     }       
 }
-
+/**
+ * @brief valida el campo de 'interest_Rate/Tax_Rate' del tab que se especifique utilizando varios criterios
+ * @param {string} identificador - id asociado el campo de texto de 'principal' del tab que se especifique
+ * @param {string} feedbackMsj - id asociado al msj de retroalimentación de 'interest/tax rate' del tab que se especifique
+ */
 export function validarPorcentaje(identificador, feedbackMsj){
     var interes = $(identificador).val();
 
@@ -86,7 +103,11 @@ export function validarPorcentaje(identificador, feedbackMsj){
         $(identificador).removeClass('is-invalid');
     }
 }
-
+/**
+ * @brief se asegura que los 2 campos obligatorios(Periodos y Principal) estén completos y correctos
+ * @param {string} periodosID - id asociado al campo de texto 'periodos' del tab que se especifique
+ * @param {string} principalID - id asociado al campo de texto 'principal' del tab que se especifique
+ */
 export function validarBotonCalcular(periodosID, principalID){
     var periodos = $(periodosID).val();
     var principal = $(principalID).val();
@@ -102,7 +123,9 @@ export function validarBotonCalcular(periodosID, principalID){
     }else if(periodosListo && principalListo);
     return true;
 }
-
+/**
+ * @brief valida que los campos que utiliza el calculo de MACRS esten completos
+ */
 export function validarMACRS(){
     var periodos = $('#periodosID3').val();
     var principal = $('#principalID3').val();
@@ -114,10 +137,14 @@ export function validarMACRS(){
         if(principal == "")
             $('#principalID2').addClass('is-invalid');
             return false;
-    }else if(periodosListo && principalListo);
+    }else if(periodosListo && principalListo);//las variables de esta condición son globales, por lo tanto otras funciones las acceden
         return true;
 }
-
+/**
+ * @brief valida el campo de 'Salvage Value' del tab que se especifique, utilizando varios criterios
+ * @param {string} identificador - id asociado el campo de texto de 'Salvage Value' del tab que se especifique
+ * @param {string} feedbackMsj - id asociado al msj de retroalimentación de 'Salvage Value' del tab que se especifique
+ */
 export function validarSalvageValue(identificador, feedbackMsj){
     var principal = $(identificador).val();
     if(principal == ""){//El campo esta vacio
@@ -140,7 +167,11 @@ export function validarSalvageValue(identificador, feedbackMsj){
         $(`${feedbackMsj} > p > i`).text("");
     } 
 }
-
+/**
+ * @brief valida el campo de 'Period of Salvage Value' del tab que se especifique, utilizando varios criterios
+ * @param {string} identificador - id asociado el campo de texto de 'Period of Salvage Value' del tab que se especifique
+ * @param {string} feedbackMsj - id asociado al msj de retroalimentación de 'Period of Salvage Value' del tab que se especifique
+ */
 export function validarP_SalvageValue(periodosID,identificador, feedbackMsj){
     var num = $(identificador).val();//Obtenemos el número de periodos de Salvage Value
     var periodos = Number($(periodosID).val());//Obtenemos el número de periodos 
