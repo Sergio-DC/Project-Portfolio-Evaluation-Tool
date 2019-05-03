@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>  
+        <div class="container">
+            <div class="row">
+                <span class="md-subhead text-uppercase text-bold">Project Screening Matrix</span>
+                <p layout="row" layout-align="start star">
+                        Uses several selection qualitative and quantitative criteria to evaluate project proposals. Scores are assigned to each
+                        criterion for the project based on importance. Allows objective comparison of various projects.
+                </p>
+            </div>
+            
+                    <form name="projectScreenForm">
+                        <div class="row">
+                            <label class="md-subhead text-uppercase text-bold">Primary Considerations</label>                                
+                            <input ng-model="projectMatrix.primaryConsideration" type="number" ng-class="{colorRed:projectMatrix.totalWeighting!=100}">
+                        </div>
+                            
+                
+                            <div class="row">
+                                <div class="col">
+                                    <h3 flex>Rating</h3>
+                                </div>
+                                <div class="col">
+                                    <h3 flex>Weighting</h3>
+                                </div>
+                                <div class="col">
+                                    <h3 flex>Weighted Value</h3>
+                                </div>
+                                <div class="col">
+                                    <h3 flex="10">Info</h3>
+                                </div>                             
+                            </div>
+                            
+                            <div id="seccionA">
+                                    
+                            </div>
+
+                            <!-- <div class="row">
+                                    <div class="form-group col">
+                                            <select id="rating${i}" required>
+                                                <option>
+                                                    Bajo    
+                                                </option>
+                                                <option>
+                                                    Medio    
+                                                </option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group col">
+                                        <input ng-model="projectMatrix.timeWeighting" type="number">
+                                    </div>
+                                    <div class="form-group col">
+                                        <h4 class="pl-5">NUM</h4>                                         </h4>
+                                    </div>
+                                    <div class="form-group col">
+                                        <button class="btn btn-dark" click="alert('Hola')">
+                                                <span><i class="far fa-question-circle"></i></span>
+                                        </button>
+                                    </div>
+                            </div> -->
+                            
+
+
+                            <!--<div layout="row">
+                                <div class="form-group col">
+                                        <select required>
+                                        <option>
+                                            Bajo    
+                                        </option>
+                                        <option>
+                                            Medio    
+                                        </option>
+                                    </select>
+                                </div>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.environmentalWeighting" type="number" ng-class="{colorRed:projectMatrix.primaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.environmentalResult = projectMatrix.environmentalWeighting/5 * projectMatrix.environmental}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.environmental)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container flex>
+                                    <label>Availability of funding</label>
+                                    <md-select ng-model="projectMatrix.funding" name="funding" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.funding.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.fundingWeighting" type="number"  ng-class="{colorRed:projectMatrix.primaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.fundingResult = projectMatrix.fundingWeighting/5 * projectMatrix.funding}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.funding)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container flex>
+                                    <label>Well defined scope</label>
+                                    <md-select ng-model="projectMatrix.scope" name="scope" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.scope.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.scopeWeighting" type="number"  ng-class="{colorRed:projectMatrix.primaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.scopeResult = projectMatrix.scopeWeighting/5 * projectMatrix.scope}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.scope)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <div flex></div>
+                                <h4 flex><strong>Total Weighting:</strong> {{projectMatrix.primaryWeighting = projectMatrix.scopeWeighting+projectMatrix.timeWeighting+projectMatrix.environmentalWeighting+projectMatrix.fundingWeighting}}</h4>
+                                <h4 flex><strong>Total Weighted Value:</strong> {{ projectMatrix.primaryWeightingValue = projectMatrix.scopeResult+projectMatrix.timeResult+projectMatrix.environmentalResult+projectMatrix.fundingResult}}</h4>
+                                <div flex="10"> </div>
+                            </div>
+                            <div layout="row">
+                                <div flex></div>
+                                <h4 flex><strong>Weighted Total:</strong> {{projectMatrix.primaryWeightedTotal = projectMatrix.primaryWeightingValue/100*projectMatrix.primaryConsideration}}</h4>
+                                <div flex> </div>
+                            </div>
+                
+                            <span class="md-subhead text-uppercase text-bold">Secondary Considerations</span>
+                            <div layout="row" layout-align="center center" layout-padding="">
+                                <md-input-container flex layout-padding="">
+                                    <label>Secondary Considerations</label>
+                                    <input ng-model="projectMatrix.secondaryConsideration" type="number" ng-class="{colorRed:projectMatrix.totalWeighting!=100}">
+                                </md-input-container>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="complexity" flex>
+                                    <label>Overall project complexity</label>
+                                    <md-select ng-model="projectMatrix.complexity" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.complexity.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.complexityWeighting" type="number"  ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.complexityResult = projectMatrix.complexityWeighting/5 * projectMatrix.complexity}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.complexity)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="complexity" flex>
+                                    <label>Complexity of performance requirements</label>
+                                    <md-select ng-model="projectMatrix.performanceComplexity" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.performanceComplexity.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.performanceComplexityWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.performanceComplexityResult = projectMatrix.performanceComplexityWeighting/5 * projectMatrix.performanceComplexity}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.performanceComplexity)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="size" flex>
+                                    <label>Project Size</label>
+                                    <md-select ng-model="projectMatrix.size" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.size.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.sizeWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.sizeResult = projectMatrix.sizeWeighting/5 * projectMatrix.size}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.size)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="qualifiedTeams" flex>
+                                    <label>Availability of qualified teams</label>
+                                    <md-select ng-model="projectMatrix.qualifiedTeams" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.qualifiedTeams.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.qualifiedTeamsWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.qualifiedTeamsResult = projectMatrix.qualifiedTeamsWeighting/5 * projectMatrix.qualifiedTeams}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.qualifiedTeams)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="ownerExperience" flex>
+                                    <label>Owner experience and resources</label>
+                                    <md-select ng-model="projectMatrix.ownerExperience" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.qualifiedTeams.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.ownerExperienceWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.ownerExperienceResult = projectMatrix.ownerExperienceWeighting/5 * projectMatrix.ownerExperience}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.qualifiedTeams)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="cost" flex>
+                                    <label>Cost of project</label>
+                                    <md-select ng-model="projectMatrix.cost" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.cost.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.costWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.costResult = projectMatrix.costWeighting/5 * projectMatrix.cost}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.cost)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="teamCollaboration" flex>
+                                    <label>Degree of team collaboration</label>
+                                    <md-select ng-model="projectMatrix.teamCollaboration" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.teamCollaboration.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.teamCollaborationWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.teamCollaborationResult = projectMatrix.teamCollaborationWeighting/5 * projectMatrix.teamCollaboration}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.teamCollaboration)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="contracts" flex>
+                                    <label>Number of contracts</label>
+                                    <md-select ng-model="projectMatrix.contracts" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.contracts.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.contractsWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.contractsResult = projectMatrix.contractsWeighting/5 * projectMatrix.contracts}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.contracts)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="risks" flex>
+                                    <label>Allocation of risks</label>
+                                    <md-select ng-model="projectMatrix.risks" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.risks.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.risksWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.risksResult = projectMatrix.risksWeighting/5 * projectMatrix.risks}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.risks)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="innovation" flex>
+                                    <label>Interest in innovation</label>
+                                    <md-select ng-model="projectMatrix.innovation" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.innovation.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="" >
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.innovationWeighting" type="number" ng-class="{colorRed:projectMatrix.secondaryWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.innovationResult = projectMatrix.innovationWeighting/5 * projectMatrix.innovation}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.innovation)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <div flex></div>
+                                <h4 flex><strong>Total Weighting:</strong> {{projectMatrix.secondaryWeighting = projectMatrix.complexityWeighting+projectMatrix.performanceComplexityWeighting+projectMatrix.sizeWeighting+projectMatrix.qualifiedTeamsWeighting+projectMatrix.ownerExperienceWeighting+projectMatrix.costWeighting+projectMatrix.teamCollaborationWeighting+projectMatrix.contractsWeighting+projectMatrix.risksWeighting+projectMatrix.innovationWeighting}}</h4>
+                                <h4 flex><strong>Total Weighting Value:</strong> {{projectMatrix.secondaryWeightingValue = projectMatrix.complexityResult+projectMatrix.performanceComplexityResult+projectMatrix.sizeResult+projectMatrix.qualifiedTeamsResult+projectMatrix.ownerExperienceResult+projectMatrix.costResult+projectMatrix.teamCollaborationResult+projectMatrix.contractsResult+projectMatrix.risksResult+projectMatrix.innovationResult}}</h4>
+                                <div flex="10"> </div>
+                            </div>
+                            <div layout="row">
+                                <div flex></div>
+                                <h4 flex><strong>Weighted Total:</strong> {{projectMatrix.secondaryWeightedTotal = projectMatrix.secondaryWeightingValue/100*projectMatrix.secondaryConsideration}}</h4>
+                                <div flex> </div>
+                            </div>
+                
+                            <span class="md-subhead text-uppercase text-bold">Other Considerations</span>
+                            <div layout="row" layout-align="center center" layout-padding="">
+                                <md-input-container flex layout-padding="">
+                                    <label>Secondary Considerations</label>
+                                    <input ng-model="projectMatrix.otherConsideration" type="number" ng-class="{colorRed:projectMatrix.totalWeighting!=100}">
+                                </md-input-container>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="dataSecurity" flex>
+                                    <label>Data Security</label>
+                                    <md-select ng-model="projectMatrix.dataSecurity" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.dataSecurity.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.dataSecurityWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.dataSecurityResult = projectMatrix.dataSecurityWeighting/5 * projectMatrix.dataSecurity}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.dataSecurity)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="constraints" flex>
+                                    <label>Operational constraints</label>
+                                    <md-select ng-model="projectMatrix.constraints" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.constraints.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.constraintsWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}" >
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.constraintsResult = projectMatrix.constraintsWeighting/5 * projectMatrix.constraints}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.constraints)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="utilityRelocation" flex>
+                                    <label>Utility relocation</label>
+                                    <md-select ng-model="projectMatrix.utilityRelocation" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.utilityRelocation.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.utilityRelocationWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.utilityRelocationResult = projectMatrix.utilityRelocationWeighting/5 * projectMatrix.utilityRelocation}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.constraints)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="qa" flex>
+                                    <label>QC/QA responsibilities</label>
+                                    <md-select ng-model="projectMatrix.qa" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.qa.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.qaWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.qaResult = projectMatrix.qaWeighting/5 * projectMatrix.qa}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.qa)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="warranties" flex>
+                                    <label>Performance guarantees/ warranties</label>
+                                    <md-select ng-model="projectMatrix.warranties" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.warranties.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.warrantiesWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.warrantiesResult = projectMatrix.warrantiesWeighting/5 * projectMatrix.warranties}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.warranties)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="design" flex>
+                                    <label>Design reviews/approvals</label>
+                                    <md-select ng-model="projectMatrix.design" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.design.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.designWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.designResult = projectMatrix.designWeighting/5 * projectMatrix.design}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.warranties)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="legal" flex>
+                                    <label>Legal frame or requirements</label>
+                                    <md-select ng-model="projectMatrix.legal" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.legal.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.legalWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.legalResult = projectMatrix.legalWeighting/5 * projectMatrix.legal}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.legal)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <md-input-container name="intellectual" flex>
+                                    <label>Ownership of intellectual property</label>
+                                    <md-select ng-model="projectMatrix.intellectual" required>
+                                        <md-option ng-repeat="option in screenMatrixOptions" ng-value="option.value">
+                                            {{option.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="projectScreenFrom.intellectual.$error" style="color:maroon; margin-top:-30px; margin-bottom: 30px" role="alert">
+                                        <div ng-message="required">Required field</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex layout-padding="">
+                                    <label>Weighting</label>
+                                    <input ng-model="projectMatrix.intellectualWeighting" type="number" ng-class="{colorRed:projectMatrix.otherWeighting!=100}">
+                                </md-input-container>
+                                <h4 flex layout-padding="" layout-align="center center">
+                                    {{projectMatrix.intellectualResult = projectMatrix.intellectualWeighting/5 * projectMatrix.intellectual}}
+                                </h4>
+                                <md-button class="md-icon-button md-primary" ng-click="showDialog(projectScreeningInfo.intellectual)">
+                                    <md-icon><i class="icon ion-ios-help-circle f-s-24"></i></md-icon>
+                                </md-button>
+                            </div>
+                            <div layout="row">
+                                <div flex></div>
+                                <h4 flex><strong>Total Weighting:</strong> {{projectMatrix.otherWeighting = projectMatrix.dataSecurityWeighting+projectMatrix.constraintsWeighting+projectMatrix.utilityRelocationWeighting+projectMatrix.qaWeighting+projectMatrix.warrantiesWeighting+projectMatrix.designWeighting+projectMatrix.legalWeighting+projectMatrix.intellectualWeighting}}</h4>
+                                <h4 flex><strong>Total Weighting Value:</strong> {{projectMatrix.otherWeightingValue = projectMatrix.dataSecurityResult+projectMatrix.constraintsResult+projectMatrix.utilityRelocationResult+projectMatrix.qaResult+projectMatrix.warrantiesResult+projectMatrix.designResult+projectMatrix.legalResult+projectMatrix.intellectualResult}}</h4>
+                                <div flex="10"> </div>
+                            </div>
+                
+                            <div layout="row">
+                                <div flex></div>
+                                <h4 flex><strong>Weighted Total:</strong> {{projectMatrix.otherWeightedTotal = projectMatrix.otherWeightingValue/100*projectMatrix.otherConsideration}}</h4>
+                                <div flex> </div>
+                            </div>
+                
+                
+                            <br>
+                            <br>
+                            <br>
+                
+                            <span class="md-subhead text-uppercase text-bold">All Considerations</span>
+                
+                
+                            <div layout="row">
+                                <div flex></div>
+                                <h4 flex><strong>Total Weighting:</strong> {{projectMatrix.totalWeighting = projectMatrix.primaryConsideration+projectMatrix.secondaryConsideration+projectMatrix.otherConsideration}}</h4>
+                                <h4 flex><strong>Total Weighting Value:</strong> {{projectMatrix.totalWeightingValue =(projectMatrix.primaryWeightingValue/100*projectMatrix.primaryConsideration)+(projectMatrix.secondaryWeightingValue/100*projectMatrix.secondaryConsideration)+(projectMatrix.otherWeightingValue/100*projectMatrix.otherConsideration)}}</h4>
+                
+                                <div flex="10"> </div>
+                            </div>
+                
+                            <br>
+                            <br>
+                            <br>
+                
+                            Hay una función llamada 'decision() que pone el resultado y se encuentra en matrix.php' -->
+                            <!-- <span class="md-subhead text-uppercase text-bold" ng-class="{colorRed:projectMatrix.totalWeightingValue<=50, colorYellow:projectMatrix.totalWeightingValue>50 && projectMatrix.totalWeightingValue<=65, colorGreen:projectMatrix.totalWeightingValue>65 && projectMatrix.totalWeightingValue<=100}"><strong>Decision: </strong>{{decision(projectMatrix.totalWeightingValue)}}</span>
+                
+                            <br>
+                            <br>
+                            <br> -->
+                
+                
+                
+                            <!-- <div layout="row">
+                                <div flex layout="row" layout-align="center center">
+                                    <md-button class="md-raised md-primary" ng-click="getMatrix()">Print</md-button>
+                                </div>
+                            </div> -->
+                    </form>
+            </div>
+        </div>
+            
+    
+            
+            
+    <link rel="stylesheet" href="../frameworks/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="module">
+        import {displayFilas} from '../js-scripts/tab5.js';
+        $(document).ready(function () {
+            displayFilas();
+            
+        });
+    </script>
+    
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.18/angular-material.css"> -->
+</html>
