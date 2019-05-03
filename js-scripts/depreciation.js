@@ -58,12 +58,15 @@ function calculateValueInLedgers(depreciation, principal, periodos){
     return valueInLedgers;
 }
 
-function displayInfoMACRS(starting_year, depreciation, accDep, valor_libros, periodos){
+function displayInfoMACRS(tax, macrs_category, starting_year, depreciation, accDep, valor_libros, periodos){
     for(var i = 0; i <= periodos; i++){
         $(`#years${i}`).val(starting_year++);
+        $(`#depRate${i}`).val(macrs_category[i]);
         $(`#AnnualDep${i}`).val(depreciation[i]);
         $(`#AccDep${i}`).val(accDep[i]);
         $(`#valueInLedgers${i}`).val(valor_libros[i]);
+        $(`#taxPerYear${i}`).val((valor_libros[i]* tax).toFixed(2));
+
     }
 }
 
@@ -91,9 +94,9 @@ export function runAlgorithm_MACRS(){
     console.log("Dep category " + dep_category);
 
     //1. Identificar la categoria de MACRS
-    var macr_category = MACRS_TABLE[dep_category]
+    var macrs_category = MACRS_TABLE[dep_category]
     //2. Calcular la columna de Depreciación(MACRS*Principal)
-    var depreciation = calculateDep(macr_category, principal, periodos);
+    var depreciation = calculateDep(macrs_category, principal, periodos);
     console.log("Depreciación Anual: " + depreciation);
     //3. Calcular la depreciación acumulada
     var accDep = calculateAccuDep(depreciation, periodos);//arreglo que guarda la 'depreciación acumulada'
@@ -102,7 +105,7 @@ export function runAlgorithm_MACRS(){
     var valor_libros = calculateValueInLedgers(depreciation, principal,periodos);
     console.log("Valor en libros: " + valor_libros);
     //5. Mostrar la información en la tabla
-    displayInfoMACRS(starting_year, depreciation, accDep, valor_libros, periodos);
+    displayInfoMACRS(tax/100,macrs_category,starting_year, depreciation, accDep, valor_libros, periodos);
 }
 
 
