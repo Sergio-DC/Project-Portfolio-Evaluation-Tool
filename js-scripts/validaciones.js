@@ -1,6 +1,6 @@
 import {displayPeriodosTab1} from './discPayBack.js';
 import {displayPeriodosTab2} from './npv.js';
-import {displayPeriodosTab3} from './macrs.js';
+import {displayPeriodosTab3} from './depreciation.js';
 
 var periodosListo = false, principalListo=false;
 

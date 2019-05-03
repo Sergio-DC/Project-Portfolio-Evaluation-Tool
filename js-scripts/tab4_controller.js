@@ -1,5 +1,5 @@
 import {validarMACRS, validarPeriodosID, validarPrincipalID, validarPorcentaje, validarSalvageValue, validarP_SalvageValue} from './validaciones.js';
-import {runAlgorithm_MACRS, runAlgorithm_STRAIGHT_LINE} from './macrs.js';//Recuerda siempre agregar la extension js al final sino error   
+import {runAlgorithm_MACRS, runAlgorithm_STRAIGHT_LINE} from './depreciation.js';//Recuerda siempre agregar la extension js al final sino error   
 
 const TAB = 3;
 const FEEDBACK_PERIODOS = '#feedbackPeriodos3';
