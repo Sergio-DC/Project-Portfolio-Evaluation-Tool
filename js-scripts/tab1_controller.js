@@ -130,3 +130,38 @@ const BOTON_LIMPIAR = '#bLimpiar1';
             swal({text: "Porfavor completa los campos",});            
     });
 
+/**
+ * @brief muestra en la tabla del tab 1 una tabla de 4*N celdas, siendo N el número de periodos/filas
+ * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ */
+export function displayPeriodosTab1(numero_periodos){//Despliega filas de periodos con 3 columnas 
+    var template;
+    if(numero_periodos == "")
+        template = "";
+    else{
+        for(var i = 0; i <= numero_periodos; i++)
+        {
+            if(i == 0){
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>
+                    <td><input id="inflow1ID${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="outflow1ID${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="netCashFlow${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="cumCash1${i}" type="number" class="form-control-sm" disabled></td>
+                </tr>
+                `;
+            }else           
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>
+                    <td><input id="inflow1ID${i}" type="number" class="form-control-sm"></td>
+                    <td><input id="outflow1ID${i}" type="number" class="form-control-sm"></td>
+                    <td><input id="netCashFlow${i}" type="number" class="form-control-sm" disabled></td>
+                    <td><input id="cumCash1${i}" type="number" class="form-control-sm" disabled></td>
+                </tr>
+                `;
+        }            
+    }
+    $('#datosTabla').html(template);    
+}

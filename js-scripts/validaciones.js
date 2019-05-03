@@ -1,6 +1,6 @@
-import {displayPeriodosTab1} from './discPayBack.js';
-import {displayPeriodosTab2} from './npv.js';
-import {displayPeriodosTab3} from './depreciation.js';
+import {displayPeriodosTab1} from './tab1_controller.js';
+import {displayPeriodosTab2} from './tab2_controller.js';
+import {displayPeriodosTab4} from './tab4_controller.js';
 
 var periodosListo = false, principalListo=false;
 
@@ -11,7 +11,7 @@ export function validarPeriodosID(identificador, feedbackMsj, tab){
         $(`${feedbackMsj} > p > i`).text("");
         if(tab == 1) displayPeriodosTab1(0);
         if(tab == 2) displayPeriodosTab2(0);
-        if(tab == 3) displayPeriodosTab3(0);
+        if(tab == 3) displayPeriodosTab4(0);
         periodosListo = false;         
     }else if(isNaN(num)){//No es un número
         $(identificador).removeClass('is-valid');
@@ -26,14 +26,14 @@ export function validarPeriodosID(identificador, feedbackMsj, tab){
         $(`${feedbackMsj} > p > i`).text("Ingresa un número entre 0 y 10");
         if(tab == 1) displayPeriodosTab1(0);
         if(tab == 2) displayPeriodosTab2(0);
-        if(tab == 3) displayPeriodosTab3(0);
+        if(tab == 3) displayPeriodosTab4(0);
         periodosListo = false;
     }else{//El número de periodos esta dentro del rango
         $(identificador).removeClass('is-invalid');$(identificador).addClass('is-valid');
         $(`${feedbackMsj} > p > i`).text("");
         if(tab == 1) displayPeriodosTab1(num);//Mostramos los campos en el DOM
         if(tab == 2) displayPeriodosTab2(num);
-        if(tab == 3) displayPeriodosTab3(num);
+        if(tab == 3) displayPeriodosTab4(num);
         periodosListo = true;
     }
 }

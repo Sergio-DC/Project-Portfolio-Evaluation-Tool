@@ -1,41 +1,6 @@
 const PERIODO_INICIAL = 0;//Constante que indica desde que periodo se realizaran los calculos
 
 /**
- * @brief muestra en la GUI una tabla de 4*N celdas, siendo N el número de periodos
- * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
- */
-export function displayPeriodosTab2 (numero_periodos){//Despliega filas de periodos con 3 columnas 
-    var template, template2;
-    if(numero_periodos == "")
-        template = "";
-    else{
-        for(var i = PERIODO_INICIAL; i <= numero_periodos; i++)
-        {
-            if(i == 0){
-                template += `
-                <tr id="${i}ID">
-                    <td>${i}</td>                
-                    <td><input id="inflow2ID${i}" type="text" class="form-control-sm" size="15" disabled></td>
-                    <td><input id="outflow2ID${i}" type="text" class="form-control-sm" size="15" disabled></td>
-                    <td><input id="netCashFlow2${i}" typw="text" class="form-control-sm" size="15" disabled></td>
-                    <td><input id="cumCash2${i}" type="text" class="form-control-sm" size="15" disabled></td>
-                </tr>
-                `;
-            }else
-                template += `
-                <tr id="${i}ID">
-                    <td>${i}</td>                
-                    <td><input id="inflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
-                    <td><input id="outflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
-                    <td><input id="netCashFlow2${i}" typw="text" class="form-control-sm" size="15"></td>
-                    <td><input id="cumCash2${i}" type="text" class="form-control-sm" size="15"></td>
-                </tr>
-                `;
-        }          
-    }
-    $('#datosTabla2').html(template);    
-}
-/**
  * 
  * @param {number} cumCashFlow 
  * @param {number} netCash 

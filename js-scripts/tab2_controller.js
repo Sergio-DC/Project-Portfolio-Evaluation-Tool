@@ -128,12 +128,48 @@ $('#customSwitch3').on('click', function () {
     }            
 });
 
-    //Evento asociado al campo de texto 'Limpiar' del TAB2
-    $(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la información mostrada  
-        $('#form2').trigger('reset');
-        validarPeriodosID(PERIODOS_ID, FEEDBACK_PERIODOS);
-        validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
-        validarPorcentaje(INTERES_ID, FEEDBACK_INTERES);
-        validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
-        validarP_SalvageValue(PERIODOS_ID,PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
-    });
+//Evento asociado al campo de texto 'Limpiar' del TAB2
+$(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la información mostrada  
+    $('#form2').trigger('reset');
+    validarPeriodosID(PERIODOS_ID, FEEDBACK_PERIODOS);
+    validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
+    validarPorcentaje(INTERES_ID, FEEDBACK_INTERES);
+    validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
+    validarP_SalvageValue(PERIODOS_ID,PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
+});
+
+/**
+ * @brief muestra en la GUI una tabla de 4*N celdas, siendo N el número de periodos
+ * @param {number} numero_periodos - es un número entero positivo que tiene significado por su propio nombre
+ */
+export function displayPeriodosTab2 (numero_periodos){//Despliega filas de periodos con 3 columnas 
+    var template, template2;
+    if(numero_periodos == "")
+        template = "";
+    else{
+        for(var i = 0; i <= numero_periodos; i++)
+        {
+            if(i == 0){
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>                
+                    <td><input id="inflow2ID${i}" type="text" class="form-control-sm" size="15" disabled></td>
+                    <td><input id="outflow2ID${i}" type="text" class="form-control-sm" size="15" disabled></td>
+                    <td><input id="netCashFlow2${i}" typw="text" class="form-control-sm" size="15" disabled></td>
+                    <td><input id="cumCash2${i}" type="text" class="form-control-sm" size="15" disabled></td>
+                </tr>
+                `;
+            }else
+                template += `
+                <tr id="${i}ID">
+                    <td>${i}</td>                
+                    <td><input id="inflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
+                    <td><input id="outflow2ID${i}" type="text" class="form-control-sm" size="15"></td>
+                    <td><input id="netCashFlow2${i}" typw="text" class="form-control-sm" size="15"></td>
+                    <td><input id="cumCash2${i}" type="text" class="form-control-sm" size="15"></td>
+                </tr>
+                `;
+        }          
+    }
+    $('#datosTabla2').html(template);    
+}
