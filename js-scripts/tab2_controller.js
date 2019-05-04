@@ -114,15 +114,7 @@ $('#customSwitch3').on('click', function () {
         $(SALVAGE_VALUE_ID).attr("disabled", false);
         $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
     }else{//Me desactivaron
-        estoyActivo = false;
-        $(SALVAGE_VALUE_ID).attr("disabled", true);
-        $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
-        $(SALVAGE_VALUE_ID).val("");
-        $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
-        $(SALVAGE_VALUE_ID).removeClass("is-valid");
-        $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-valid");
-        $(SALVAGE_VALUE_ID).removeClass("is-invalid");
-        $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+        deactivateSalvageSection(SALVAGE_VALUE_ID, PERIOD_OF_SALVAGE_VALUE_ID);
         validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
         validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
     }            
@@ -134,9 +126,22 @@ $(BOTON_LIMPIAR).on("click", function (e){//Limpiamos los campos y la informaci√
     validarPeriodosID(PERIODOS_ID, FEEDBACK_PERIODOS);
     validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
     validarPorcentaje(INTERES_ID, FEEDBACK_INTERES);
+    deactiveSalvageSection(SALVAGE_VALUE_ID, PERIOD_OF_SALVAGE_VALUE_ID);
     validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
     validarP_SalvageValue(PERIODOS_ID,PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
 });
+
+function deactiveSalvageSection(){
+    estoyActivo = false;
+    $(SALVAGE_VALUE_ID).attr("disabled", true);
+    $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
+    $(SALVAGE_VALUE_ID).val("");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+    $(SALVAGE_VALUE_ID).removeClass("is-valid");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-valid");
+    $(SALVAGE_VALUE_ID).removeClass("is-invalid");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+}
 
 /**
  * @brief muestra en la GUI una tabla de 4*N celdas, siendo N el n√∫mero de periodos

@@ -61,15 +61,7 @@ const BOTON_LIMPIAR = '#bLimpiar1';
             $(SALVAGE_VALUE_ID).attr("disabled", false);
             $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", false);
         }else{//Me desactivaron
-            estoyActivo = false;
-            $(SALVAGE_VALUE_ID).attr("disabled", true);
-            $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
-            $(SALVAGE_VALUE_ID).val("");
-            $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
-            $(SALVAGE_VALUE_ID).removeClass("is-valid");
-            $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-valid");
-            $(SALVAGE_VALUE_ID).removeClass("is-invalid");
-            $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+            deactiveSalvageSection();
             validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
             validarP_SalvageValue(PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
         }            
@@ -103,12 +95,8 @@ const BOTON_LIMPIAR = '#bLimpiar1';
             estoyActivo2 = true;
             $(INTERES_ID).attr("disabled", false);
         }else{//Me desactivaron
-            estoyActivo2 = false;
-            $(INTERES_ID).attr("disabled", true);
-            $(INTERES_ID).val("");
-            $(INTERES_ID).removeClass("is-valid");
-            $(INTERES_ID).removeClass("is-invalid");
-            validarPorcentaje(INTERES_ID,FEEDBACK_INTERES);            
+            deactiveInterestSection();
+            validarPorcentaje(INTERES_ID,FEEDBACK_INTERES);
         }            
     });
  
@@ -117,7 +105,9 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         $('#form1').trigger('reset');
         validarPeriodosID(PERIODOS_ID, FEEDBACK_PERIODOS);
         validarPrincipalID(PRINCIPAL_ID, FEEDBACK_PRINCIPAL);
+        deactiveInterestSection();
         validarPorcentaje(INTERES_ID,FEEDBACK_INTERES);
+        deactiveSalvageSection();
         validarSalvageValue(SALVAGE_VALUE_ID, FEEDBACK_SALVAGE_VALUE);
         validarP_SalvageValue(PERIODOS_ID,PERIOD_OF_SALVAGE_VALUE_ID, FEEDBACK_PERIOD_SALVAGE_VALUE);
     });    
@@ -129,6 +119,26 @@ const BOTON_LIMPIAR = '#bLimpiar1';
         }else
             swal({text: "Porfavor completa los campos",});            
     });
+
+function deactiveInterestSection(){
+    estoyActivo2 = false;
+    $(INTERES_ID).attr("disabled", true);
+    $(INTERES_ID).val("");
+    $(INTERES_ID).removeClass("is-valid");
+    $(INTERES_ID).removeClass("is-invalid");
+}
+
+function deactiveSalvageSection(){
+    estoyActivo = false;
+    $(SALVAGE_VALUE_ID).attr("disabled", true);
+    $(PERIOD_OF_SALVAGE_VALUE_ID).attr("disabled", true);
+    $(SALVAGE_VALUE_ID).val("");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).val("");
+    $(SALVAGE_VALUE_ID).removeClass("is-valid");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-valid");
+    $(SALVAGE_VALUE_ID).removeClass("is-invalid");
+    $(PERIOD_OF_SALVAGE_VALUE_ID).removeClass("is-invalid");
+}
 
 /**
  * @brief muestra en la tabla del tab 1 una tabla de 4*N celdas, siendo N el número de periodos/filas
