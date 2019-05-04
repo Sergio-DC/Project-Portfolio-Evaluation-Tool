@@ -21,7 +21,15 @@ export function validarPeriodosID(identificador, feedbackMsj, tab){
         if(tab == 1) displayPeriodosTab1(0);
         if(tab == 2) displayPeriodosTab2(0);
         if(tab == 3) displayPeriodosTab4(0);
-        periodosListo = false;         
+        periodosListo = false;
+    }else if(!isInteger(num)){//Si el número de periodos no es entero dispara error
+        $(identificador).removeClass('is-valid'); 
+        $(identificador).addClass('is-invalid');
+        $(`${feedbackMsj} > p > i`).text("Ingresa un número entero");
+        if(tab == 1) displayPeriodosTab1(0);
+        if(tab == 2) displayPeriodosTab2(0);
+        if(tab == 3) displayPeriodosTab4(0);
+        periodosListo = false;
     }else if(isNaN(num)){//No es un número
         $(identificador).removeClass('is-valid');
         $(identificador).addClass('is-invalid');
@@ -198,3 +206,13 @@ export function validarP_SalvageValue(periodosID,identificador, feedbackMsj){
     }
 }
 
+function isInteger(number){
+    var numberInt = parseInt(number);
+    var numberFloat = parseFloat(number);
+
+    var decision = numberFloat - numberInt
+    if(decision == 0)
+        return true;
+    else
+        return false;
+}
