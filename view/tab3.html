@@ -95,7 +95,10 @@
                 <th>Organization Culture</th>
                 <td>Is our organization culture right for this type of project?</td>
                 <td>
-                        <input type="text"/>
+                    <input type="radio" name="yn"
+                    value="yes"> Yes
+                    <input type="radio" name="yn1"
+                    value="no"> No
               </td>
 
             </tr>
@@ -103,14 +106,21 @@
                 <th>Resources</th>
                 <td>Will internal resources be available for this project?</td>
                 <td>
-                        <input type="text"/>
+                    <input type="radio" name="yn2"
+                    value="yes1"> Yes
+                    <input type="radio" name="yn3"
+                    value="no1"> No
                  </td>
             </tr>
             <tr>
                 <th>Approach</th>
                 <td>Will we build or buy?</td>
                 <td>
-                        <input type="text"/>
+                       
+                        <select>
+                                <option value="build">Build</option>
+                                <option value="buy">Buy</option>
+                         </select>
                 </td>
             </tr>
             <tr>
@@ -124,7 +134,10 @@
                 <th>Schedule</th>
                 <td>Is the timeline realistic?</td>
                 <td>
-                        <input type="text"/>
+                        <input type="radio" name="yn4"
+                        value="yes2"> Yes
+                        <input type="radio" name="yn5"
+                        value="no2"> No
                 </td>
             </tr>
             <tr>
@@ -145,7 +158,10 @@
                 <th>Portfolio</th>
                 <td>Is this a new initiative or path of an existing initiative?</td>
                 <td>
-                        <input type="text"/>
+                        <select>
+                                <option value="new">New Initiative</option>
+                                <option value="existing">Existing Initiative</option>
+                         </select>
               </td>
             </tr>
             <tr>
@@ -161,7 +177,10 @@
                 <th>Technology</th>
                 <td>Is the technology available or new?</td>
                 <td>
-                        <input type="text"/>
+                        <select>
+                                <option value="new1">New technology</option>
+                                <option value="available">Available technology</option>
+                         </select>
               </td>
             </tr>         
                 
