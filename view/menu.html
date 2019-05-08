@@ -18,12 +18,12 @@
             <div class="col-4">
                 <div class="form-group">
                     <label for="proyectoID" class="form-control-label">Nombre/Número de Proyecto</label>
-                    <input type="text" name="" id="proyectoID" class="form-control" placeholder="" aria-describedby="helpId">                 
+                    <input type="text" name="" id="proyectoID" class="form-control" placeholder="" aria-describedby="helpId">
                 </div>
                 <div class="form-group">
                     <label for="evaluadorID" class="form-control-label">Evaluador</label>
                     <input type="text" name="" id="evaluadorID" class="form-control" placeholder="" aria-describedby="helpId">
-                  </div>                
+                  </div>
             </div>
         </div>
         <div class="col"><!--Tabs con las herramientas-->
@@ -42,39 +42,38 @@
                 </li>
                 <li class="nav-item">
                     <a href="#tab5" class="nav-link text-white bg-secondary">Project Screening Matrix</a>
-                </li>               
+                </li>
             </ul>
             <div class="row justify-content-center">
                 <div class="col">
-                    
+
                 </div>
-                <div class="tab-content ml-3 col-12"><!--Inicio del Contenido de las Tabs-->            
+                <div class="tab-content ml-3 col-12"><!--Inicio del Contenido de las Tabs-->
                         <div class="tab-pane bg-success rounded border border-dark" id="tab1"><!--Start tab1: Discounted Pay Back-->
                             <div style="height:490px; overflow-y:scroll; overflow-x: hidden;" id="content-tab1">
 
-                            </div>                            
+                            </div>
                         </div><!--End tab1-->
                         <div class="tab-pane bg-danger rounded border border-dark pt-4" id="tab2"><!--Start tab2: NPV-->
                             <div style="height:490px; overflow-y:scroll; overflow-x: hidden;" id="content-tab2">
 
-                            </div>   
+                            </div>
                         </div><!--End Tab2-->
-                        <div class="row tab-pane bg-warning rounded border border-dark" id="tab3"><!--Start tab3 CheckList-->                                
+                        <div class="row tab-pane bg-warning rounded border border-dark" id="tab3"><!--Start tab3 CheckList-->
                             <div style="height:490px; overflow-y:scroll; overflow-x: hidden;" id="content-tab3">
 
-                            </div> 
+                            </div>
                         </div><!--End Tab3-->
                         <div class="tab-pane bg-primary rounded border border-dark pt-4" id="tab4"><!--Start tab4: Depreciation-->
                             <div style="height:490px; overflow-y:scroll; overflow-x: hidden;" id="content-tab4">
 
-                            </div>  
+                            </div>
                         </div><!--End Tab 4-->
                         <div class="tab-pane bg-secondary rounded border border-dark" id="tab5"><!--Star tab5: Project Screening Matrix-->
-                                <h3>PANEL 5</h3>
-                                <p>Hola mundo</p>
+                                <div style="height:490px; overflow-y:scroll; overflow-x: hidden;" id="content-tab5">
                         </div><!--End tab 5-->
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 </body>
@@ -82,7 +81,7 @@
     <script src="../frameworks/jquery-3.3.1.min.js"></script>
     <!-- <script src="../js-scripts/main.js" type=""></script> -->
     <link rel="stylesheet" type="text/css" href="../frameworks/bootstrap.css">
-   
+
     <script src="../frameworks/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -90,6 +89,7 @@
             $('#content-tab2').load('../view/tab2.html');
             $('#content-tab3').load('../view/tab3.html');
             $('#content-tab4').load('../view/tab4.html');
+            $('#content-tab5').load('../view/tab5.html');
                 $('.nav li a').on('click', function(){
                 $('.nav li a').removeClass("active");
                 $(this).addClass("active");
@@ -101,5 +101,5 @@
             });
         });
     </script>
-   
+
 </html>
