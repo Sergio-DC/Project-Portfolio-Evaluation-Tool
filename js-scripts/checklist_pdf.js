@@ -27,7 +27,8 @@ boton.addEventListener('click', function(){
     var input11 = document.querySelector('input[name="yn1"]:checked');
     var input12 = document.querySelector('input[name="yn2"]:checked');
     var input15 = document.querySelector('input[name="yn2"]:checked');
-
+    if(input11 == null || input12 == null || input15 == null)
+        swal({text: "Porfavor completa los radio buttons",});
 var templatePrint = `
 <div>
     <label><b>Nombre/Número de Proyecto:</b> <i>${proyecto.value}</i></label>
